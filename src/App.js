@@ -4,7 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
-  withRouter
+  withRouter,
 } from "react-router-dom";
 
 import "react-circular-progressbar/dist/styles.css";
@@ -17,35 +17,22 @@ import GlobalStyle from "theme/globalStyle";
 import MyRoute from "service/MyRoute";
 
 import Gallery from "containers/Gallery";
-
-
-
-
+import About from "containers/About";
 
 function App() {
   return (
     <div className="App">
-      
-        <BasicStyle />
-        <GlobalStyle />
-        
-        <Router>
-         
-            <Switch>
-             
-                    <Route
-                      exact
-                      path="/"
-                      render={() => <Redirect to="/gallery" />}
-                    />
-                    
-                    <MyRoute exact path="/gallery" component={Gallery}/>
-                    
-              
-            </Switch>
-        
-        </Router>
-     
+      <BasicStyle />
+      <GlobalStyle />
+
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/gallery" />} />
+
+          <MyRoute exact path="/gallery" component={Gallery} />
+          <MyRoute exact path="/about" component={About} />
+        </Switch>
+      </Router>
     </div>
   );
 }

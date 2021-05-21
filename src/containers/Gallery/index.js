@@ -14,7 +14,7 @@ const Gallery = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [items, setItems] = useState([]);
   const [mainImg, setMainImg] = useState(3);
-  const [scrollLimit , setScrollLimit] = useState(100)
+  const [scrollLimit , setScrollLimit] = useState(50)
 
   const [{ data, loading, error }, refetch] = useAxios(
     "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
@@ -39,17 +39,20 @@ const Gallery = () => {
       setItems(nftArray);
     }
   }, [loading, data]);
-  console.log(items);
+ 
 
   
 
   const handleScroll = (e) => {
     console.log(e.deltaY);
-    let newScrollLimit = scrollLimit - e.deltaY
+    let newScrollLimit = scrollLimit - (e.deltaY *.5)
       console.log(newScrollLimit);
       if (newScrollLimit < 0){
           setMainImg(mainImg + 1)
-          setScrollLimit(100)
+          setScrollLimit(50)
+      } else if (newScrollLimit> 100) {
+        setMainImg(mainImg - 1)
+        setScrollLimit(50)
       } else {
         setScrollLimit(newScrollLimit)
       }

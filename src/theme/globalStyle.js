@@ -34,11 +34,7 @@ const GlobalStyle = createGlobalStyle`
       display: none;
     }
   }
-  nav {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-  }
+  
   .video-area{
     width: 100%;
     video{
@@ -87,29 +83,7 @@ const GlobalStyle = createGlobalStyle`
       line-height: 20px;
     }
   }
-  .font-n-1{
-    color: ${colors.blueDark};
-    font-size: 24px;
-    line-height: 32px;
-    letter-spacing: 0.03em;
-  }
-  .font-c-l{
-    color: ${colors.blueDark};
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-  }
-  .shadow-radius {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16) !important;
-    border-radius: 4px !important;
-  }
-  .height-auto{height: auto !important;}
-  .height-130{height: 130px !important;}
-  .overlay-opensea{
-    position: relative;
-    margin-right: -5px;
-  }
+  
   .flex1{ flex: 1; }
   h1,
   h2,

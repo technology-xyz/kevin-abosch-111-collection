@@ -67,35 +67,6 @@ const BasicStyle = createGlobalStyle`
     .pr-30{padding-right: 30px !important;}
     .pr-40{padding-right: 40px !important;}
 
-    h1 {
-        font-size: 32px !important;
-        font-weight: 600;
-    }
-    h2 {
-        font-size: 28px !important;
-        font-weight: 600;
-    }
-    h3 {
-        font-size: 24px !important;
-        font-weight: 600;
-    }
-    h4 {
-        font-size: 22px !important;
-        font-weight: 400;
-    }
-    h5 {
-        font-size: 20px !important;
-        letter-spacing: 0.03em;
-    }
-    h6 {
-        font-size: 18px !important;
-        letter-spacing: 0.03em;
-        font-weight: 400;
-    }
-    p {
-        font-size: 16px !important;
-        line-height: 24px;
-        letter-spacing: 0.03em;
     }
     .w160{width: 160px;}
     .w110{width: 110px;}
