@@ -211,4 +211,4 @@ function MobileTickersArea({ onClickClose = () => {} }) {
   );
 }
 
-export default MobileTickersArea;
+

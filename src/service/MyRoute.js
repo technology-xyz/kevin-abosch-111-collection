@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom';
-import PageLayout from 'layouts';
+import PageLayout from 'layout';
 
 const MyRoute = ({ component: Component, ...rest }) => {
 
