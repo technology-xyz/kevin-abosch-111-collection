@@ -18,7 +18,8 @@ import MyRoute from "service/MyRoute";
 
 import Gallery from "containers/Gallery";
 import About from "containers/About";
-
+import Collection from "containers/Collection";
+import DataContextContainer from "contexts/DataContextContainer";
 function App() {
   return (
     <div className="App">
@@ -27,10 +28,12 @@ function App() {
 
       <Router>
         <Switch>
+        <DataContextContainer>
           <Route exact path="/" render={() => <Redirect to="/gallery" />} />
-
           <MyRoute exact path="/gallery" component={Gallery} />
           <MyRoute exact path="/about" component={About} />
+          <MyRoute exact path="/collection" component={Collection} />
+        </DataContextContainer>
         </Switch>
       </Router>
     </div>

@@ -8,7 +8,7 @@ const Menu = () => {
       <SideContent>
         <Nav>
           <NavLink>
-            <Link to="/menu">The Collection</Link>
+            <Link to="/collection">The Collection</Link>
           </NavLink>
           <NavLink>
             <Link to="/about">About 1111</Link>

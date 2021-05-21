@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import useAxios from "axios-hooks";
-import { Image } from "react-bootstrap";
+import { DataContext } from "contexts/DataContextContainer";
 import { preUrl } from "config";
 import {
   ImageWrapper,
@@ -11,11 +11,16 @@ import {
   PlaceHolder,
 } from "./style";
 const Gallery = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  
   const [items, setItems] = useState([]);
   const [mainImg, setMainImg] = useState(3);
   const [scrollLimit , setScrollLimit] = useState(50)
-
+  const {contents, 
+    setContents, 
+    totalKoiCt, 
+    setTotalKoiCt, 
+    totalViewCt, 
+    setTotalViewCt } = useContext(DataContext)
   const [{ data, loading, error }, refetch] = useAxios(
     "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
   );
@@ -36,6 +41,7 @@ const Gallery = () => {
           source = `${preUrl}${value}?t=${Math.random() * 999999}`;
         }
       }
+      setContents(nftArray)
       setItems(nftArray);
     }
   }, [loading, data]);
@@ -85,7 +91,7 @@ const Gallery = () => {
             <RightImg>
               <img 
                width="100"
-               height={scrollLimit}
+               height="100"
                alt={items[mainImg].name} src={items[mainImg + 1].source} />
             </RightImg>
           </BottomBar>
