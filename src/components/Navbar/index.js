@@ -1,10 +1,10 @@
 import React from "react";
-import { Bar, Title, Koi, Menu } from "./style";
+import { Bar, Title, Koi, Menu, Left } from "./style";
 const Navbar = () => {
   return (
     <Bar>
       <Title>Studio Kevin Abosch</Title>
-      <div>
+      <Left>
         <Koi>
           <svg
             width="34"
@@ -45,7 +45,7 @@ const Navbar = () => {
             />
           </svg>
         </Menu>
-      </div>
+      </Left>
     </Bar>
   );
 };
