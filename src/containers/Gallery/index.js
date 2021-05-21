@@ -41,7 +41,7 @@ const Gallery = () => {
           source = `${preUrl}${value}?t=${Math.random() * 999999}`;
         }
       }
-      setContents(nftArray)
+      
       setItems(nftArray);
     }
   }, [loading, data]);

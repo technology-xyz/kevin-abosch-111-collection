@@ -15,7 +15,7 @@ function DataContextContainer(props){
   const [keyAr, setKeyAr] = useLocalStorage('koi-keyAr', null);
   const [balanceKoi, setBalanceKoi] = useLocalStorage('koi-balanceKoi', null);
   const [balanceAr, setBalanceAr] = useLocalStorage('koi-balanceAr', null);
-  const [contents, setContents] = useState([]);
+  const [contents, setContents] = useState(props.images);
   const [totalViewCt, setTotalViewCt] = useLocalStorage('koi-totalViewCt', 0);
   const [totalKoiCt, setTotalKoiCt] = useLocalStorage('koi-totalKoiCt', 0);
 
