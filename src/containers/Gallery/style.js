@@ -9,12 +9,14 @@ export const MenuContainer = styled.div`
  justify-content: center;
 `;
 export const ImageWrapper = styled.div`
-  width: 100%;
+  display: flex;
+  justify-content: center;
   margin: 4%;
 `;
 
 export const BottomBar = styled.div`
 display: flex;
+justify-content: space-between;
 width:100%`;
 export const PlaceHolder = styled.div``;
 export const LeftImg = styled.div`

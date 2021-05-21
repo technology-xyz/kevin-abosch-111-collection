@@ -41,23 +41,7 @@ const Gallery = () => {
   }, [loading, data]);
   console.log(items);
 
-  // useEffect(() => {
-  //   const onScroll = (e) => {
-      
-  //     let newScrollLimit = scrollLimit - e.deltaY
-  //     console.log(newScrollLimit);
-  //     if (newScrollLimit < 0){
-  //         setMainImg(mainImg + 1)
-  //         setScrollLimit(100)
-  //     } else {
-  //       setScrollLimit(newScrollLimit)
-  //     }
-      
-  //   };
-  //   window.addEventListener("wheel", onScroll);
-
-  //   return () => window.removeEventListener("scroll", onScroll);
-  // }, );
+  
 
   const handleScroll = (e) => {
     console.log(e.deltaY);
@@ -79,7 +63,7 @@ const Gallery = () => {
             <img
               width="600"
               height="600"
-              loading="lazy"
+              
               alt={items[mainImg].name}
               src={items[mainImg].source}
             />
@@ -98,7 +82,7 @@ const Gallery = () => {
             <RightImg>
               <img 
                width="100"
-               height="100"
+               height={scrollLimit}
                alt={items[mainImg].name} src={items[mainImg + 1].source} />
             </RightImg>
           </BottomBar>
