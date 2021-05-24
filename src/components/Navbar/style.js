@@ -49,7 +49,7 @@ export const Nav = styled.nav`
 margin: 40px 20px;
 `;
 export const NavLink = styled.nav`
-margin: 20 20px;
+margin: 20px 20px;
 color: white;
 text-align: right;
 a {
