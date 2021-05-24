@@ -15,7 +15,7 @@ const Gallery = () => {
   const params = useParams()
   const history = useHistory()
   const [items, setItems] = useState([]);
-  const [mainImg, setMainImg] = useState(3);
+  const [mainImg, setMainImg] = useState(params.id);
   const [scrollLimit , setScrollLimit] = useState(50)
   console.log(params)
   const [{ data, loading, error }, refetch] = useAxios(
