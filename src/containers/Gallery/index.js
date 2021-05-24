@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import useAxios from "axios-hooks";
 import { Logo } from "../../assets/images";
 import { preUrl } from "config";
+import Details from "./details"
 import {
   ImageWrapper,
   MenuContainer,
@@ -9,9 +10,7 @@ import {
   LeftImg,
   RightImg,
   PlaceHolder,
-  Details,
-  TagGroup,
-  Tag
+  ImageMenu
 } from "./style";
 import { useHistory, useParams } from "react-router";
 const Gallery = () => {
@@ -53,7 +52,7 @@ const Gallery = () => {
     if (newScrollLimit < 0) {
       setMainImg(mainImg + 1);
       setScrollLimit(50);
-      history.push(`/gallery/${mainImg}`);
+      
     } else if (newScrollLimit > 100) {
       setMainImg(mainImg - 1);
       setScrollLimit(50);
@@ -78,74 +77,43 @@ const Gallery = () => {
               src={items[mainImg].source}
               onClick={onShowDetails}
             />
-            <div>
+            <ImageMenu>
               <span>{items[mainImg].name}</span>
               <span>
                 2.16
                 <img src={Logo} />
               </span>
               <span>Bid Now</span>
-            </div>
-          </ImageWrapper>
-
-          <Details>
-            <div>
-              <span>{items[mainImg].name}</span>
-              <span>
-                2.16
-                <img src={Logo} />
-              </span>
-              <span>Bid Now</span>
-            </div>
-
-            <p>
-              1111 NFT digital works comprised of cryptographic alphanumerics
-              presented in various compositions and colors. Individually and
-              collectively, the works are embedded with and within a
-              decentralized autonomous organization (DAO). Over time, it will be
-              revealed how communities from around the world can interact with
-              the work, with an emphasis on redefining the attention economy.
-              Collectors are advised to “pay attention” themselves as this work
-              is full of surprises!
-            </p>
-
-            <a>Explore Block</a>
-
-            <TagGroup>
-              <Tag>
-                tag #1
-              </Tag>
-              <Tag>
-                tag #2
-              </Tag>
-              <Tag>
-                tag #3
-              </Tag>
-            </TagGroup>
-          </Details>
-
-          <BottomBar>
-            <LeftImg>
-              {mainImg === 0 ? (
-                <PlaceHolder />
-              ) : (
+            </ImageMenu>
+            {showDetails ? (
+            <Details item={items[mainImg]}/>
+          ) : (
+            <BottomBar>
+              <LeftImg>
+                {mainImg === 0 ? (
+                  <PlaceHolder />
+                ) : (
+                  <img
+                    width="100"
+                    height="100"
+                    alt={items[mainImg].name}
+                    src={items[mainImg - 1].source}
+                  />
+                )}
+              </LeftImg>
+              <RightImg>
                 <img
                   width="100"
                   height="100"
                   alt={items[mainImg].name}
-                  src={items[mainImg - 1].source}
+                  src={items[mainImg + 1].source}
                 />
-              )}
-            </LeftImg>
-            <RightImg>
-              <img
-                width="100"
-                height="100"
-                alt={items[mainImg].name}
-                src={items[mainImg + 1].source}
-              />
-            </RightImg>
-          </BottomBar>
+              </RightImg>
+            </BottomBar>
+          )}
+          </ImageWrapper>
+
+          
         </>
       )}
     </MenuContainer>

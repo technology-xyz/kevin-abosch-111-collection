@@ -7,10 +7,11 @@ export const MenuContainer = styled.div`
   max-height: 100vh;
   overflow: hidden;
   justify-content: center;
+  align-items: center;
 `;
 
 export const Details = styled.div`
-
+max-width:100%;
 `
 
 export const TagGroup = styled.div`
@@ -22,9 +23,19 @@ export const Tag = styled.div``
 export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 4%;
+  flex-direction: column;
+  width:min-content;
 `;
 
+
+export const ImageMenu = styled.div`
+display: flex;
+justify-content:space-between;
+width: 100%;
+color: #FFffff;
+`
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
