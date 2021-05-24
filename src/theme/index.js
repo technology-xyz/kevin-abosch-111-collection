@@ -1,5 +1,5 @@
 export const fonts = {
-  main: 'PT Serif',
+  main: 'Source Sans Pro',
 }
 
 export const colors = {
@@ -11,7 +11,7 @@ export const colors = {
   orange: '#F5B900',
   orangeLight: '#FFDFBA',
   gray: '#D6D6D6',
- 
+
   errorBackground: '#FFA6A6',
   successBackground: '#9BE7C4',
 }

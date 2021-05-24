@@ -17,7 +17,7 @@ const Gallery = () => {
   const params = useParams();
   const history = useHistory();
   const [items, setItems] = useState([]);
-  const [mainImg, setMainImg] = useState(params.id);
+  const [mainImg, setMainImg] = useState(4);
   const [showDetails, setShowDetails] = useState(false);
   const [scrollLimit, setScrollLimit] = useState(50);
   console.log(params);
@@ -47,7 +47,7 @@ const Gallery = () => {
 
   const handleScroll = (e) => {
     console.log(e.deltaY);
-    let newScrollLimit = scrollLimit - e.deltaY * 0.5;
+    let newScrollLimit = scrollLimit - e.deltaY * 0.3;
 
     if (newScrollLimit < 0) {
       setMainImg(mainImg + 1);
