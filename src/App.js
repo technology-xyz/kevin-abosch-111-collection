@@ -4,13 +4,9 @@ import {
   Redirect,
   Route,
   Switch,
-  withRouter,
 } from "react-router-dom";
 
-import "react-circular-progressbar/dist/styles.css";
-import "assets/css/fontawesome.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "antd/dist/antd.css";
+
 import BasicStyle from "theme/basicStyle";
 import GlobalStyle from "theme/globalStyle";
 
@@ -61,10 +57,10 @@ function App() {
       <Router>
         <Switch>
           <DataContextContainer>
-            <Route exact path="/" render={() => <Redirect to="/gallery" />} />
-            <MyRoute exact path="/gallery" component={Gallery} />
+            <Route exact path="/" render={() => <Redirect to="/gallery/0" />} />
+            <MyRoute  path="/gallery/:id" component={Gallery} />
             <MyRoute exact path="/about" component={About} />
-            <MyRoute exact path="/collection" component={Collection} />
+            <MyRoute exact path="/collection" component={Collection} items={items}/>
           </DataContextContainer>
         </Switch>
       </Router>
