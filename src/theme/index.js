@@ -4,13 +4,7 @@ export const fonts = {
 
 export const colors = {
   white: '#fff',
-  greyGradient: 'linear-gradient(90deg, #EEE 0%, #FFF 100%)',
-  blueGradient: 'linear-gradient(90deg, #030332 0%, #171753 100%)',
-  blueDark: '#171753',
-  blueLight: '#BCF3EF',
-  orange: '#F5B900',
-  orangeLight: '#FFDFBA',
-  gray: '#D6D6D6',
+  yellow: '#F5B900',
 
   errorBackground: '#FFA6A6',
   successBackground: '#9BE7C4',
