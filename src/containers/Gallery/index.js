@@ -51,11 +51,11 @@ const Gallery = () => {
     if (!showDetails) {
       if (newScrollLimit < 0) {
         setScrollLimit(50);
-        history.replace(`${mainImg + 1}`)
+        history.replace(`${parseInt(id) + 1}`)
         
       } else if (newScrollLimit > 100) {
         setScrollLimit(50);
-        history.replace(`${mainImg - 1}`)
+        history.replace(`${parseInt(id) - 1}`)
         
       } else {
         setScrollLimit(newScrollLimit);
@@ -72,7 +72,7 @@ const Gallery = () => {
     }
     
   };
-  console.log(mainImg)
+  console.log(id)
 
   return (
     <MenuContainer onWheel={handleScroll} showDetails>
@@ -82,8 +82,8 @@ const Gallery = () => {
             <img
               width="512"
               height="512"
-              alt={items[mainImg].name}
-              src={items[mainImg].source}
+              alt={items[parseInt(id)].name}
+              src={items[parseInt(id)].source}
               onClick={onShowDetails}
             />
             <ImageMenu>
@@ -105,8 +105,8 @@ const Gallery = () => {
                     <img
                       width="100"
                       height="100"
-                      alt={items[id].name}
-                      src={items[id - 1].source}
+                      alt={items[parseInt(id)].name}
+                      src={items[parseInt(id) - 1].source}
                     />
                   )}
                 </LeftImg>
@@ -114,8 +114,8 @@ const Gallery = () => {
                   <img
                     width="100"
                     height="100"
-                    alt={items[id].name}
-                    src={items[id + 1].source}
+                    alt={items[parseInt(id)].name}
+                    src={items[parseInt(id) + 1].source}
                   />
                 </RightImg>
               </BottomBar>
