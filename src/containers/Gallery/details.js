@@ -27,8 +27,8 @@ const DetailView = () => (
 const ImageDetails = ({ item }) => {
     const history = useHistory()
     const handleClick = (e) =>{
-        console.log(e.target.attributes.value)
-        history.push(e.target.attributes.value)
+        console.log(e.target.textContent)
+        history.push(e.target.textContent.toLowerCase())
     }
   return (
     <Details>

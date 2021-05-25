@@ -14,13 +14,13 @@ import {
 } from "./style";
 import { useHistory, useParams } from "react-router";
 const Gallery = () => {
-  const params = useParams();
+  const {id} = useParams();
   const history = useHistory();
   const [items, setItems] = useState([]);
-  const [mainImg, setMainImg] = useState(4);
+  const [mainImg, setMainImg] = useState(parseInt(id));
   const [showDetails, setShowDetails] = useState(false);
   const [scrollLimit, setScrollLimit] = useState(50);
-  console.log(params);
+  
   const [{ data, loading, error }, refetch] = useAxios(
     "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
   );
@@ -46,15 +46,17 @@ const Gallery = () => {
   }, [loading, data]);
 
   const handleScroll = (e) => {
-    console.log(e.deltaY);
+   
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
     if (!showDetails) {
       if (newScrollLimit < 0) {
-        setMainImg(mainImg + 1);
         setScrollLimit(50);
+        history.replace(`${mainImg + 1}`)
+        
       } else if (newScrollLimit > 100) {
-        setMainImg(mainImg - 1);
         setScrollLimit(50);
+        history.replace(`${mainImg - 1}`)
+        
       } else {
         setScrollLimit(newScrollLimit);
       }
@@ -63,7 +65,14 @@ const Gallery = () => {
 
   const onShowDetails = () => {
     setShowDetails(!showDetails);
+    if (showDetails) {
+      history.goBack()
+    } else {
+      history.push(`/gallery/${id}/details`)
+    }
+    
   };
+  console.log(mainImg)
 
   return (
     <MenuContainer onWheel={handleScroll} showDetails>
@@ -90,14 +99,14 @@ const Gallery = () => {
             ) : (
               <BottomBar>
                 <LeftImg>
-                  {mainImg === 0 ? (
+                  {id === '0' ? (
                     <PlaceHolder />
                   ) : (
                     <img
                       width="100"
                       height="100"
-                      alt={items[mainImg].name}
-                      src={items[mainImg - 1].source}
+                      alt={items[id].name}
+                      src={items[id - 1].source}
                     />
                   )}
                 </LeftImg>
@@ -105,8 +114,8 @@ const Gallery = () => {
                   <img
                     width="100"
                     height="100"
-                    alt={items[mainImg].name}
-                    src={items[mainImg + 1].source}
+                    alt={items[id].name}
+                    src={items[id + 1].source}
                   />
                 </RightImg>
               </BottomBar>
