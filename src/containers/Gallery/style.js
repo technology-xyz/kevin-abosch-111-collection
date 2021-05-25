@@ -4,21 +4,29 @@ export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  max-height: 100vh;
-  overflow: hidden;
+  height:100%;
+  overflow: ${props => props.showDetails ? "scroll": "hidden"};
   justify-content: center;
   align-items: center;
+  background-color: #000;
+
 `;
 
 export const Details = styled.div`
 max-width:100%;
+height: 100%;
 `
 
 export const TagGroup = styled.div`
+display: flex;
 
 `
 
-export const Tag = styled.div``
+export const Tag = styled.div`
+border: 1px solid #2EBAAE;
+border-radius:50%;
+color:#2EBAAE;
+`
 
 export const ImageWrapper = styled.div`
   display: flex;

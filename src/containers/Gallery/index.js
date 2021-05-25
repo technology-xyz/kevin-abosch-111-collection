@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import useAxios from "axios-hooks";
 import { Logo } from "../../assets/images";
 import { preUrl } from "config";
-import Details from "./details"
+import Details from "./details";
 import {
   ImageWrapper,
   MenuContainer,
@@ -10,7 +10,7 @@ import {
   LeftImg,
   RightImg,
   PlaceHolder,
-  ImageMenu
+  ImageMenu,
 } from "./style";
 import { useHistory, useParams } from "react-router";
 const Gallery = () => {
@@ -48,16 +48,16 @@ const Gallery = () => {
   const handleScroll = (e) => {
     console.log(e.deltaY);
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
-
-    if (newScrollLimit < 0) {
-      setMainImg(mainImg + 1);
-      setScrollLimit(50);
-      
-    } else if (newScrollLimit > 100) {
-      setMainImg(mainImg - 1);
-      setScrollLimit(50);
-    } else {
-      setScrollLimit(newScrollLimit);
+    if (!showDetails) {
+      if (newScrollLimit < 0) {
+        setMainImg(mainImg + 1);
+        setScrollLimit(50);
+      } else if (newScrollLimit > 100) {
+        setMainImg(mainImg - 1);
+        setScrollLimit(50);
+      } else {
+        setScrollLimit(newScrollLimit);
+      }
     }
   };
 
@@ -66,7 +66,7 @@ const Gallery = () => {
   };
 
   return (
-    <MenuContainer onWheel={handleScroll}>
+    <MenuContainer onWheel={handleScroll} showDetails>
       {items[mainImg] && (
         <>
           <ImageWrapper>
@@ -86,34 +86,32 @@ const Gallery = () => {
               <span>Bid Now</span>
             </ImageMenu>
             {showDetails ? (
-            <Details item={items[mainImg]}/>
-          ) : (
-            <BottomBar>
-              <LeftImg>
-                {mainImg === 0 ? (
-                  <PlaceHolder />
-                ) : (
+              <Details item={items[mainImg]} />
+            ) : (
+              <BottomBar>
+                <LeftImg>
+                  {mainImg === 0 ? (
+                    <PlaceHolder />
+                  ) : (
+                    <img
+                      width="100"
+                      height="100"
+                      alt={items[mainImg].name}
+                      src={items[mainImg - 1].source}
+                    />
+                  )}
+                </LeftImg>
+                <RightImg>
                   <img
                     width="100"
                     height="100"
                     alt={items[mainImg].name}
-                    src={items[mainImg - 1].source}
+                    src={items[mainImg + 1].source}
                   />
-                )}
-              </LeftImg>
-              <RightImg>
-                <img
-                  width="100"
-                  height="100"
-                  alt={items[mainImg].name}
-                  src={items[mainImg + 1].source}
-                />
-              </RightImg>
-            </BottomBar>
-          )}
+                </RightImg>
+              </BottomBar>
+            )}
           </ImageWrapper>
-
-          
         </>
       )}
     </MenuContainer>
