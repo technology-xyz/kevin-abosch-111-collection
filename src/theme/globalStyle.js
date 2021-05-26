@@ -2,10 +2,12 @@ import { createGlobalStyle } from "styled-components";
 import { colors, fonts, mixins } from "theme";
 
 const GlobalStyle = createGlobalStyle`
+
   body {
     font-family: ${fonts.main};
     margin: 0;
     height: 100%;
+    background-color: black;
   }
   .App {
     height: 100vh;

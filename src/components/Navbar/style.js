@@ -1,20 +1,22 @@
 import styled from "styled-components";
 export const Bar = styled.div`
   width: 100%;
+  box-sizing:border-box;
   display: flex;
   justify-content: space-between;
-  position: relative;
+  padding: 1% 2%;
+  position: fixed;
   top: 0;
-  left: 0;
-  padding: 10px;
+  z-index: 3;
 `;
 export const Title = styled.p`
-  font-size: 15px;
+  font-size: 16px;
   color: #f5b900;
 `;
 export const Koi = styled.div`
   position: relative;
   display: inline-block;
+  margin: 0px 16px;
 
   &:hover {
     span {
@@ -23,14 +25,17 @@ export const Koi = styled.div`
   }
 `;
 export const MenuIconWrapper = styled.div`
-  margin: 0 20px;
-`;
-export const Left = styled.div`
-  display: flex;
 
-  margin: 0 25px;
 `;
-export const NavigationWrapper = styled.div``;
+export const Right = styled.div`
+display: flex;
+align-items: center;
+
+ 
+`;
+export const NavigationWrapper = styled.div`
+  position: static;
+`;
 
 export const Tooltip = styled.span`
   visibility: hidden;
@@ -40,7 +45,6 @@ export const Tooltip = styled.span`
   background-color: black;
   color: #fff;
   text-align: center;
-
   align-items: center;
   padding: 7px;
   border: 2px solid #f5b900;
@@ -81,19 +85,21 @@ export const Tooltip = styled.span`
   }
 `;
 export const MenuWrapper = styled.div`
-  height:100vh;
+  height: 100%;
   width: 100vw;
-  
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: flex-end;
 `;
 export const SideContent = styled.div`
   height: 70%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
 `;
 export const Nav = styled.nav`
   margin: 40px 20px;
@@ -106,9 +112,9 @@ export const NavLink = styled.nav`
   a {
     font-size: 18px;
     color: white;
-    &:hover{
-        color:#f5b900;
-        font-weight: bold;
+    &:hover {
+      color: #f5b900;
+      font-weight: bold;
     }
   }
 `;
@@ -118,5 +124,10 @@ export const KoiLink = styled.a`
   a {
     font-size: 18px;
     color: white;
+    text-align: right;
+    &:hover {
+      color: #f5b900;
+      font-weight: bold;
+    }
   }
 `;

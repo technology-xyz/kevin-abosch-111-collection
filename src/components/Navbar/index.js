@@ -4,7 +4,7 @@ import {
   Title,
   Koi,
   MenuIconWrapper,
-  Left,
+  Right,
   NavigationWrapper,
   Tooltip,
 } from "./style";
@@ -20,13 +20,16 @@ const Navbar = () => {
     <NavigationWrapper>
       <Bar>
         <Title>Studio Kevin Abosch</Title>
-        <Left>
+        <Right>
           <Koi onHover={handleHover}>
             <img src={Logo} />
             <Tooltip>
-              Powered by Koi. Koi is the first framework for building easy,
+                <p>
+                    Powered by Koi. Koi is the first framework for building easy,
               customizable dApps where content earns attention rewards by
               default.
+                </p>
+              
               <a href="https://openkoi.com/framework/">
                   Learn More
               </a>
@@ -38,10 +41,14 @@ const Navbar = () => {
             {!activeMenu ? (
               <img src={MenuIcon} />
             ) : (
-              <h4 style={{ color: "#fff" }}>X</h4>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L15 15" stroke="white" stroke-width="2"/>
+                <path d="M15 1L1 15" stroke="white" stroke-width="2"/>
+                </svg>
+                
             )}
           </MenuIconWrapper>
-        </Left>
+        </Right>
       </Bar>
       {activeMenu && <Menu />}
     </NavigationWrapper>

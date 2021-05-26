@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CollectionWrapper } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
-import { preUrl } from "config";
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useHistory } from "react-router";
 
-import useAxios from "axios-hooks";
-import { propTypes } from "react-bootstrap/esm/Image";
-const Collection = (props) => {
-    const [pics, setPics] = useState([])
-    useEffect(()=>{
-        console.log(props)
-            setPics(props.items)
-    },[props.items])
-    
-  
+
+
+const Collection = () => {
+  const { contents } = useContext(DataContext);
+    const history = useHistory()
+
+    const handleClick = () =>{
+
+    }
   return (
- 
-      
-        <CollectionWrapper>
-          {pics.map((pic) => {
-            return <img width="200" height="200" src={pic.source} />;
-          })}
-        </CollectionWrapper>
-     
-
+    <CollectionWrapper>
+      {contents.map((pic, id) => {
+        return (<LazyLoadImage 
+            onClick={()=> history.push(`/gallery/${parseInt(id) + 1}/details`)}
+            width="200" 
+            height="200" 
+            effect="blur"
+            src={pic.source}
+            alt={pic.name} />);
+      })}
+    </CollectionWrapper>
   );
 };
 export default Collection;

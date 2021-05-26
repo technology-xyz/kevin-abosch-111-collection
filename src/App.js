@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from "react-router-dom";
-
 
 import BasicStyle from "theme/basicStyle";
 import GlobalStyle from "theme/globalStyle";
@@ -19,9 +18,9 @@ import { preUrl } from "config";
 
 import DataContextContainer from "contexts/DataContextContainer";
 
-
 function App() {
-  const [items, setItems] = useState([])
+ 
+  const [items, setItems] = useState([]);
 
   const [{ data, loading, error }, refetch] = useAxios(
     "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
@@ -43,11 +42,11 @@ function App() {
           source = `${preUrl}${value}?t=${Math.random() * 999999}`;
         }
       }
-     
+
       setItems(nftArray);
+    
     }
   }, [loading, data]);
- 
 
   return (
     <div className="App">
@@ -56,12 +55,20 @@ function App() {
 
       <Router>
         <Switch>
-          <DataContextContainer>
-            <Route exact path="/" render={() => <Redirect to="/gallery/0" />} />
-            <MyRoute  path="/gallery/:id" component={Gallery} />
+          
+          <DataContextContainer images={items}>
+            <Route exact path="/" render={() => <Redirect to="/gallery/1" />} />
+            
+            <Suspense fallback={<h1>Loading</h1>}>
+              <MyRoute path="/gallery/:id" component={Gallery} />
+            </Suspense>
+
             <MyRoute exact path="/about" component={About} />
-            <MyRoute exact path="/collection" component={Collection} items={items}/>
+
+            <MyRoute exact path="/collection" component={Collection} />
+           
           </DataContextContainer>
+          <Route exact path="/gallery" render={() => <Redirect to="/gallery/1" />} />
         </Switch>
       </Router>
     </div>

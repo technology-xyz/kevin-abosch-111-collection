@@ -1,7 +1,6 @@
 import React from "react";
-import { Details, TagGroup, Tag, ImageMenu, DetailLink } from "./style";
-import { Logo } from "../../assets/images";
-import { useHistory } from "react-router";
+import { Details, TagGroup, Tag, } from "./style";
+import {  matchPath, useLocation } from "react-router";
 
 const DetailView = () => (
   <div>
@@ -24,20 +23,40 @@ const DetailView = () => (
     </TagGroup>
   </div>
 );
-const ImageDetails = ({ item }) => {
-    const history = useHistory()
-    const handleClick = (e) =>{
-        console.log(e.target.textContent)
-        history.push(e.target.textContent.toLowerCase())
-    }
+
+const CollectView = () => (
+  <div>
+    <p>852 Profit Sharing Tokens available for purchase.</p>
+    <a>Bid Now</a>
+    <a>Share</a>
+    <span>Current Owners</span>
+    <p>1234567890123456789012345678901234567890</p>
+    <p>6789012345678901234567890123456789012345</p>
+    <p>1234567890123456789012345678901234567890</p>
+    <p>1234567890123456789012345678901234567890</p>
+    <p>6789012345678901234567890123456789012345</p>
+    <p>1234567890123456789012345678901234567890</p>
+  </div>
+);
+const ImageDetails = () => {
+
+  const { pathname } = useLocation();
+  
+  const matchDetails = matchPath(pathname, {
+    path: "/gallery/:id/details",
+    exact: true,
+    strict: false,
+  });
+  const matchCollect = matchPath(pathname, {
+    path: "/gallery/:id/collect",
+    exact: true,
+    strict: false,
+  });
+
   return (
     <Details>
-      <ImageMenu>
-        <DetailLink value="details" onClick={handleClick}>Details</DetailLink>
-        <DetailLink value="collect" onClick={handleClick}>Collect</DetailLink>
-        <span>Bid Now</span>
-      </ImageMenu>
-      {DetailView()}
+      {matchDetails && DetailView()}
+      {matchCollect && CollectView()}
     </Details>
   );
 };

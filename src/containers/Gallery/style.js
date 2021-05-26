@@ -24,20 +24,28 @@ export const Details = styled.div`
     text-decoration: none;
     font-size: 16px;
     line-height: 28px;
+    margin: 16px 0;
   }
 `;
+export const CollectContainer = styled.div`
+
+`
 export const DetailLink = styled.div`
   border-bottom: ${props => props.active ? "3px solid var(--yellow)" : "none"};
+  color: ${props => props.active ? "var(--yellow)" : "white"};
 `;
 
 export const TagGroup = styled.div`
   display: flex;
+  width:100%;
+  margin: 16px 0;
+
 `;
 
 export const Tag = styled.div`
   width: 97px;
   height: 24px;
-
+  margin-right: 8px;
   display: block;
   text-align: center;
   border: 1px solid #2ebaae;
@@ -57,19 +65,30 @@ export const ImageWrapper = styled.div`
 export const ImageMenu = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   color: #ffffff;
+  margin: 8px 0px;
+  span {
+    display:block;
+    height:24px
+  }
+  img{
+    width:24px;
+  }
 `;
 export const BottomBar = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  position:absolute;
+  bottom: 0;
   width: 100%;
 `;
 export const PlaceHolder = styled.div``;
 export const LeftImg = styled.div`
-  width: 100px;
+ 
 `;
 
 export const RightImg = styled.div`
-  width: 100px;
+  
 `;
