@@ -79,7 +79,7 @@ export const ImageMenu = styled.div`
 `;
 export const BottomBar = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   position:absolute;
   bottom: 0;
   width: 100%;

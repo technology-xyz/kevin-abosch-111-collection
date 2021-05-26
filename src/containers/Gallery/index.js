@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import useAxios from "axios-hooks";
+import React, { useContext, useEffect, useState, } from "react";
+
 import { Logo } from "../../assets/images";
-import { preUrl } from "config";
+
 import Details from "./details";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
+import { DataContext } from "contexts/DataContextContainer";
 import {
   ImageWrapper,
   MenuContainer,
@@ -15,39 +16,40 @@ import {
   DetailLink,
 } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { getNftReward } from "koi_tools/common";
+import * as kweb from "koi_tools/web"
+
+const getKoi = async (txId) => {
+  const ktools = new kweb.Web();
+  console.log(kweb)
+  try {
+     let nftRewards = await kweb.getNftReward(txId)
+      return {
+          nftRewards
+      }
+  } catch (err) {
+      throw err.message
+  }
+}
+
 const Gallery = () => {
   const { id } = useParams();
   const history = useHistory();
   const { pathname } = useLocation();
   const [items, setItems] = useState([]);
-  const [mainImg, setMainImg] = useState(parseInt(id));
-
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id);
-  const [{ data, loading, error }, refetch] = useAxios(
-    "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
-  );
+  const { contents } = useContext(DataContext);
   useEffect(() => {
-    if (!loading) {
-      const nftArray = [""];
-
-      let source = "";
-      for (const [key, value] of Object.entries(data)) {
-        const [name, extension] = key.split(".");
-
-        if (extension === "json") {
-          nftArray.push({
-            name: name.slice(5),
-            source: source,
-            json: `${preUrl}${value}?t=${Math.random() * 999999}`,
-          });
-        } else {
-          source = `${preUrl}${value}?t=${Math.random() * 999999}`;
-        }
+      
+      setItems(contents);
+      if (items.length > 0) {
+        console.log(getKoi(items[56].source), )
+        
       }
-      setItems(nftArray);
-    }
-  }, [loading, data]);
+  }, [contents, items]);
 
   const matchDetail = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -89,12 +91,13 @@ const Gallery = () => {
         {items[id] && (
           <>
             <ImageWrapper>
-              <img
+              <LazyLoadImage
                 width="512"
                 height="512"
                 alt={items[parseInt(id)].name}
                 src={items[parseInt(id)].source}
                 onClick={onShowDetails}
+                effect="blur"
               />
               <ImageMenu>
                 <span>#{items[parseInt(id)].name}</span>
@@ -130,20 +133,22 @@ const Gallery = () => {
                   {id === "0" ? (
                     <PlaceHolder />
                   ) : (
-                    <img
+                    <LazyLoadImage
                       width="170"
                       height="170"
                       alt={items[parseInt(id)].name}
                       src={items[parseInt(id) - 1].source}
+                      effect="blur"
                     />
                   )}
                 </LeftImg>
                 <RightImg>
-                  <img
+                  <LazyLoadImage
                     width="170"
                     height="170"
                     alt={items[parseInt(id)].name}
                     src={items[parseInt(id) + 1].source}
+                    effect="blur"
                   />
                 </RightImg>
               </BottomBar>

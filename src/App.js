@@ -19,9 +19,8 @@ import { preUrl } from "config";
 import DataContextContainer from "contexts/DataContextContainer";
 
 function App() {
- 
   const [items, setItems] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [{ data, loading, error }, refetch] = useAxios(
     "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
   );
@@ -44,7 +43,7 @@ function App() {
       }
 
       setItems(nftArray);
-    
+      setIsLoading(false);
     }
   }, [loading, data]);
 
@@ -54,22 +53,30 @@ function App() {
       <GlobalStyle />
 
       <Router>
-        <Switch>
-          
-          <DataContextContainer images={items}>
-            <Route exact path="/" render={() => <Redirect to="/gallery/1" />} />
-            
-            <Suspense fallback={<h1>Loading</h1>}>
-              <MyRoute path="/gallery/:id" component={Gallery} />
-            </Suspense>
+        {!isLoading && (
+          <Switch>
+            <DataContextContainer images={items}>
+              <Route
+                exact
+                path="/"
+                render={() => <Redirect to="/gallery/1" />}
+              />
 
-            <MyRoute exact path="/about" component={About} />
+              <Suspense fallback={<h1>Loading</h1>}>
+                <MyRoute path="/gallery/:id" component={Gallery} />
+              </Suspense>
 
-            <MyRoute exact path="/collection" component={Collection} />
-           
-          </DataContextContainer>
-          <Route exact path="/gallery" render={() => <Redirect to="/gallery/1" />} />
-        </Switch>
+              <MyRoute exact path="/about" component={About} />
+
+              <MyRoute exact path="/collection" component={Collection} />
+            </DataContextContainer>
+            <Route
+              exact
+              path="/gallery"
+              render={() => <Redirect to="/gallery/1" />}
+            />
+          </Switch>
+        )}
       </Router>
     </div>
   );
