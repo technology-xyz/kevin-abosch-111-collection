@@ -3,6 +3,7 @@ import useAxios from "axios-hooks";
 import { Logo } from "../../assets/images";
 import { preUrl } from "config";
 import Details from "./details";
+import MetaWrapper from "components/Wrappers/MetaWrapper";
 import {
   ImageWrapper,
   MenuContainer,
@@ -83,72 +84,74 @@ const Gallery = () => {
   };
 
   return (
-    <MenuContainer onWheel={handleScroll} showDetails={false}>
-      {items[id] && (
-        <>
-          <ImageWrapper>
-            <img
-              width="512"
-              height="512"
-              alt={items[parseInt(id)].name}
-              src={items[parseInt(id)].source}
-              onClick={onShowDetails}
-            />
-            <ImageMenu>
-              <span>#{items[parseInt(id)].name}</span>
-              <span>
-                2.16
-                <img src={Logo} />
-              </span>
-              <span>Bid Now</span>
-            </ImageMenu>
-            <ImageMenu>
-            <DetailLink
-              value="details"
-              active={matchDetail}
-              onClick={() => history.push("details")}
-            >
-              Details
-            </DetailLink>
-            <DetailLink
-              value="collect"
-              active={matchCollect}
-              onClick={() => history.push("collect")}
-            >
-              Collect
-            </DetailLink>
-            <span>Bid Now</span>
-          </ImageMenu>
-            {matchDetail && <Details item={items[indexId]} />}
-          </ImageWrapper>
-          
-          {!matchDetail && !matchCollect && (
-            <BottomBar>
-              <LeftImg>
-                {id === "0" ? (
-                  <PlaceHolder />
-                ) : (
+    <MetaWrapper>
+      <MenuContainer onWheel={handleScroll} showDetails={false}>
+        {items[id] && (
+          <>
+            <ImageWrapper>
+              <img
+                width="512"
+                height="512"
+                alt={items[parseInt(id)].name}
+                src={items[parseInt(id)].source}
+                onClick={onShowDetails}
+              />
+              <ImageMenu>
+                <span>#{items[parseInt(id)].name}</span>
+                <span>
+                  2.16
+                  <img src={Logo} />
+                </span>
+                <span>Bid Now</span>
+              </ImageMenu>
+              <ImageMenu>
+                <DetailLink
+                  value="details"
+                  active={matchDetail}
+                  onClick={() => history.push("details")}
+                >
+                  Details
+                </DetailLink>
+                <DetailLink
+                  value="collect"
+                  active={matchCollect}
+                  onClick={() => history.push("collect")}
+                >
+                  Collect
+                </DetailLink>
+                <span>Bid Now</span>
+              </ImageMenu>
+              {matchDetail && <Details item={items[indexId]} />}
+            </ImageWrapper>
+
+            {!matchDetail && !matchCollect && (
+              <BottomBar>
+                <LeftImg>
+                  {id === "0" ? (
+                    <PlaceHolder />
+                  ) : (
+                    <img
+                      width="170"
+                      height="170"
+                      alt={items[parseInt(id)].name}
+                      src={items[parseInt(id) - 1].source}
+                    />
+                  )}
+                </LeftImg>
+                <RightImg>
                   <img
                     width="170"
                     height="170"
                     alt={items[parseInt(id)].name}
-                    src={items[parseInt(id) - 1].source}
+                    src={items[parseInt(id) + 1].source}
                   />
-                )}
-              </LeftImg>
-              <RightImg>
-                <img
-                  width="170"
-                  height="170"
-                  alt={items[parseInt(id)].name}
-                  src={items[parseInt(id) + 1].source}
-                />
-              </RightImg>
-            </BottomBar>
-          )}
-        </>
-      )}
-    </MenuContainer>
+                </RightImg>
+              </BottomBar>
+            )}
+          </>
+        )}
+      </MenuContainer>
+    </MetaWrapper>
   );
 };
 
