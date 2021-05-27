@@ -21,11 +21,23 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 import * as Ktools from '@_koi/sdk/common'
+
+
+const Gallery = () => {
+  const { id } = useParams();
+  const history = useHistory();
+  const { pathname } = useLocation();
+  const [items, setItems] = useState([]);
+  const [scrollLimit, setScrollLimit] = useState(50);
+  const indexId = parseInt(id) -1 ;
+  const { contents } = useContext(DataContext);
+  const [nftInfo, setNftInfo] = useState('')
+
+
 const getKoi = async (txId) => {
- 
-  console.log(Ktools)
   try {
-     let nftRewards = Ktools.getNftReward(txId)
+     let nftRewards = await Ktools.getNftReward(txId)
+     
       return {
           nftRewards
       }
@@ -34,21 +46,9 @@ const getKoi = async (txId) => {
   }
 }
 
-const Gallery = () => {
-  const { id } = useParams();
-  const history = useHistory();
-  const { pathname } = useLocation();
-  const [items, setItems] = useState([]);
-  const [scrollLimit, setScrollLimit] = useState(50);
-  const indexId = parseInt(id);
-  const { contents } = useContext(DataContext);
-  useEffect(() => {
-      
+  useEffect(()  => {
       setItems(contents);
-      if (items.length > 0) {
-        console.log(getKoi(items[56].source) )
-        
-      }
+     
   }, [contents, items]);
 
   const matchDetail = matchPath(pathname, {
@@ -64,13 +64,13 @@ const Gallery = () => {
 
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
-    if (!matchDetail) {
+    if (!matchDetail || !matchCollect) {
       if (newScrollLimit < 0) {
         setScrollLimit(50);
-        history.push(`${indexId + 1}`);
+        history.push(`/gallery/${indexId + 1}`);
       } else if (newScrollLimit > 100) {
         setScrollLimit(50);
-        history.push(`${indexId - 1}`);
+        history.push(`/gallery/${indexId - 1}`);
       } else {
         setScrollLimit(newScrollLimit);
       }
@@ -81,7 +81,7 @@ const Gallery = () => {
     if (matchDetail) {
       history.goBack();
     } else {
-      history.push(`/gallery/${id}/details`);
+      history.push(`/gallery/${indexId}/details`);
     }
   };
 
@@ -94,15 +94,15 @@ const Gallery = () => {
               <LazyLoadImage
                 width="512"
                 height="512"
-                alt={items[parseInt(id)].name}
-                src={items[parseInt(id)].source}
+                alt={items[indexId].name}
+                src={items[indexId].source}
                 onClick={onShowDetails}
                 effect="blur"
               />
               <ImageMenu>
-                <span>#{items[parseInt(id)].name}</span>
+                <span>#{items[indexId].name}</span>
                 <span>
-                  2.16
+                  {nftInfo}
                   <img src={Logo} />
                 </span>
                 <span>Bid Now</span>
@@ -111,33 +111,33 @@ const Gallery = () => {
                 <DetailLink
                   value="details"
                   active={matchDetail}
-                  onClick={() => history.push("details")}
+                  onClick={() => matchDetail ? history.push(`/gallery/${id}`) : history.push(`/gallery/${id}/details`)}
                 >
                   Details
                 </DetailLink>
                 <DetailLink
                   value="collect"
                   active={matchCollect}
-                  onClick={() => history.push("collect")}
+                  onClick={() => matchCollect? history.push(`/gallery/${id}`) : history.push(`/gallery/${id}/collect`)}
                 >
                   Collect
                 </DetailLink>
                 <span>Bid Now</span>
               </ImageMenu>
-              {matchDetail && <Details item={items[indexId]} />}
+              {(matchDetail || matchCollect) && <Details item={items[indexId]} />}
             </ImageWrapper>
 
             {!matchDetail && !matchCollect && (
               <BottomBar>
                 <LeftImg>
-                  {id === "0" ? (
+                  {indexId === 0 ? (
                     <PlaceHolder />
                   ) : (
                     <LazyLoadImage
                       width="170"
                       height="170"
-                      alt={items[parseInt(id)].name}
-                      src={items[parseInt(id) - 1].source}
+                      alt={items[indexId].name}
+                      src={items[indexId - 1].source}
                       effect="blur"
                     />
                   )}
@@ -146,8 +146,8 @@ const Gallery = () => {
                   <LazyLoadImage
                     width="170"
                     height="170"
-                    alt={items[parseInt(id)].name}
-                    src={items[parseInt(id) + 1].source}
+                    alt={items[indexId].name}
+                    src={items[indexId + 1].source}
                     effect="blur"
                   />
                 </RightImg>
