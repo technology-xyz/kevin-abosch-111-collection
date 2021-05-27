@@ -84,6 +84,9 @@ export const Tooltip = styled.span`
     border-color: transparent transparent #f5b900;
   }
 `;
+
+export const CurrentOwners = styled.div`
+`
 export const MenuWrapper = styled.div`
   height: 100%;
   width: 100vw;

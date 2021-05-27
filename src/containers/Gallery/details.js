@@ -1,6 +1,6 @@
 import React from "react";
-import { Details, TagGroup, Tag, } from "./style";
-import {  matchPath, useLocation } from "react-router";
+import { Details, TagGroup, Tag, CollectLinks, CurrentOwners } from "./style";
+import { matchPath, useLocation } from "react-router";
 
 const DetailView = () => (
   <div>
@@ -27,21 +27,24 @@ const DetailView = () => (
 const CollectView = () => (
   <div>
     <p>852 Profit Sharing Tokens available for purchase.</p>
-    <a href="verto.exchange">Bid Now</a>
-    <a>Share</a>
-    <span>Current Owners</span>
-    <p>1234567890123456789012345678901234567890</p>
-    <p>6789012345678901234567890123456789012345</p>
-    <p>1234567890123456789012345678901234567890</p>
-    <p>1234567890123456789012345678901234567890</p>
-    <p>6789012345678901234567890123456789012345</p>
-    <p>1234567890123456789012345678901234567890</p>
+    <CollectLinks>
+      <a href="verto.exchange">Bid Now</a>
+      <a>Share</a>
+    </CollectLinks>
+    <CurrentOwners>
+      <span>Current Owners</span>
+      <p>1234567890123456789012345678901234567890</p>
+      <p>6789012345678901234567890123456789012345</p>
+      <p>1234567890123456789012345678901234567890</p>
+      <p>1234567890123456789012345678901234567890</p>
+      <p>6789012345678901234567890123456789012345</p>
+      <p>1234567890123456789012345678901234567890</p>
+    </CurrentOwners>
   </div>
 );
 const ImageDetails = () => {
-
   const { pathname } = useLocation();
-  
+
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
     exact: true,

@@ -12,23 +12,41 @@ export const MenuContainer = styled.div`
 `;
 
 export const Details = styled.div`
-  max-width: 100%;
+  width: 100%;
   height: 100%;
+  color:#fff;
   a {
     display: block;
     text-align: center;
     border: 1px solid #fff;
-    width: 127px;
+    width: 170px;
     height: 32px;
     color: #fff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 28px;
     margin: 16px 0;
+    margin-right:10%;
   }
 `;
-export const CollectContainer = styled.div`
+export const CollectLinks = styled.div`
+display: flex;
+a:first-of-type{
+  background-color: #f5b900;
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    border:none;
+}
+`
+export const CurrentOwners = styled.div`
 
+span {
+  display:inline-block;
+  border-bottom: 3px solid var(--yellow);
+  margin-bottom: 5%;
+}
 `
 export const DetailLink = styled.div`
   border-bottom: ${props => props.active ? "3px solid var(--yellow)" : "none"};
