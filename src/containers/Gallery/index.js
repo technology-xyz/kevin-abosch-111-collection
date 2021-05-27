@@ -18,14 +18,14 @@ import {
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { getNftReward } from "koi_tools/common";
-import * as kweb from "koi_tools/web"
 
+
+import * as Ktools from '@_koi/sdk/common'
 const getKoi = async (txId) => {
-  const ktools = new kweb.Web();
-  console.log(kweb)
+ 
+  console.log(Ktools)
   try {
-     let nftRewards = await kweb.getNftReward(txId)
+     let nftRewards = Ktools.getNftReward(txId)
       return {
           nftRewards
       }
@@ -46,7 +46,7 @@ const Gallery = () => {
       
       setItems(contents);
       if (items.length > 0) {
-        console.log(getKoi(items[56].source), )
+        console.log(getKoi(items[56].source) )
         
       }
   }, [contents, items]);
