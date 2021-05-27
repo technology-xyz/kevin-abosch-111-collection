@@ -1,4 +1,4 @@
-import React, { useHistory } from "react";
+import React from "react";
 import { Logo } from "../../assets/images";
 import { Link } from "react-router-dom";
 import { MenuWrapper, SideContent, Nav, NavLink, KoiLink } from "./style";
@@ -19,7 +19,7 @@ const Menu = () => {
         </Nav>
         <KoiLink>
             <Link>
-            <img src={Logo} />
+            <img src={Logo} alt="logo"/>
           Powered By Koi
             </Link>
          

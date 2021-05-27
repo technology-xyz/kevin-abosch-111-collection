@@ -15,14 +15,14 @@ const Navbar = () => {
   const showMenu = () => {
     setActiveMenu(!activeMenu);
   };
-  const handleHover = () => {};
+
   return (
     <NavigationWrapper>
       <Bar>
         <Title>Studio Kevin Abosch</Title>
         <Right>
-          <Koi onHover={handleHover}>
-            <img src={Logo} />
+          <Koi >
+            <img src={Logo} alt="koi-logo"/>
             <Tooltip>
                 <p>
                     Powered by Koi. Koi is the first framework for building easy,
@@ -39,7 +39,7 @@ const Navbar = () => {
           </Koi>
           <MenuIconWrapper onClick={showMenu}>
             {!activeMenu ? (
-              <img src={MenuIcon} />
+              <img src={MenuIcon} alt="menu icon" />
             ) : (
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1L15 15" stroke="white" stroke-width="2"/>

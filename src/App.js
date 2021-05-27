@@ -28,6 +28,7 @@ function App() {
     if (!loading) {
       const nftArray = [];
       let source = "";
+      
       for (const [key, value] of Object.entries(data)) {
         const [name, extension] = key.split(".");
 
@@ -38,6 +39,7 @@ function App() {
             json: `${preUrl}${value}?t=${Math.random() * 999999}`,
           });
         } else {
+          
           source = `${preUrl}${value}?t=${Math.random() * 999999}`;
         }
       }
@@ -45,7 +47,11 @@ function App() {
       setItems(nftArray);
       setIsLoading(false);
     }
-  }, [loading, data]);
+    if(error){
+      console.log(error)
+      refetch()
+    }
+  }, [loading, data,error,refetch]);
 
   return (
     <div className="App">

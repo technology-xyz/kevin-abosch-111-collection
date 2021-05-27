@@ -27,7 +27,7 @@ const DetailView = () => (
 const CollectView = () => (
   <div>
     <p>852 Profit Sharing Tokens available for purchase.</p>
-    <a>Bid Now</a>
+    <a href="verto.exchange">Bid Now</a>
     <a>Share</a>
     <span>Current Owners</span>
     <p>1234567890123456789012345678901234567890</p>

@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { Logo } from "../../assets/images";
-
 import Details from "./details";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
@@ -18,8 +16,7 @@ import {
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
-import * as Ktools from "@_koi/sdk/common";
+import {getNftReward} from "@_koi/sdk/common";
 
 const Gallery = () => {
   const { id } = useParams();
@@ -30,7 +27,7 @@ const Gallery = () => {
   const indexId = parseInt(id) - 1;
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
-  const [lockScroll, setLockScroll] = useState(true)
+
 
   const matchDetail = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -44,25 +41,29 @@ const Gallery = () => {
   });
 
   const getKoi = async (txId) => {
+  
     try {
-      let nftRewards = await Ktools.getNftReward(txId);
-
-      return {
-        nftRewards,
-      };
+      let nftRewards = await getNftReward('WYKj6XuKup37QQxnQ92VFoVfFXAAvyDTf_4Y_vM7Z0A');
+      console.log(nftRewards)
+      setNftInfo(nftRewards)
     } catch (err) {
+      console.log(err.message)
       throw err.message;
     }
   };
 
   useEffect(() => {
     setItems(contents);
-    if(matchDetail || matchCollect){
-        setLockScroll(false)
-    } else {
-      setLockScroll(true)
-    }
-  }, [contents, matchDetail,matchCollect]);
+    
+       getKoi("contents[indexId].source").then(res=>{
+      console.log(res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+    
+   
+  }, [contents,indexId]);
 
  
 
