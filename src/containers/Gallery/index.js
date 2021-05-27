@@ -16,7 +16,7 @@ import {
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import {getNftReward} from "@_koi/sdk/common";
+import * as Kcommon from "@_koi/sdk/common";
 
 const Gallery = () => {
   const { id } = useParams();
@@ -27,7 +27,6 @@ const Gallery = () => {
   const indexId = parseInt(id) - 1;
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
-
 
   const matchDetail = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -41,35 +40,33 @@ const Gallery = () => {
   });
 
   const getKoi = async (txId) => {
-  
+    const Ktools = new Kcommon.Common();
     try {
-      let nftRewards = await getNftReward('WYKj6XuKup37QQxnQ92VFoVfFXAAvyDTf_4Y_vM7Z0A');
-      console.log(nftRewards)
-      setNftInfo(nftRewards)
+      let nftRewards = await Kcommon.getNftReward(txId);
+
+      setNftInfo(nftRewards);
     } catch (err) {
-      console.log(err.message)
+      console.log(err);
       throw err.message;
     }
   };
 
   useEffect(() => {
     setItems(contents);
-    
-       getKoi("contents[indexId].source").then(res=>{
-      console.log(res.data)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
-    
-   
-  }, [contents,indexId]);
-
- 
+    if (contents.length) {
+      getKoi(contents[indexId].source)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [contents]);
 
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
-  
+
     if (!matchDetail && !matchCollect) {
       if (newScrollLimit < 0) {
         setScrollLimit(50);
@@ -90,7 +87,7 @@ const Gallery = () => {
       history.push(`/gallery/${id}/details`);
     }
   };
- 
+
   return (
     <MetaWrapper>
       <MenuContainer onWheel={handleScroll} lockScroll={false}>
@@ -113,33 +110,39 @@ const Gallery = () => {
                 </span>
                 <span>Bid Now</span>
               </ImageMenu>
-              <ImageMenu>
-                <DetailLink
-                  value="details"
-                  active={matchDetail}
-                  onClick={() =>
-                    matchDetail
-                      ? history.push(`/gallery/${id}`)
-                      : history.push(`/gallery/${id}/details`)
-                  }
-                >
-                  Details
-                </DetailLink>
-                <DetailLink
-                  value="collect"
-                  active={matchCollect}
-                  onClick={() =>
-                    matchCollect
-                      ? history.push(`/gallery/${id}`)
-                      : history.push(`/gallery/${id}/collect`)
-                  }
-                >
-                  Collect
-                </DetailLink>
-                <span>Bid Now</span>
-              </ImageMenu>
+
               {(matchDetail || matchCollect) && (
-                <Details item={items[indexId]} />
+                <>
+                  
+                  
+                  <ImageMenu>
+                    <DetailLink
+                      value="details"
+                      active={matchDetail}
+                      onClick={() =>
+                        matchDetail
+                          ? history.push(`/gallery/${id}`)
+                          : history.push(`/gallery/${id}/details`)
+                      }
+                    >
+                      Details
+                    </DetailLink>
+                    <DetailLink
+                      value="collect"
+                      active={matchCollect}
+                      onClick={(e) =>{
+                        e.preventDefault()
+                        matchCollect
+                          ? history.push(`/gallery/${id}`)
+                          : history.push(`/gallery/${id}/collect`)
+                      }
+                      }>
+                      Collect
+                    </DetailLink>
+                    <span>Bid Now</span>
+                  </ImageMenu>
+                  <Details item={items[indexId]} />
+                </>
               )}
             </ImageWrapper>
 

@@ -48,7 +48,11 @@ span {
   margin-bottom: 5%;
 }
 `
-export const DetailLink = styled.div`
+export const DetailLink = styled.button`
+  background-color:transparent;
+  border:none;
+  padding: none;
+  outline:0;
   border-bottom: ${props => props.active ? "3px solid var(--yellow)" : "none"};
   color: ${props => props.active ? "var(--yellow)" : "white"};
 `;
@@ -94,6 +98,7 @@ export const ImageMenu = styled.div`
   img{
     width:24px;
   }
+  
 `;
 export const BottomBar = styled.div`
   display: flex;
@@ -108,5 +113,11 @@ export const LeftImg = styled.div`
 `;
 
 export const RightImg = styled.div`
-  
 `;
+
+export const ShareView = styled.div`
+`;
+
+export const Copy = styled.div``
+
+export const SocialBar = styled.div``

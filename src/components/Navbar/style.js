@@ -85,8 +85,7 @@ export const Tooltip = styled.span`
   }
 `;
 
-export const CurrentOwners = styled.div`
-`
+
 export const MenuWrapper = styled.div`
   height: 100%;
   width: 100vw;

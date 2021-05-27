@@ -1,5 +1,5 @@
 import React from "react";
-import { Details, TagGroup, Tag, CollectLinks, CurrentOwners } from "./style";
+import { Details, TagGroup, Tag, CollectLinks, CurrentOwners, ShareView, Copy ,SocialBar } from "./style";
 import { matchPath, useLocation } from "react-router";
 
 const DetailView = () => (
@@ -42,6 +42,21 @@ const CollectView = () => (
     </CurrentOwners>
   </div>
 );
+
+const Share = (url) => {
+  return (
+    <ShareView>
+      <Copy>
+        <p>{url}</p>
+        <button>Copy</button>
+      </Copy>
+      <SocialBar>
+
+      </SocialBar>
+      
+    </ShareView>
+  )
+}
 const ImageDetails = () => {
   const { pathname } = useLocation();
 
