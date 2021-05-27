@@ -5,7 +5,7 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   width: 100vw;
   height: 100%;
-  overflow: ${(props) => (props.showDetails ? "scroll" : "hidden")};
+  overflow: ${(props) => (props.lockScroll ? "hidden" :"scroll" )};
   justify-content: center;
   align-items: center;
   background-color: #000;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Logo } from "../../assets/images";
 
@@ -19,9 +19,7 @@ import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-
-import * as Ktools from '@_koi/sdk/common'
-
+import * as Ktools from "@_koi/sdk/common";
 
 const Gallery = () => {
   const { id } = useParams();
@@ -29,27 +27,10 @@ const Gallery = () => {
   const { pathname } = useLocation();
   const [items, setItems] = useState([]);
   const [scrollLimit, setScrollLimit] = useState(50);
-  const indexId = parseInt(id) -1 ;
+  const indexId = parseInt(id) - 1;
   const { contents } = useContext(DataContext);
-  const [nftInfo, setNftInfo] = useState('')
-
-
-const getKoi = async (txId) => {
-  try {
-     let nftRewards = await Ktools.getNftReward(txId)
-     
-      return {
-          nftRewards
-      }
-  } catch (err) {
-      throw err.message
-  }
-}
-
-  useEffect(()  => {
-      setItems(contents);
-     
-  }, [contents, items]);
+  const [nftInfo, setNftInfo] = useState("");
+  const [lockScroll, setLockScroll] = useState(true)
 
   const matchDetail = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -62,12 +43,36 @@ const getKoi = async (txId) => {
     strict: false,
   });
 
+  const getKoi = async (txId) => {
+    try {
+      let nftRewards = await Ktools.getNftReward(txId);
+
+      return {
+        nftRewards,
+      };
+    } catch (err) {
+      throw err.message;
+    }
+  };
+
+  useEffect(() => {
+    setItems(contents);
+    if(matchDetail || matchCollect){
+        setLockScroll(false)
+    } else {
+      setLockScroll(true)
+    }
+  }, [contents, matchDetail,matchCollect]);
+
+ 
+
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
-    if (!matchDetail || !matchCollect) {
+  
+    if (!matchDetail && !matchCollect) {
       if (newScrollLimit < 0) {
         setScrollLimit(50);
-        history.push(`/gallery/${indexId + 1}`);
+        history.push(`/gallery/${indexId + 2}`);
       } else if (newScrollLimit > 100) {
         setScrollLimit(50);
         history.push(`/gallery/${indexId - 1}`);
@@ -81,13 +86,13 @@ const getKoi = async (txId) => {
     if (matchDetail) {
       history.goBack();
     } else {
-      history.push(`/gallery/${indexId}/details`);
+      history.push(`/gallery/${id}/details`);
     }
   };
-
+ 
   return (
     <MetaWrapper>
-      <MenuContainer onWheel={handleScroll} showDetails={false}>
+      <MenuContainer onWheel={handleScroll} lockScroll={false}>
         {items[id] && (
           <>
             <ImageWrapper>
@@ -111,20 +116,30 @@ const getKoi = async (txId) => {
                 <DetailLink
                   value="details"
                   active={matchDetail}
-                  onClick={() => matchDetail ? history.push(`/gallery/${id}`) : history.push(`/gallery/${id}/details`)}
+                  onClick={() =>
+                    matchDetail
+                      ? history.push(`/gallery/${id}`)
+                      : history.push(`/gallery/${id}/details`)
+                  }
                 >
                   Details
                 </DetailLink>
                 <DetailLink
                   value="collect"
                   active={matchCollect}
-                  onClick={() => matchCollect? history.push(`/gallery/${id}`) : history.push(`/gallery/${id}/collect`)}
+                  onClick={() =>
+                    matchCollect
+                      ? history.push(`/gallery/${id}`)
+                      : history.push(`/gallery/${id}/collect`)
+                  }
                 >
                   Collect
                 </DetailLink>
                 <span>Bid Now</span>
               </ImageMenu>
-              {(matchDetail || matchCollect) && <Details item={items[indexId]} />}
+              {(matchDetail || matchCollect) && (
+                <Details item={items[indexId]} />
+              )}
             </ImageWrapper>
 
             {!matchDetail && !matchCollect && (
