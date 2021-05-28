@@ -24,7 +24,11 @@ export const Koi = styled.div`
     }
   }
 `;
-export const MenuIconWrapper = styled.div``;
+export const MenuIconWrapper = styled.button`
+outline:0;
+background-color:transparent;
+border:0;
+`;
 export const Right = styled.div`
   display: flex;
   align-items: center;

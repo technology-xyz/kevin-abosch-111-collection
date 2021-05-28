@@ -1,5 +1,5 @@
 import React, {  useContext } from "react";
-import { CollectionWrapper } from "./style";
+import { CollectionWrapper,Grid } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -11,7 +11,8 @@ const Collection = () => {
   return (
     <MetaWrapper>
       <CollectionWrapper>
-        {contents.map((pic, id) => {
+      <Grid>
+      {contents.map((pic, id) => {
           return (
             <LazyLoadImage
               onClick={() =>
@@ -25,6 +26,8 @@ const Collection = () => {
             />
           );
         })}
+      </Grid>
+       
       </CollectionWrapper>
     </MetaWrapper>
   );

@@ -64,25 +64,32 @@ const Share = (url) => {
       </Copy>
       <SocialBar>
         <a href={`https://twitter.com/intent/tweet?url${""}`}>
-          <img src={Twitter} />
+          <img src={Twitter} alt="twitter-logo"/>
         </a>
-        <a
-          href={`https://www.linkedin.com/shareArticle?mini=true&url=%{}`}
-        >
-          <img src={linkein} />
+        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=%{}`}>
+          <img src={linkein} alt="linkedin-logo" />
         </a>
 
         <a href={`https://www.facebook.com/sharer.php?u=${""}`}>
-          <img src={facebook} />
+          <img src={facebook} alt="facebook-logo"/>
+        </a>
+        <a href="8888888">
+          <img src={sms}  alt="sms-logo" />
         </a>
 
-        <img src={sms} />
-        <img src={email} />
-        <a href={`https://telegram.me/share/url?url=`}>
-         <img src={telegram} /> 
+        <a
+          href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site --Link--"
+          title="Share by Email"
+        >
+          <img src={email} alt="email-logo"/>
         </a>
-        
-        <img src={discord} />
+
+        <a href={`https://telegram.me/share/url?url=`}>
+          <img src={telegram} alt="telegram-logo" />
+        </a>
+        <a href="discord.com">
+          <img src={discord} alt="discord-logo" />
+        </a>
       </SocialBar>
     </ShareView>
   );
@@ -90,7 +97,7 @@ const Share = (url) => {
 const ImageDetails = (props) => {
   const { pathname } = useLocation();
   const history = useHistory();
-  const [share, setShare] = useState(false);
+  
 
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
