@@ -28,6 +28,11 @@ const Gallery = () => {
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
 
+  const matchMain = matchPath(pathname, {
+    path: "/gallery/:id/",
+    exact: true,
+    strict: true,
+  });
   const matchDetail = matchPath(pathname, {
     path: "/gallery/:id/details",
     exact: true,
@@ -67,7 +72,7 @@ const Gallery = () => {
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
 
-    if (!matchDetail && !matchCollect) {
+    if (matchMain) {
       if (newScrollLimit < 0) {
         setScrollLimit(50);
         history.push(`/gallery/${indexId + 2}`);
@@ -111,7 +116,7 @@ const Gallery = () => {
                 <span>Bid Now</span>
               </ImageMenu>
 
-              {(matchDetail || matchCollect) && (
+              {!matchMain && (
                 <>
                   <ImageMenu>
                     <DetailLink
@@ -143,7 +148,7 @@ const Gallery = () => {
               )}
             </ImageWrapper>
 
-            {!matchDetail && !matchCollect && (
+            {matchMain && (
               <BottomBar>
                 <LeftImg>
                   {indexId === 0 ? (

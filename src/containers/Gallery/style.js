@@ -122,4 +122,8 @@ export const ShareView = styled.div`
 
 export const Copy = styled.div``
 
-export const SocialBar = styled.div``
+export const SocialBar = styled.div`
+display:flex;
+width: 80%;
+justify-content:space-between;
+`

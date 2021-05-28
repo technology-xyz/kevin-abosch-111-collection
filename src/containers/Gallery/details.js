@@ -1,7 +1,24 @@
 import React, { useState } from "react";
-import { Details, TagGroup, Tag, CollectLinks, CurrentOwners, ShareView, Copy ,SocialBar } from "./style";
+import {
+  Details,
+  TagGroup,
+  Tag,
+  CollectLinks,
+  CurrentOwners,
+  ShareView,
+  Copy,
+  SocialBar,
+} from "./style";
 import { matchPath, useHistory, useLocation } from "react-router";
-import {Twitter, twitter} from "../../assets/images"
+import {
+  Twitter,
+  discord,
+  email,
+  facebook,
+  linkein,
+  sms,
+  telegram,
+} from "../../assets/images";
 const DetailView = () => (
   <div>
     <p>
@@ -24,19 +41,19 @@ const DetailView = () => (
   </div>
 );
 
-const OwnersView = () =>{
-  return ( 
+const OwnersView = () => {
+  return (
     <CurrentOwners>
-        <span>Current Owners</span>
-        <p>1234567890123456789012345678901234567890</p>
-        <p>6789012345678901234567890123456789012345</p>
-        <p>1234567890123456789012345678901234567890</p>
-        <p>1234567890123456789012345678901234567890</p>
-        <p>6789012345678901234567890123456789012345</p>
-        <p>1234567890123456789012345678901234567890</p>
-      </CurrentOwners>
-  )
-}
+      <span>Current Owners</span>
+      <p>1234567890123456789012345678901234567890</p>
+      <p>6789012345678901234567890123456789012345</p>
+      <p>1234567890123456789012345678901234567890</p>
+      <p>1234567890123456789012345678901234567890</p>
+      <p>6789012345678901234567890123456789012345</p>
+      <p>1234567890123456789012345678901234567890</p>
+    </CurrentOwners>
+  );
+};
 
 const Share = (url) => {
   return (
@@ -46,18 +63,21 @@ const Share = (url) => {
         <button>Copy</button>
       </Copy>
       <SocialBar>
-      <img
-      src={Twitter}
-      />
+        <img src={Twitter} />
+        <img src={linkein} />
+        <img src={facebook} />
+        <img src={sms} />
+        <img src={email} />
+        <img src={telegram} />
+        <img src={discord} />
       </SocialBar>
-      
     </ShareView>
-  )
-}
+  );
+};
 const ImageDetails = (props) => {
   const { pathname } = useLocation();
-  const history = useHistory()
-  const [share , setShare] = useState(false)
+  const history = useHistory();
+  const [share, setShare] = useState(false);
 
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -75,28 +95,29 @@ const ImageDetails = (props) => {
     exact: true,
     strict: false,
   });
-  
 
   const CollectView = () => (
     <div>
       <p>852 Profit Sharing Tokens available for purchase.</p>
       <CollectLinks>
         <a href="verto.exchange">Bid Now</a>
-        <span onClick={()=> history.push(`/gallery/${props.id}/collect/share`)}>Share</span>
+        <span
+          onClick={() => history.push(`/gallery/${props.id}/collect/share`)}
+        >
+          Share
+        </span>
       </CollectLinks>
-      {matchShare ? 
-      Share()
-      :
-      OwnersView()
-    }
-      
+
+      {matchShare && Share(pathname)}
+
+      {!matchShare && OwnersView()}
     </div>
   );
 
   return (
     <Details>
       {matchDetails && DetailView()}
-      {matchCollect && CollectView()}
+      {(matchCollect || matchShare) && CollectView()}
     </Details>
   );
 };
