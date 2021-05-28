@@ -51,10 +51,11 @@ span {
 export const DetailLink = styled.button`
   background-color:transparent;
   border:none;
-  padding: none;
+  
   outline:0;
   border-bottom: ${props => props.active ? "3px solid var(--yellow)" : "none"};
   color: ${props => props.active ? "var(--yellow)" : "white"};
+  
 `;
 
 export const TagGroup = styled.div`
@@ -93,7 +94,8 @@ export const ImageMenu = styled.div`
   margin: 8px 0px;
   span {
     display:block;
-    height:24px
+    height:24px;
+    border: 1px solid #000;
   }
   img{
     width:24px;

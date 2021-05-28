@@ -113,8 +113,6 @@ const Gallery = () => {
 
               {(matchDetail || matchCollect) && (
                 <>
-                  
-                  
                   <ImageMenu>
                     <DetailLink
                       value="details"
@@ -130,18 +128,17 @@ const Gallery = () => {
                     <DetailLink
                       value="collect"
                       active={matchCollect}
-                      onClick={(e) =>{
-                        e.preventDefault()
+                      onClick={(e) => {
                         matchCollect
                           ? history.push(`/gallery/${id}`)
-                          : history.push(`/gallery/${id}/collect`)
-                      }
-                      }>
+                          : history.push(`/gallery/${id}/collect`);
+                      }}
+                    >
                       Collect
                     </DetailLink>
                     <span>Bid Now</span>
                   </ImageMenu>
-                  <Details item={items[indexId]} />
+                  <Details item={items[indexId]} id={id} />
                 </>
               )}
             </ImageWrapper>
