@@ -3,6 +3,7 @@ import { Logo } from "../../assets/images";
 import { Link } from "react-router-dom";
 import { MenuWrapper, SideContent, Nav, NavLink, KoiLink } from "./style";
 const Menu = () => {
+  const genRand = () => Math.floor(Math.random() * 1001)
   return (
     <MenuWrapper>
       <SideContent>
@@ -14,7 +15,7 @@ const Menu = () => {
             <Link to="/about">About 1111</Link>
           </NavLink>
           <NavLink>
-            <Link>Random</Link>
+            <Link to={`/gallery/${genRand()}`}>Random</Link>
           </NavLink>
         </Nav>
         <KoiLink>

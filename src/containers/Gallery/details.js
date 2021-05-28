@@ -63,12 +63,25 @@ const Share = (url) => {
         <button>Copy</button>
       </Copy>
       <SocialBar>
-        <img src={Twitter} />
-        <img src={linkein} />
-        <img src={facebook} />
+        <a href={`https://twitter.com/intent/tweet?url${""}`}>
+          <img src={Twitter} />
+        </a>
+        <a
+          href={`https://www.linkedin.com/shareArticle?mini=true&url=%{}`}
+        >
+          <img src={linkein} />
+        </a>
+
+        <a href={`https://www.facebook.com/sharer.php?u=${""}`}>
+          <img src={facebook} />
+        </a>
+
         <img src={sms} />
         <img src={email} />
-        <img src={telegram} />
+        <a href={`https://telegram.me/share/url?url=`}>
+         <img src={telegram} /> 
+        </a>
+        
         <img src={discord} />
       </SocialBar>
     </ShareView>
@@ -100,7 +113,7 @@ const ImageDetails = (props) => {
     <div>
       <p>852 Profit Sharing Tokens available for purchase.</p>
       <CollectLinks>
-        <a href="verto.exchange">Bid Now</a>
+        <a href="https://verto.exchange">Bid Now</a>
         <span
           onClick={() => history.push(`/gallery/${props.id}/collect/share`)}
         >

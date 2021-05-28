@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const Bar = styled.div`
   width: 100%;
-  box-sizing:border-box;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   padding: 1% 2%;
@@ -24,14 +24,10 @@ export const Koi = styled.div`
     }
   }
 `;
-export const MenuIconWrapper = styled.div`
-
-`;
+export const MenuIconWrapper = styled.div``;
 export const Right = styled.div`
-display: flex;
-align-items: center;
-
- 
+  display: flex;
+  align-items: center;
 `;
 export const NavigationWrapper = styled.div`
   position: static;
@@ -84,7 +80,6 @@ export const Tooltip = styled.span`
     border-color: transparent transparent #f5b900;
   }
 `;
-
 
 export const MenuWrapper = styled.div`
   height: 100%;

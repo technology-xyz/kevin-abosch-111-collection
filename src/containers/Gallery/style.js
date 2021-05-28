@@ -5,7 +5,7 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   width: 100vw;
   height: 100%;
-  overflow: ${(props) => (props.lockScroll ? "hidden" :"scroll" )};
+  overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")};
   justify-content: center;
   align-items: center;
   background-color: #000;
@@ -14,7 +14,7 @@ export const MenuContainer = styled.div`
 export const Details = styled.div`
   width: 100%;
   height: 100%;
-  color:#fff;
+  color: #fff;
   a {
     display: block;
     text-align: center;
@@ -26,43 +26,50 @@ export const Details = styled.div`
     font-size: 17px;
     line-height: 28px;
     margin: 16px 0;
-    margin-right:10%;
+    margin-right: 10%;
   }
 `;
 export const CollectLinks = styled.div`
-display: flex;
-a:first-of-type{
-  background-color: #f5b900;
+
+  a:first-of-type {
+    width:170px;
+    display: inline-block;
+    background-color: #f5b900;
     color: #000;
     font-size: 17px;
     font-weight: bold;
     text-align: center;
-    border:none;
-}
-`
+    border: none;
+  }
+  span {
+    text-align:center;
+    width:170px;
+    display: inline-block;
+    height: 32px;
+    border: 1px solid white;
+  }
+`;
 export const CurrentOwners = styled.div`
-
-span {
-  display:inline-block;
-  border-bottom: 3px solid var(--yellow);
-  margin-bottom: 5%;
-}
-`
+  span {
+    display: inline-block;
+    border-bottom: 3px solid var(--yellow);
+    margin-bottom: 5%;
+  }
+`;
 export const DetailLink = styled.button`
-  background-color:transparent;
-  border:none;
-  
-  outline:0;
-  border-bottom: ${props => props.active ? "3px solid var(--yellow)" : "none"};
-  color: ${props => props.active ? "var(--yellow)" : "white"};
-  
+  background-color: transparent;
+  border: none;
+
+  outline: 0;
+  border-bottom: ${(props) =>
+    props.active ? "3px solid var(--yellow)" : "none"};
+  color: ${(props) => (props.active ? "var(--yellow)" : "white")};
 `;
 
 export const TagGroup = styled.div`
   display: flex;
-  width:100%;
+  width: 100%;
   margin: 16px 0;
-
 `;
 
 export const Tag = styled.div`
@@ -93,37 +100,51 @@ export const ImageMenu = styled.div`
   color: #ffffff;
   margin: 8px 0px;
   span {
-    display:block;
-    height:24px;
+    display: block;
+    height: 24px;
     border: 1px solid #000;
   }
-  img{
-    width:24px;
+  img {
+    width: 24px;
   }
-  
 `;
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
-  position:absolute;
+  position: absolute;
   bottom: 0;
   width: 100%;
 `;
 export const PlaceHolder = styled.div``;
-export const LeftImg = styled.div`
- 
-`;
+export const LeftImg = styled.div``;
 
-export const RightImg = styled.div`
-`;
+export const RightImg = styled.div``;
 
 export const ShareView = styled.div`
+  width: 100%;
 `;
 
-export const Copy = styled.div``
+export const Copy = styled.div`
+  margin:16px 0px;
+  display: flex;
+  height: 32px;
+
+  min-width: 100%;
+  p {
+    flex: 1;
+    height: 32px;
+    border: 1px solid white;
+  }
+  button {
+    width: 95px;
+    background-color: #2ebaae;
+    border: none;
+  }
+`;
 
 export const SocialBar = styled.div`
-display:flex;
-width: 80%;
-justify-content:space-between;
-`
+margin:16px 0px;
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+`;
