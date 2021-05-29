@@ -35,12 +35,13 @@ function App() {
         if (extension === "json") {
           nftArray.push({
             name: name.slice(5),
-            source: source,
+            source: `${preUrl}${source}?t=${Math.random() * 999999}`,
             json: `${preUrl}${value}?t=${Math.random() * 999999}`,
+            txId: source,
           });
         } else {
           
-          source = `${preUrl}${value}?t=${Math.random() * 999999}`;
+          source = value
         }
       }
 
@@ -57,9 +58,9 @@ function App() {
     <div className="App">
       <BasicStyle />
       <GlobalStyle />
-
+ {!isLoading && (
       <Router>
-        {!isLoading && (
+       
           <Switch>
             <DataContextContainer images={items}>
               <Route
@@ -82,8 +83,9 @@ function App() {
               render={() => <Redirect to="/gallery/1" />}
             />
           </Switch>
-        )}
+       
       </Router>
+       )}
     </div>
   );
 }

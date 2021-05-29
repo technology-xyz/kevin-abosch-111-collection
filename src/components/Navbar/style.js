@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 export const Bar = styled.div`
   width: 100%;
   box-sizing: border-box;
@@ -25,9 +26,9 @@ export const Koi = styled.div`
   }
 `;
 export const MenuIconWrapper = styled.button`
-outline:0;
-background-color:transparent;
-border:0;
+  outline: 0;
+  background-color: transparent;
+  border: 0;
 `;
 export const Right = styled.div`
   display: flex;
@@ -103,26 +104,28 @@ export const SideContent = styled.div`
   align-items: flex-end;
 `;
 export const Nav = styled.nav`
-  margin: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-end;
+  margin: 64px 0px;
 `;
-export const NavLink = styled.nav`
+
+export const Nlink = styled(NavLink)`
   margin: 20px 20px;
   color: white;
   text-align: right;
-
-  a {
-    font-size: 18px;
-    color: white;
-    &:hover {
-      color: #f5b900;
-      font-weight: bold;
-    }
+  display: inline-block;
+  font-size: 18px;
+  color: white;
+  &:hover {
+    color: #f5b900;
+    font-weight: bold;
   }
 `;
 export const KoiLink = styled.a`
   margin: 0 20px;
   color: white;
-  a {
+  
     font-size: 18px;
     color: white;
     text-align: right;
@@ -130,5 +133,5 @@ export const KoiLink = styled.a`
       color: #f5b900;
       font-weight: bold;
     }
-  }
+  
 `;

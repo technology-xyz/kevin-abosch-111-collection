@@ -30,7 +30,9 @@ const Navbar = () => {
               default.
                 </p>
               
-              <a href="https://openkoi.com/framework/">
+              <a href="https://openkoi.com/framework/"
+              target="_blank"
+              rel="noopener noreferrer">
                   Learn More
               </a>
 

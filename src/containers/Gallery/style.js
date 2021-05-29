@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { NavLink } from "react-router-dom";
 export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,9 +30,8 @@ export const Details = styled.div`
   }
 `;
 export const CollectLinks = styled.div`
-
   a:first-of-type {
-    width:170px;
+    width: 170px;
     display: inline-block;
     background-color: #f5b900;
     color: #000;
@@ -42,8 +41,8 @@ export const CollectLinks = styled.div`
     border: none;
   }
   span {
-    text-align:center;
-    width:170px;
+    text-align: center;
+    width: 170px;
     display: inline-block;
     height: 32px;
     border: 1px solid white;
@@ -56,7 +55,7 @@ export const CurrentOwners = styled.div`
     margin-bottom: 5%;
   }
 `;
-export const DetailLink = styled.button`
+export const DetailLink = styled(NavLink)`
   background-color: transparent;
   border: none;
 
@@ -64,6 +63,10 @@ export const DetailLink = styled.button`
   border-bottom: ${(props) =>
     props.active ? "3px solid var(--yellow)" : "none"};
   color: ${(props) => (props.active ? "var(--yellow)" : "white")};
+  &:hover {
+    color: var(--yellow);
+    text-decoration: none;
+  }
 `;
 
 export const TagGroup = styled.div`
@@ -125,7 +128,7 @@ export const ShareView = styled.div`
 `;
 
 export const Copy = styled.div`
-  margin:16px 0px;
+  margin: 16px 0px;
   display: flex;
   height: 32px;
 
@@ -140,16 +143,4 @@ export const Copy = styled.div`
     background-color: #2ebaae;
     border: none;
   }
-`;
-
-export const SocialBar = styled.div`
-a {
-  width:auto;
-  border:0;
-outline:0;
-}
-margin:16px 0px;
-  display: flex;
-  width: 80%;
-  justify-content: space-between;
 `;

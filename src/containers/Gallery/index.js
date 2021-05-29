@@ -1,18 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Logo } from "../../assets/images";
 import Details from "./details";
+import BottomBar from "./bottom";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
-import {
-  ImageWrapper,
-  MenuContainer,
-  BottomBar,
-  LeftImg,
-  RightImg,
-  PlaceHolder,
-  ImageMenu,
-  DetailLink,
-} from "./style";
+import { ImageWrapper, MenuContainer, ImageMenu, DetailLink } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -28,27 +20,15 @@ const Gallery = () => {
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
 
-  const matchMain = matchPath(pathname, {
-    path: "/gallery/:id/",
-    exact: true,
-    strict: true,
-  });
-  const matchDetail = matchPath(pathname, {
-    path: "/gallery/:id/details",
-    exact: true,
-    strict: false,
-  });
-  const matchCollect = matchPath(pathname, {
-    path: "/gallery/:id/collect",
-    exact: true,
-    strict: false,
-  });
+  const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
+  const matchDetail = matchPath(pathname, "/gallery/:id/details");
+  const matchCollect = matchPath(pathname, "/gallery/:id/collect");
 
   const getKoi = async (txId) => {
     const Ktools = new Kcommon.Common();
     try {
       let nftRewards = await Kcommon.getNftReward(txId);
-
+      console.log(nftRewards);
       setNftInfo(nftRewards);
     } catch (err) {
       console.log(err);
@@ -59,7 +39,8 @@ const Gallery = () => {
   useEffect(() => {
     setItems(contents);
     if (contents.length) {
-      getKoi(contents[indexId].source)
+      console.log(contents[indexId].txId)
+      getKoi('_73jfTSX_rmd-7S5mAIzXdZ3hA3uWMvUY4KZQRlWEtY')
         .then((res) => {
           console.log(res.data);
         })
@@ -98,7 +79,7 @@ const Gallery = () => {
       <MenuContainer onWheel={handleScroll} lockScroll={false}>
         {items[id] && (
           <>
-            <ImageWrapper>
+            <ImageWrapper key={items[indexId].name}>
               <LazyLoadImage
                 width="512"
                 height="512"
@@ -111,7 +92,7 @@ const Gallery = () => {
                 <span>#{items[indexId].name}</span>
                 <span>
                   {nftInfo}
-                  <img src={Logo} />
+                  <img src={Logo} alt="koi-logo" />
                 </span>
                 <span>Bid Now</span>
               </ImageMenu>
@@ -122,57 +103,30 @@ const Gallery = () => {
                     <DetailLink
                       value="details"
                       active={matchDetail}
-                      onClick={() =>
-                        matchDetail
-                          ? history.push(`/gallery/${id}`)
-                          : history.push(`/gallery/${id}/details`)
-                      }
+                      to={`/gallery/${id}/details`}
                     >
                       Details
                     </DetailLink>
                     <DetailLink
                       value="collect"
                       active={matchCollect}
-                      onClick={(e) => {
-                        matchCollect
-                          ? history.push(`/gallery/${id}`)
-                          : history.push(`/gallery/${id}/collect`);
-                      }}
+                      to={`/gallery/${id}/collect`}
                     >
                       Collect
                     </DetailLink>
                     <span>Bid Now</span>
                   </ImageMenu>
-                  <Details item={items[indexId]} id={id} />
+                  <Details item={items[indexId]} id={id} txId={items[indexId].txId} />
                 </>
               )}
             </ImageWrapper>
 
             {matchMain && (
-              <BottomBar>
-                <LeftImg>
-                  {indexId === 0 ? (
-                    <PlaceHolder />
-                  ) : (
-                    <LazyLoadImage
-                      width="170"
-                      height="170"
-                      alt={items[indexId].name}
-                      src={items[indexId - 1].source}
-                      effect="blur"
-                    />
-                  )}
-                </LeftImg>
-                <RightImg>
-                  <LazyLoadImage
-                    width="170"
-                    height="170"
-                    alt={items[indexId].name}
-                    src={items[indexId + 1].source}
-                    effect="blur"
-                  />
-                </RightImg>
-              </BottomBar>
+              <BottomBar
+                left={items[indexId - 1]}
+                right={items[indexId + 1]}
+                index={indexId}
+              />
             )}
           </>
         )}

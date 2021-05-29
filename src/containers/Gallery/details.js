@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Details,
   TagGroup,
@@ -7,19 +7,12 @@ import {
   CurrentOwners,
   ShareView,
   Copy,
-  SocialBar,
 } from "./style";
+
+import ShareBar from "../../components/ShareBar";
 import { matchPath, useHistory, useLocation } from "react-router";
-import {
-  Twitter,
-  discord,
-  email,
-  facebook,
-  linkein,
-  sms,
-  telegram,
-} from "../../assets/images";
-const DetailView = () => (
+
+const DetailView = (txId) => (
   <div>
     <p>
       1111 NFT digital works comprised of cryptographic alphanumerics presented
@@ -31,7 +24,13 @@ const DetailView = () => (
       this work is full of surprises!
     </p>
 
-    <a href="google.com">Explore Block</a>
+    <a
+      href={`https://viewblock.io/arweave/tx/${txId}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Explore Block
+    </a>
 
     <TagGroup>
       <Tag>tag #1</Tag>
@@ -62,42 +61,13 @@ const Share = (url) => {
         <p>{url}</p>
         <button>Copy</button>
       </Copy>
-      <SocialBar>
-        <a href={`https://twitter.com/intent/tweet?url${""}`}>
-          <img src={Twitter} alt="twitter-logo"/>
-        </a>
-        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=%{}`}>
-          <img src={linkein} alt="linkedin-logo" />
-        </a>
-
-        <a href={`https://www.facebook.com/sharer.php?u=${""}`}>
-          <img src={facebook} alt="facebook-logo"/>
-        </a>
-        <a href="8888888">
-          <img src={sms}  alt="sms-logo" />
-        </a>
-
-        <a
-          href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site --Link--"
-          title="Share by Email"
-        >
-          <img src={email} alt="email-logo"/>
-        </a>
-
-        <a href={`https://telegram.me/share/url?url=`}>
-          <img src={telegram} alt="telegram-logo" />
-        </a>
-        <a href="discord.com">
-          <img src={discord} alt="discord-logo" />
-        </a>
-      </SocialBar>
+      <ShareBar />
     </ShareView>
   );
 };
 const ImageDetails = (props) => {
   const { pathname } = useLocation();
   const history = useHistory();
-  
 
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -136,7 +106,7 @@ const ImageDetails = (props) => {
 
   return (
     <Details>
-      {matchDetails && DetailView()}
+      {matchDetails && DetailView(props.txId)}
       {(matchCollect || matchShare) && CollectView()}
     </Details>
   );

@@ -1,29 +1,25 @@
 import React from "react";
 import { Logo } from "../../assets/images";
-import { Link } from "react-router-dom";
-import { MenuWrapper, SideContent, Nav, NavLink, KoiLink } from "./style";
+import { MenuWrapper, SideContent, Nav, Nlink, KoiLink } from "./style";
 const Menu = () => {
-  const genRand = () => Math.floor(Math.random() * 1001)
+  const genRand = () => Math.floor(Math.random() * 1001);
   return (
     <MenuWrapper>
       <SideContent>
         <Nav>
-          <NavLink>
-            <Link to="/collection">The Collection</Link>
-          </NavLink>
-          <NavLink>
-            <Link to="/about">About 1111</Link>
-          </NavLink>
-          <NavLink>
-            <Link to={`/gallery/${genRand()}`}>Random</Link>
-          </NavLink>
+          <Nlink to="/collection">
+            The Collection
+          </Nlink>
+          <Nlink to="/about">
+            About 1111
+          </Nlink>
+          <Nlink to={`/gallery/${genRand()}`}>
+            Random
+          </Nlink>
         </Nav>
-        <KoiLink>
-            <Link>
-            <img src={Logo} alt="logo"/>
+        <KoiLink href="openkoi.com" target="_blank" rel="noopener noreferrer">
+          <img src={Logo} alt="logo" />
           Powered By Koi
-            </Link>
-         
         </KoiLink>
       </SideContent>
     </MenuWrapper>
