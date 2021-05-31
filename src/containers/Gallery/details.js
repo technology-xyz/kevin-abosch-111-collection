@@ -40,16 +40,14 @@ const DetailView = (txId) => (
   </div>
 );
 
-const OwnersView = () => {
+const OwnersView = (owners) => {
   return (
     <CurrentOwners>
       <span>Current Owners</span>
-      <p>1234567890123456789012345678901234567890</p>
-      <p>6789012345678901234567890123456789012345</p>
-      <p>1234567890123456789012345678901234567890</p>
-      <p>1234567890123456789012345678901234567890</p>
-      <p>6789012345678901234567890123456789012345</p>
-      <p>1234567890123456789012345678901234567890</p>
+      
+      {owners.map((wallet) => {
+        return <p>{wallet}</p>;
+      })}
     </CurrentOwners>
   );
 };
@@ -90,7 +88,7 @@ const ImageDetails = (props) => {
     <div>
       <p>852 Profit Sharing Tokens available for purchase.</p>
       <CollectLinks>
-        <a href="https://verto.exchange">Bid Now</a>
+        <a href={`https://verto.exchange/assest/${props.txId}`}>Bid Now</a>
         <span
           onClick={() => history.push(`/gallery/${props.id}/collect/share`)}
         >
@@ -100,7 +98,7 @@ const ImageDetails = (props) => {
 
       {matchShare && Share(pathname)}
 
-      {!matchShare && OwnersView()}
+      {!matchShare && OwnersView(props.owners)}
     </div>
   );
 

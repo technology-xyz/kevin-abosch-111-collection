@@ -19,17 +19,20 @@ const Gallery = () => {
   const indexId = parseInt(id) - 1;
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
-
+  const [owners, setOwners] = useState([])
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
 
   const getKoi = async (txId) => {
     const Ktools = new Kcommon.Common();
+    console.log(Ktools)
     try {
-      let nftRewards = await Kcommon.getNftReward(txId);
-      console.log(nftRewards);
+      let nftRewards = await Ktools.getNftReward(txId);
+      let nftContract = await Ktools.readNftState(txId)
+      console.log(nftRewards, nftContract);
       setNftInfo(nftRewards);
+      setOwners(Object.keys(nftContract.balances))
     } catch (err) {
       console.log(err);
       throw err.message;
@@ -40,7 +43,7 @@ const Gallery = () => {
     setItems(contents);
     if (contents.length) {
       console.log(contents[indexId].txId)
-      getKoi('_73jfTSX_rmd-7S5mAIzXdZ3hA3uWMvUY4KZQRlWEtY')
+      getKoi(contents[indexId].txId)
         .then((res) => {
           console.log(res.data);
         })
@@ -116,7 +119,7 @@ const Gallery = () => {
                     </DetailLink>
                     <span>Bid Now</span>
                   </ImageMenu>
-                  <Details item={items[indexId]} id={id} txId={items[indexId].txId} />
+                  <Details item={items[indexId]} id={id} txId={items[indexId].txId} owners={owners}/>
                 </>
               )}
             </ImageWrapper>
