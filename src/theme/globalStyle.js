@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     height: 100%;
     background-color: black;
+    letter-spacing:1px;
   }
   .App {
     height: 100vh;

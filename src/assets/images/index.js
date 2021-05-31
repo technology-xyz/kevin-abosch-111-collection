@@ -9,3 +9,5 @@ export { default as linkein} from "./linkedin.svg"
 export { default as sms} from "./sms.svg"
 export { default as telegram} from "./telegram.svg"
 
+export { default as IconUpload } from "./IconUpload.svg";
+export { default as IconUploadPng } from "./IconUpload.png";

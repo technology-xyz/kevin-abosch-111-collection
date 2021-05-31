@@ -53,6 +53,7 @@ export const CollectLinks = styled.div`
     display: inline-block;
     height: 32px;
     border: 1px solid white;
+    
   }
 `;
 export const CurrentOwners = styled.div`
@@ -113,7 +114,9 @@ export const ImageMenu = styled.div`
     display: block;
     height: 24px;
     border: 1px solid #000;
+    width: 84px;
   }
+
   img {
     width: 24px;
   }

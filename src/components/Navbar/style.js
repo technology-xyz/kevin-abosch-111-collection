@@ -10,9 +10,16 @@ export const Bar = styled.div`
   top: 0;
   z-index: 3;
 `;
-export const Title = styled.p`
+export const Title = styled.a`
+display: flex;
+align-items:center;
   font-size: 16px;
   color: #f5b900;
+  
+  &:hover{
+    text-decoration:none;
+    color: var(--yellow);
+  }
 `;
 export const Koi = styled.div`
   position: relative;
@@ -29,10 +36,14 @@ export const MenuIconWrapper = styled.button`
   outline: 0;
   background-color: transparent;
   border: 0;
+  height: 34px;
+  width: 34px;
+  display: flex;
 `;
 export const Right = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 export const NavigationWrapper = styled.div`
   position: static;

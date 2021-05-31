@@ -1,16 +1,25 @@
 import styled from "styled-components";
 
 export const CollectionWrapper = styled.div`
+    width:100%;
     display: flex;
-    align-items:center;
-    max-width: 100%;
+    justify-content:center;
+   
 
 `
 
 export const Grid = styled.div`
-    width:100%;
+
+    margin-top: 10%;
+    width:86%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-auto-flow:row;
     grid-gap: 40px;
+    img {
+        width:100%;
+        &:hover{
+            cursor: pointer;
+        }
+    }
 `

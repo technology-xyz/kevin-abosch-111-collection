@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <NavigationWrapper>
       <Bar>
-        <Title>Studio Kevin Abosch</Title>
+        <Title href="https://www.kevinabosch.com/">Studio Kevin Abosch</Title>
         <Right>
           <Koi >
             <img src={Logo} alt="koi-logo"/>

@@ -7,7 +7,7 @@ import {
   isVideoContent,
 } from "service/utils";
 import queryString from "query-string";
-import { getArWalletAddressFromJson, exportNFT } from "service/NFT";
+
 import Arweave from "arweave";
 import { DataContext } from "contexts/DataContextContainer";
 import Web3 from "web3";
@@ -15,9 +15,10 @@ import customAxios from "service/customAxios";
 import { useHistory } from "react-router";
 import axios from "axios";
 import { alertTimeout } from "config";
-const [isLoading, setIsLoading] = useState(false);
+
 const Evolve = () => {
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
   const { address } = queryString.parse(history.location.search);
   const [showAlert, setShowAlert] = useState(false);
   const [isAlertCancel, setIsAlertCancel] = useState(false);

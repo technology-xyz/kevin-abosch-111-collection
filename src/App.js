@@ -8,12 +8,11 @@ import {
 
 import BasicStyle from "theme/basicStyle";
 import GlobalStyle from "theme/globalStyle";
-
 import MyRoute from "service/MyRoute";
 import useAxios from "axios-hooks";
 import Gallery from "containers/Gallery";
 import About from "containers/About";
-import Evolve from "containers/Evolve";
+
 import Collection from "containers/Collection";
 import { preUrl } from "config";
 
@@ -64,6 +63,7 @@ function App() {
        
           <Switch>
             <DataContextContainer images={items}>
+            
               <Route
                 exact
                 path="/"
@@ -75,7 +75,7 @@ function App() {
               </Suspense>
 
               <MyRoute exact path="/about" component={About} />
-              <MyRoute exact path="/evolve" component={Evolve} />
+             
 
               <MyRoute exact path="/collection" component={Collection} />
             </DataContextContainer>

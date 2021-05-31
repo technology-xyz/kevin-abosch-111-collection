@@ -1,8 +1,7 @@
 import React from "react";
 import {
   Details,
-  TagGroup,
-  Tag,
+  
   CollectLinks,
   CurrentOwners,
   ShareView,
@@ -32,11 +31,7 @@ const DetailView = (txId) => (
       Explore Block
     </a>
 
-    <TagGroup>
-      <Tag>tag #1</Tag>
-      <Tag>tag #2</Tag>
-      <Tag>tag #3</Tag>
-    </TagGroup>
+    
   </div>
 );
 

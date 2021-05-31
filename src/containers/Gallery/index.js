@@ -19,20 +19,20 @@ const Gallery = () => {
   const indexId = parseInt(id) - 1;
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
-  const [owners, setOwners] = useState([])
+  const [owners, setOwners] = useState([]);
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
 
   const getKoi = async (txId) => {
     const Ktools = new Kcommon.Common();
-    console.log(Ktools)
+    console.log(Ktools);
     try {
       let nftRewards = await Ktools.getNftReward(txId);
-      let nftContract = await Ktools.readNftState(txId)
+      let nftContract = await Ktools.readNftState(txId);
       console.log(nftRewards, nftContract);
       setNftInfo(nftRewards);
-      setOwners(Object.keys(nftContract.balances))
+      setOwners(Object.keys(nftContract.balances));
     } catch (err) {
       console.log(err);
       throw err.message;
@@ -42,7 +42,7 @@ const Gallery = () => {
   useEffect(() => {
     setItems(contents);
     if (contents.length) {
-      console.log(contents[indexId].txId)
+      console.log(contents[indexId].txId);
       getKoi(contents[indexId].txId)
         .then((res) => {
           console.log(res.data);
@@ -83,7 +83,6 @@ const Gallery = () => {
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
-              
               <LazyLoadImage
                 width="512"
                 height="512"
@@ -98,7 +97,7 @@ const Gallery = () => {
                   {nftInfo}
                   <img src={Logo} alt="koi-logo" />
                 </span>
-                {matchMain ? <span>Bid Now</span> : <p>ETH: 2.751</p>}
+                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>}
               </ImageMenu>
 
               {!matchMain && (
@@ -120,7 +119,12 @@ const Gallery = () => {
                     </DetailLink>
                     <span>Bid Now</span>
                   </ImageMenu>
-                  <Details item={items[indexId]} id={id} txId={items[indexId].txId} owners={owners}/>
+                  <Details
+                    item={items[indexId]}
+                    id={id}
+                    txId={items[indexId].txId}
+                    owners={owners}
+                  />
                 </>
               )}
             </ImageWrapper>
