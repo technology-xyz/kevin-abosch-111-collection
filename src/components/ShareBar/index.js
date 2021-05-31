@@ -37,9 +37,7 @@ const ShareBar = () => {
       <a href={`https://telegram.me/share/url?url=`}>
         <img src={telegram} alt="telegram-logo" />
       </a>
-      <a href="discord.com">
-        <img src={discord} alt="discord-logo" />
-      </a>
+      
     </SocialBar>
   );
 };

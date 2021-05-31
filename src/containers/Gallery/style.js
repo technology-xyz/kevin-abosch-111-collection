@@ -9,6 +9,11 @@ export const MenuContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #000;
+  img {
+    &:hover{
+       cursor: pointer;
+    }
+  }
 `;
 
 export const Details = styled.div`
@@ -40,7 +45,9 @@ export const CollectLinks = styled.div`
     text-align: center;
     border: none;
   }
-  span {
+  button {
+    color:white;
+    background-color:transparent;
     text-align: center;
     width: 170px;
     display: inline-block;

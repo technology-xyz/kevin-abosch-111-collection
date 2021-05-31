@@ -83,6 +83,7 @@ const Gallery = () => {
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
+              
               <LazyLoadImage
                 width="512"
                 height="512"
@@ -97,7 +98,7 @@ const Gallery = () => {
                   {nftInfo}
                   <img src={Logo} alt="koi-logo" />
                 </span>
-                <span>Bid Now</span>
+                {matchMain ? <span>Bid Now</span> : <p>ETH: 2.751</p>}
               </ImageMenu>
 
               {!matchMain && (

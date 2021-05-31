@@ -16,6 +16,9 @@ const Menu = () => {
           <Nlink to={`/gallery/${genRand()}`}>
             Random
           </Nlink>
+          <Nlink to="/evolve">
+            Evolve
+          </Nlink>
         </Nav>
         <KoiLink href="openkoi.com" target="_blank" rel="noopener noreferrer">
           <img src={Logo} alt="logo" />

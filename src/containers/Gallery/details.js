@@ -10,7 +10,7 @@ import {
 } from "./style";
 
 import ShareBar from "../../components/ShareBar";
-import { matchPath, useHistory, useLocation } from "react-router";
+import { matchPath, useHistory, useLocation,} from "react-router";
 
 const DetailView = (txId) => (
   <div>
@@ -66,7 +66,7 @@ const Share = (url) => {
 const ImageDetails = (props) => {
   const { pathname } = useLocation();
   const history = useHistory();
-
+  const currentURL = window.location.href
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
     exact: true,
@@ -88,15 +88,15 @@ const ImageDetails = (props) => {
     <div>
       <p>852 Profit Sharing Tokens available for purchase.</p>
       <CollectLinks>
-        <a href={`https://verto.exchange/assest/${props.txId}`}>Bid Now</a>
-        <span
+        <a href={`https://verto.exchange/asset/${props.txId}`}>Bid Now</a>
+        <button
           onClick={() => history.push(`/gallery/${props.id}/collect/share`)}
         >
           Share
-        </span>
+        </button>
       </CollectLinks>
 
-      {matchShare && Share(pathname)}
+      {matchShare && Share(currentURL)}
 
       {!matchShare && OwnersView(props.owners)}
     </div>
