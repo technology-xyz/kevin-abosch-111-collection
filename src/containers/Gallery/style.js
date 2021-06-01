@@ -10,8 +10,8 @@ export const MenuContainer = styled.div`
   align-items: center;
   background-color: #000;
   img {
-    &:hover{
-       cursor: pointer;
+    &:hover {
+      cursor: pointer;
     }
   }
 `;
@@ -46,14 +46,13 @@ export const CollectLinks = styled.div`
     border: none;
   }
   button {
-    color:white;
-    background-color:transparent;
+    color: white;
+    background-color: transparent;
     text-align: center;
     width: 170px;
     display: inline-block;
     height: 32px;
     border: 1px solid white;
-    
   }
 `;
 export const CurrentOwners = styled.div`
@@ -100,7 +99,14 @@ export const ImageWrapper = styled.div`
   align-items: center;
   margin: 4%;
   flex-direction: column;
-  width: min-content;
+  width: 40%;
+  img {
+    width:100%
+  }
+  @media (max-width:475px) {
+    width:92%;
+    margin-top: 10%;
+  }
 `;
 
 export const ImageMenu = styled.div`

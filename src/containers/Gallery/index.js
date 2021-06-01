@@ -84,8 +84,7 @@ const Gallery = () => {
           <>
             <ImageWrapper key={items[indexId].name}>
               <LazyLoadImage
-                width="512"
-                height="512"
+               
                 alt={items[indexId].name}
                 src={items[indexId].source}
                 onClick={onShowDetails}
