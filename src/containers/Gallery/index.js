@@ -142,7 +142,7 @@ const Gallery = () => {
             )}
           </>
         )}
-        {!mobile && <RightArrow/>}
+        {!mobile && <Arrow direction="right" />}
          
       </MenuContainer>
      

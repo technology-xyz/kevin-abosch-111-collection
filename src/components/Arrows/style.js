@@ -7,4 +7,5 @@ export const Button = styled.button`
   border: 0;
   height: 40px;
   width:90px;
+  transform: ${(props) => (props.right ? "scaleX(-1)" : "")};
 `;

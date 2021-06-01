@@ -1,8 +1,8 @@
 import React from "react";
 import {Button} from './style'
-const Arrow = () => {
+const Arrow = ({direction}) => {
   return (
-    <Button>
+    <Button right={direction === 'right'}>
       <svg
         
         viewBox="0 0 389 774"
