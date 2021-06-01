@@ -9,19 +9,27 @@ export const MenuContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #000;
+  
+ 
+
+`;
+
+export const MainImage = styled.div`
   img {
     &:hover {
       cursor: pointer;
     }
+    width:100%;
+    height: auto;
   }
- 
 
-`;
+`
 
 export const Details = styled.div`
   width: 100%;
   height: 100%;
   color: #fff;
+
   a {
     display: block;
     text-align: center;
@@ -36,6 +44,15 @@ export const Details = styled.div`
     margin-right: 10%;
   }
 `;
+export const DetailWrapper = styled.div`
+width: 55vw;
+margin-left:-5vw;
+@media (max-width: 475px) {
+    width: 100%;
+    margin-left: 0;
+  }
+
+`
 export const CollectLinks = styled.div`
   display: flex;
   align-items: center;

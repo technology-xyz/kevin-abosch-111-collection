@@ -23,6 +23,7 @@ export const Loading = styled.div`
 display: flex;
   width: 86vw;
   justify-content: center;
+  margin-top:80px;
   img {
       
     animation: ${LoadingAnimation};
@@ -35,7 +36,7 @@ display: flex;
 
 
 export const Grid = styled.div`
-  margin-top: 10%;
+  margin-top: 80px;
   width: 86%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -57,5 +58,10 @@ export const Grid = styled.div`
     &:hover {
       cursor: pointer;
     }
+  }
+  @media (max-width: 475px) {
+    width: 92%;
+    margin-top: 80px;
+    grid-template-columns: 1fr 1fr;
   }
 `;

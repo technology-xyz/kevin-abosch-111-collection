@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Details,
-  
+  DetailWrapper,
   CollectLinks,
   CurrentOwners,
   ShareView,
@@ -12,7 +12,7 @@ import ShareBar from "../../components/ShareBar";
 import { matchPath, useHistory, useLocation,} from "react-router";
 
 const DetailView = (txId) => (
-  <div>
+  <DetailWrapper>
     <p>
       1111 NFT digital works comprised of cryptographic alphanumerics presented
       in various compositions and colors. Individually and collectively, the
@@ -32,7 +32,7 @@ const DetailView = (txId) => (
     </a>
 
     
-  </div>
+  </DetailWrapper>
 );
 
 const OwnersView = (owners) => {

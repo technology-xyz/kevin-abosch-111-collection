@@ -5,7 +5,7 @@ import BottomBar from "./bottom";
 import Arrow from "../../components/Arrows"
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
-import { ImageWrapper, MenuContainer, ImageMenu, DetailLink, LeftArrow,RightArrow } from "./style";
+import { ImageWrapper, MenuContainer, ImageMenu, DetailLink, MainImage } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -88,13 +88,18 @@ const Gallery = () => {
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
-              <LazyLoadImage
-               
+              <MainImage>
+<LazyLoadImage
+                width="580"
+                height="580"
                 alt={items[indexId].name}
                 src={items[indexId].source}
                 onClick={onShowDetails}
                 effect="blur"
               />
+
+              </MainImage>
+              
               <ImageMenu>
                 <span>#{items[indexId].name}</span>
                 {/* <span>

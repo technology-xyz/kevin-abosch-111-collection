@@ -8,4 +8,14 @@ export const Button = styled.button`
   height: 40px;
   width:90px;
   transform: ${(props) => (props.right ? "scaleX(-1)" : "")};
+svg{
+  animation-duration:1s;
+ 
+  &:hover{
+   
+
+   fill:var(--yellow);
+ 
+}
+}
 `;
