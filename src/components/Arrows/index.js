@@ -1,8 +1,19 @@
 import React from "react";
+import { useHistory } from "react-router";
 import {Button} from './style'
-const Arrow = ({direction}) => {
+const Arrow = ({direction, indexId}) => {
+  const history = useHistory()
+  const handleClick = () =>{
+    if (direction === "right") {
+      history.push(`/gallery/${indexId + 2}`);
+    } else {
+      history.push(`/gallery/${indexId }`);
+    }
+  }
   return (
-    <Button right={direction === 'right'}>
+    <Button 
+    onClick={handleClick}
+    right={direction === 'right'}>
       <svg
         
         viewBox="0 0 389 774"

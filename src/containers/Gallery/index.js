@@ -84,7 +84,7 @@ const Gallery = () => {
     <MetaWrapper>
       <MenuContainer onWheel={handleScroll} lockScroll={false}>
         
-        {!mobile && <Arrow/>}
+        {(!mobile && matchMain) && <Arrow indexId={indexId}/>}
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
@@ -142,7 +142,7 @@ const Gallery = () => {
             )}
           </>
         )}
-        {!mobile && <Arrow direction="right" />}
+        {(!mobile && matchMain)&& <Arrow direction="right" indexId={indexId}/>}
          
       </MenuContainer>
      
