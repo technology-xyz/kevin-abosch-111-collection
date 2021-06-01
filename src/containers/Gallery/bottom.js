@@ -6,8 +6,8 @@ const Bottom = ({ left, right, index }) => {
   const mobile = window.matchMedia("(max-width: 768px)").matches
   return (
     <BottomBar>
-      {mobile ? <a>
-        <Arrow/> </a>: <LeftImg>
+      {mobile ? 
+        <Arrow indexId={index}/>: <LeftImg>
         {index === 0 ? (
           <PlaceHolder />
         ) : (
@@ -21,8 +21,8 @@ const Bottom = ({ left, right, index }) => {
         )}
       </LeftImg> }
 
-     {mobile ? <a>
-       <Arrow direction="right" /> </a>: <RightImg>
+     {mobile ? 
+       <Arrow direction="right" indexId={index}/> : <RightImg>
         <LazyLoadImage
           width="170"
           height="170"

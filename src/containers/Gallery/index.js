@@ -65,7 +65,7 @@ const Gallery = () => {
         history.push(`/gallery/${indexId + 2}`);
       } else if (newScrollLimit > 100) {
         setScrollLimit(50);
-        history.push(`/gallery/${indexId - 1}`);
+        history.push(`/gallery/${indexId }`);
       } else {
         setScrollLimit(newScrollLimit);
       }

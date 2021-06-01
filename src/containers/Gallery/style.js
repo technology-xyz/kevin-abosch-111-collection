@@ -14,6 +14,8 @@ export const MenuContainer = styled.div`
       cursor: pointer;
     }
   }
+ 
+
 `;
 
 export const Details = styled.div`
@@ -35,9 +37,11 @@ export const Details = styled.div`
   }
 `;
 export const CollectLinks = styled.div`
+  display: flex;
+  align-items: center;
   a:first-of-type {
     width: 170px;
-    display: inline-block;
+   
     background-color: #f5b900;
     color: #000;
     font-size: 17px;
@@ -50,7 +54,7 @@ export const CollectLinks = styled.div`
     background-color: transparent;
     text-align: center;
     width: 170px;
-    display: inline-block;
+   
     height: 32px;
     border: 1px solid white;
   }
@@ -109,60 +113,6 @@ export const ImageWrapper = styled.div`
   }
 `;
 
-export const LeftArrow = styled.i`
-  position: relative;
-  display: block;
-  height: 50px; /*Height should be double border thickness*/
-  &::before {
-    position: absolute;
-    display: block;
-    content: "";
-    border: 25px solid transparent; /*Adjust chevron size*/
-  }
-
-  &::after {
-    position: absolute;
-    display: block;
-    content: "";
-    border: 25px solid transparent; /*Adjust chevron size*/
-  }
-  &::before {
-    top: 0;
-    border-top-color: var(--yellow); /*Chevron Color*/
-  }
-
-  &::after {
-    top: -10px; /*Adjust thickness*/
-    border-top-color: black; /*Match chevron background colour*/
-  }
-`;
-export const RightArrow = styled.span`
-    position: relative;
-  display: block;
-  height: 50px; /*Height should be double border thickness*/
-  &::before {
-    position: absolute;
-    display: block;
-    content: "";
-    border: 25px solid transparent; /*Adjust chevron size*/
-  }
-
-  &::after {
-    position: absolute;
-    display: block;
-    content: "";
-    border: 25px solid transparent; /*Adjust chevron size*/
-  }
-  &::before {
-    top: 0;
-    border-top-color: var(--yellow); /*Chevron Color*/
-  }
-
-  &::after {
-    top: -10px; /*Adjust thickness*/
-    border-top-color: black; /*Match chevron background colour*/
-  }
-`;
 export const ImageMenu = styled.div`
   display: flex;
   justify-content: space-between;

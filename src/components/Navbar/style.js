@@ -39,6 +39,8 @@ export const MenuIconWrapper = styled.button`
   height: 34px;
   width: 34px;
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export const Right = styled.div`
   display: flex;
@@ -113,6 +115,9 @@ export const SideContent = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+  @media (max-width: 475px) {
+    width: 80%;
+  }
 `;
 export const Nav = styled.nav`
   display: flex;
