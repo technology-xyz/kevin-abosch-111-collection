@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 export const MenuContainer = styled.div`
   display: flex;
-  flex-direction: column;
+
   width: 100vw;
   height: 100%;
   overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")};
@@ -101,14 +101,68 @@ export const ImageWrapper = styled.div`
   flex-direction: column;
   width: 40%;
   img {
-    width:100%
+    width: 100%;
   }
-  @media (max-width:475px) {
-    width:92%;
+  @media (max-width: 475px) {
+    width: 92%;
     margin-top: 10%;
   }
 `;
 
+export const LeftArrow = styled.i`
+  position: relative;
+  display: block;
+  height: 50px; /*Height should be double border thickness*/
+  &::before {
+    position: absolute;
+    display: block;
+    content: "";
+    border: 25px solid transparent; /*Adjust chevron size*/
+  }
+
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+    border: 25px solid transparent; /*Adjust chevron size*/
+  }
+  &::before {
+    top: 0;
+    border-top-color: var(--yellow); /*Chevron Color*/
+  }
+
+  &::after {
+    top: -10px; /*Adjust thickness*/
+    border-top-color: black; /*Match chevron background colour*/
+  }
+`;
+export const RightArrow = styled.span`
+    position: relative;
+  display: block;
+  height: 50px; /*Height should be double border thickness*/
+  &::before {
+    position: absolute;
+    display: block;
+    content: "";
+    border: 25px solid transparent; /*Adjust chevron size*/
+  }
+
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+    border: 25px solid transparent; /*Adjust chevron size*/
+  }
+  &::before {
+    top: 0;
+    border-top-color: var(--yellow); /*Chevron Color*/
+  }
+
+  &::after {
+    top: -10px; /*Adjust thickness*/
+    border-top-color: black; /*Match chevron background colour*/
+  }
+`;
 export const ImageMenu = styled.div`
   display: flex;
   justify-content: space-between;
@@ -132,7 +186,8 @@ export const BottomBar = styled.div`
   justify-content: space-between;
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
+  
 `;
 export const PlaceHolder = styled.div``;
 export const LeftImg = styled.div``;

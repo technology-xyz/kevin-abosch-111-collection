@@ -1,11 +1,13 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { BottomBar, LeftImg, RightImg, PlaceHolder } from "./style";
+import { BottomBar, LeftImg, RightImg, PlaceHolder, LeftArrow, RightArrow } from "./style";
 import React from "react";
 
 const Bottom = ({ left, right, index }) => {
+  const mobile = window.matchMedia("(max-width: 768px)").matches
   return (
     <BottomBar>
-      <LeftImg>
+      {mobile ? <a>
+        <LeftArrow/> </a>: <LeftImg>
         {index === 0 ? (
           <PlaceHolder />
         ) : (
@@ -17,8 +19,10 @@ const Bottom = ({ left, right, index }) => {
             effect="blur"
           />
         )}
-      </LeftImg>
-      <RightImg>
+      </LeftImg> }
+
+     {mobile ? <a>
+       <LeftArrow/> </a>: <RightImg>
         <LazyLoadImage
           width="170"
           height="170"
@@ -26,7 +30,8 @@ const Bottom = ({ left, right, index }) => {
           src={right.source}
           effect="blur"
         />
-      </RightImg>
+      </RightImg>}
+      
     </BottomBar>
   );
 };

@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Logo } from "../../assets/images";
 import Details from "./details";
 import BottomBar from "./bottom";
+import Arrow from "../../components/Arrows"
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
-import { ImageWrapper, MenuContainer, ImageMenu, DetailLink } from "./style";
+import { ImageWrapper, MenuContainer, ImageMenu, DetailLink, LeftArrow,RightArrow } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -20,6 +21,8 @@ const Gallery = () => {
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
+  const mobile = window.matchMedia("(max-width: 768px)").matches
+
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
@@ -56,7 +59,7 @@ const Gallery = () => {
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
 
-    if (matchMain) {
+    if (matchMain && !mobile) {
       if (newScrollLimit < 0) {
         setScrollLimit(50);
         history.push(`/gallery/${indexId + 2}`);
@@ -80,6 +83,8 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer onWheel={handleScroll} lockScroll={false}>
+        
+        {!mobile && <Arrow/>}
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
@@ -137,7 +142,10 @@ const Gallery = () => {
             )}
           </>
         )}
+        {!mobile && <RightArrow/>}
+         
       </MenuContainer>
+     
     </MetaWrapper>
   );
 };
