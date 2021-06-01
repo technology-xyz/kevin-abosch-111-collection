@@ -35,7 +35,7 @@ const Gallery = () => {
       let nftContract = await Ktools.readNftState(txId);
       console.log(nftRewards, nftContract);
       setNftInfo(nftRewards);
-      setOwners(Object.keys(nftContract.balances));
+      setOwners(Object.entries(nftContract.balances));
     } catch (err) {
       console.log(err);
       throw err.message;
@@ -97,11 +97,11 @@ const Gallery = () => {
               />
               <ImageMenu>
                 <span>#{items[indexId].name}</span>
-                <span>
+                {/* <span>
                   {nftInfo}
                   <img src={Logo} alt="koi-logo" />
                 </span>
-                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>}
+                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} */}
               </ImageMenu>
 
               {!matchMain && (

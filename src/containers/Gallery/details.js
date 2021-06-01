@@ -41,7 +41,7 @@ const OwnersView = (owners) => {
       <span>Current Owners</span>
       
       {owners.map((wallet) => {
-        return <p>{wallet}</p>;
+        return <p>{`${wallet[0]} - ${wallet[1]}`}</p>;
       })}
     </CurrentOwners>
   );
@@ -96,7 +96,7 @@ const ImageDetails = (props) => {
       {!matchShare && OwnersView(props.owners)}
     </div>
   );
-
+    console.log(props.owners)
   return (
     <Details>
       {matchDetails && DetailView(props.txId)}
