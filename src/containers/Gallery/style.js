@@ -111,6 +111,10 @@ export const ImageWrapper = styled.div`
     width: 92%;
     margin-top: 10%;
   }
+  @media (max-width: 769px) {
+    width: 92%;
+    margin-top: 10%;
+  }
 `;
 
 export const ImageMenu = styled.div`

@@ -7,7 +7,9 @@ export const CollectionWrapper = styled.div`
    
 
 `
+export const Loading = styled.div`
 
+`
 export const Grid = styled.div`
 
     margin-top: 10%;
@@ -18,6 +20,7 @@ export const Grid = styled.div`
     grid-gap: 40px;
     img {
         width:100%;
+        height: 100%;
         &:hover{
             cursor: pointer;
         }

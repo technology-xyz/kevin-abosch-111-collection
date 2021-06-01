@@ -74,7 +74,7 @@ const Gallery = () => {
 
   const onShowDetails = () => {
     if (matchDetail) {
-      history.goBack();
+      history.replace(`/gallery/${id}/`);
     } else {
       history.push(`/gallery/${id}/details`);
     }
