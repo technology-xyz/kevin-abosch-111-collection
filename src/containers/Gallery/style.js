@@ -173,9 +173,12 @@ export const Copy = styled.div`
   margin: 16px 0px;
   display: flex;
   height: 32px;
-
   min-width: 100%;
-  p {
+  input{
+    color: white;
+    background-color: transparent;
+    padding-left: 8px;
+    text-align: left;
     flex: 1;
     height: 32px;
     border: 1px solid white;

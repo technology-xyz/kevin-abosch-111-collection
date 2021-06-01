@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   Details,
   DetailWrapper,
   CollectLinks,
   CurrentOwners,
-  ShareView,
-  Copy,
+
 } from "./style";
 
-import ShareBar from "../../components/ShareBar";
-import { matchPath, useHistory, useLocation,} from "react-router";
+import Share from './share'
+import { matchPath, useLocation,} from "react-router";
 
 const DetailView = (txId) => (
   <DetailWrapper>
@@ -47,21 +46,13 @@ const OwnersView = (owners) => {
   );
 };
 
-const Share = (url) => {
-  return (
-    <ShareView>
-      <Copy>
-        <p>{url}</p>
-        <button>Copy</button>
-      </Copy>
-      <ShareBar />
-    </ShareView>
-  );
-};
+
 const ImageDetails = (props) => {
+
+  const [share , setShare] = useState(false)
   const { pathname } = useLocation();
-  const history = useHistory();
-  const currentURL = window.location.href
+
+
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
     exact: true,
@@ -78,25 +69,25 @@ const ImageDetails = (props) => {
     exact: true,
     strict: false,
   });
-
+  const onShare = () => {
+    setShare(!share)
+  }
   const CollectView = () => (
     <div>
       <p>852 Profit Sharing Tokens available for purchase.</p>
       <CollectLinks>
         <a href={`https://verto.exchange/asset/${props.txId}`}>Bid Now</a>
         <button
-          onClick={() => history.push(`/gallery/${props.id}/collect/share`)}
+          onClick={onShare}
         >
           Share
         </button>
       </CollectLinks>
-
-      {matchShare && Share(currentURL)}
-
-      {!matchShare && OwnersView(props.owners)}
+      {share && <Share/>}
+      {!share&& OwnersView(props.owners)}
     </div>
   );
-    console.log(props.owners)
+   
   return (
     <Details>
       {matchDetails && DetailView(props.txId)}
