@@ -36,7 +36,7 @@ display: flex;
 
 
 export const Grid = styled.div`
-  margin-top: 80px;
+  margin-top: 164px;
   width: 86%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;

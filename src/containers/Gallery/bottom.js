@@ -1,17 +1,26 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { BottomBar, LeftImg, RightImg, PlaceHolder, LeftArrow, RightArrow } from "./style";
+import {
+  BottomBar,
+  LeftImg,
+  RightImg,
+  PlaceHolder,
+  LeftArrow,
+  RightArrow,
+} from "./style";
 import React from "react";
-import Arrow from "../../components/Arrows"
+import Arrow from "../../components/Arrows";
+import { useHistory } from "react-router";
 const Bottom = ({ left, right, index }) => {
-  const mobile = window.matchMedia("(max-width: 768px)").matches
+  const history = useHistory();
+  const mobile = window.matchMedia("(max-width: 768px)").matches;
   return (
     <BottomBar>
-      {mobile ? 
-        <Arrow indexId={index}/>: <LeftImg>
+      <LeftImg>
         {index === 0 ? (
           <PlaceHolder />
         ) : (
           <LazyLoadImage
+            onClick={() => history.push(`/gallery/${index}`)}
             width="170"
             height="170"
             alt={left.name}
@@ -19,19 +28,18 @@ const Bottom = ({ left, right, index }) => {
             effect="blur"
           />
         )}
-      </LeftImg> }
+      </LeftImg>
 
-     {mobile ? 
-       <Arrow direction="right" indexId={index}/> : <RightImg>
+      <RightImg>
         <LazyLoadImage
+          onClick={() => history.push(`/gallery/${index + 2}`)}
           width="170"
           height="170"
           alt={right.name}
           src={right.source}
           effect="blur"
         />
-      </RightImg>}
-      
+      </RightImg>
     </BottomBar>
   );
 };

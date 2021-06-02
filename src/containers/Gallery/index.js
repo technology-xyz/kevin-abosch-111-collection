@@ -2,10 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { Logo } from "../../assets/images";
 import Details from "./details";
 import BottomBar from "./bottom";
-import Arrow from "../../components/Arrows"
+import Arrow from "../../components/Arrows";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
-import { ImageWrapper, MenuContainer, ImageMenu, DetailLink, MainImage } from "./style";
+import {
+  ImageWrapper,
+  MenuContainer,
+  ImageMenu,
+  DetailLink,
+  MainImage,
+  BidNow
+} from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -21,7 +28,7 @@ const Gallery = () => {
   const { contents } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
-  const mobile = window.matchMedia("(max-width: 768px)").matches
+  const mobile = window.matchMedia("(max-width: 768px)").matches;
 
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
@@ -29,11 +36,9 @@ const Gallery = () => {
 
   const getKoi = async (txId) => {
     const Ktools = new Kcommon.Common();
-    console.log(Ktools);
     try {
       let nftRewards = await Ktools.getNftReward(txId);
       let nftContract = await Ktools.readNftState(txId);
-      console.log(nftRewards, nftContract);
       setNftInfo(nftRewards);
       setOwners(Object.entries(nftContract.balances));
     } catch (err) {
@@ -45,11 +50,7 @@ const Gallery = () => {
   useEffect(() => {
     setItems(contents);
     if (contents.length) {
-      console.log(contents[indexId].txId);
       getKoi(contents[indexId].txId)
-        .then((res) => {
-          console.log(res.data);
-        })
         .catch((err) => {
           console.log(err);
         });
@@ -65,7 +66,7 @@ const Gallery = () => {
         history.push(`/gallery/${indexId + 2}`);
       } else if (newScrollLimit > 100) {
         setScrollLimit(50);
-        history.push(`/gallery/${indexId }`);
+        history.push(`/gallery/${indexId}`);
       } else {
         setScrollLimit(newScrollLimit);
       }
@@ -83,23 +84,21 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer onWheel={handleScroll} lockScroll={false}>
-        
-        {(!mobile && matchMain) && <Arrow indexId={indexId}/>}
+        {/* {!mobile && matchMain && <Arrow indexId={indexId} />} */}
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
               <MainImage>
-<LazyLoadImage
-                width="580"
-                height="580"
-                alt={items[indexId].name}
-                src={items[indexId].source}
-                onClick={onShowDetails}
-                effect="blur"
-              />
-
+                <LazyLoadImage
+                  width="580"
+                  height="580"
+                  alt={items[indexId].name}
+                  src={items[indexId].source}
+                  onClick={onShowDetails}
+                  effect="blur"
+                />
               </MainImage>
-              
+
               <ImageMenu>
                 <span>#{items[indexId].name}</span>
                 {/* <span>
@@ -126,7 +125,7 @@ const Gallery = () => {
                     >
                       Collect
                     </DetailLink>
-                    <span>Bid Now</span>
+                    <BidNow href={`https://space.verto.exchange/asset/${items[indexId].txId}`}>Bid Now</BidNow>
                   </ImageMenu>
                   <Details
                     item={items[indexId]}
@@ -147,10 +146,8 @@ const Gallery = () => {
             )}
           </>
         )}
-        {(!mobile && matchMain)&& <Arrow direction="right" indexId={indexId}/>}
-         
+        {/* {!mobile && matchMain && <Arrow direction="right" indexId={indexId} />} */}
       </MenuContainer>
-     
     </MetaWrapper>
   );
 };

@@ -5,12 +5,12 @@ export const MenuContainer = styled.div`
 
   width: 100vw;
   height: 100%;
-  overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")};
+  /* overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")}; */
   justify-content: center;
   align-items: center;
   background-color: #000;
   
- 
+  
 
 `;
 
@@ -56,22 +56,33 @@ margin-left:-5vw;
 export const CollectLinks = styled.div`
   display: flex;
   align-items: center;
+  
   a:first-of-type {
-    width: 170px;
+    display: flex;
+    align-items:center;
+    justify-content:center;display: flex;
    
+    width: 170px;
+    font-weight: 700;
     background-color: #f5b900;
     color: #000;
     font-size: 17px;
     font-weight: bold;
     text-align: center;
     border: none;
+    padding:0;
   }
   button {
+
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    font-weight: 700;
     color: white;
     background-color: transparent;
     text-align: center;
     width: 170px;
-   
+    padding:0;
     height: 32px;
     border: 1px solid white;
   }
@@ -86,11 +97,12 @@ export const CurrentOwners = styled.div`
 export const DetailLink = styled(NavLink)`
   background-color: transparent;
   border: none;
-
+  
   outline: 0;
   border-bottom: ${(props) =>
     props.active ? "3px solid var(--yellow)" : "none"};
   color: ${(props) => (props.active ? "var(--yellow)" : "white")};
+  font-weight: ${(props) => (props.active ? "600" : "400")};
   &:hover {
     color: var(--yellow);
     text-decoration: none;
@@ -142,6 +154,7 @@ export const ImageMenu = styled.div`
   color: #ffffff;
   margin: 8px 0px;
   span {
+    
     display: block;
     height: 24px;
     border: 1px solid #000;
@@ -151,13 +164,28 @@ export const ImageMenu = styled.div`
   img {
     width: 24px;
   }
+  
 `;
+
+export const BidNow = styled.a`
+
+   
+  color:white;
+    &:hover{
+   
+    color:var(--yellow)
+  
+    }
+  `
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
   bottom: 0;
   width: 100vw;
+  img {
+    cursor:pointer;
+  }
   
 `;
 export const PlaceHolder = styled.div``;

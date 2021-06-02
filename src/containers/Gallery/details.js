@@ -76,11 +76,11 @@ const ImageDetails = (props) => {
     <div>
       <p>852 Profit Sharing Tokens available for purchase.</p>
       <CollectLinks>
-        <a href={`https://verto.exchange/asset/${props.txId}`}>Bid Now</a>
+        <a href={`https://space.verto.exchange/asset/${props.txId}`}>Bid Now</a>
         <button
           onClick={onShare}
         >
-          Share
+          {share? "Owners" : "Share"}
         </button>
       </CollectLinks>
       {share && <Share/>}
