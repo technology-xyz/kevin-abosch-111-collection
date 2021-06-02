@@ -24,8 +24,9 @@ const Navbar = () => {
           <Koi >
             <img src={Logo} alt="koi-logo"/>
             <Tooltip>
+              <p>Powered by Koi.</p>
                 <p>
-                    Powered by Koi. Koi is the first framework for building easy,
+                     Koi is the first framework for building easy,
               customizable dApps where content earns attention rewards by
               default.
                 </p>

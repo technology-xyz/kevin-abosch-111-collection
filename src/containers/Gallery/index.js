@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Logo } from "../../assets/images";
 import Details from "./details";
 import BottomBar from "./bottom";
-import Arrow from "../../components/Arrows";
+
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
 import {
@@ -11,7 +11,10 @@ import {
   ImageMenu,
   DetailLink,
   MainImage,
-  BidNow
+  BidNow,
+  LeftImg,
+  RightImg,
+  PlaceHolder
 } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -84,7 +87,7 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer onWheel={handleScroll} lockScroll={false}>
-        {/* {!mobile && matchMain && <Arrow indexId={indexId} />} */}
+        
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
@@ -137,16 +140,35 @@ const Gallery = () => {
               )}
             </ImageWrapper>
 
-            
-              <BottomBar
-                left={items[indexId - 1]}
-                right={items[indexId + 1]}
-                index={indexId}
-              />
+            <LeftImg>
+        {indexId === 0 ? (
+          <PlaceHolder />
+        ) : (
+          <LazyLoadImage
+            onClick={() => history.push(`/gallery/${indexId}`)}
+            width="170"
+            height="170"
+            alt={items[indexId -1].name}
+            src={items[indexId -1].source}
+            effect="blur"
+          />
+        )}
+      </LeftImg>
+              
+                <RightImg>
+        <LazyLoadImage
+          onClick={() => history.push(`/gallery/${indexId + 2}`)}
+          width="170"
+          height="170"
+          alt={items[indexId + 1].name}
+          src={items[indexId + 1].source}
+          effect="blur"
+        />
+      </RightImg>
             
           </>
         )}
-        {/* {!mobile && matchMain && <Arrow direction="right" indexId={indexId} />} */}
+      
       </MenuContainer>
     </MetaWrapper>
   );

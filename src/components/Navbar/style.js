@@ -58,22 +58,32 @@ export const Tooltip = styled.span`
   flex-direction: column;
   background-color: black;
   color: #fff;
-  text-align: center;
+
+  text-align: left;
   align-items: center;
-  padding: 7px;
+  padding: 8px;
   border: 2px solid #f5b900;
   position: absolute;
   z-index: 1;
   top: 135%;
   left: -220%;
   margin-left: -60px;
+  p{
+    font-size:15px;
+    width:100%;
+    text-align:left;
+    padding:0px 4px;
+  }
   a {
+    display:flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f5b900;
     color: #000;
     width: 170px;
     height: 32px;
     font-size: 17px;
-    font-weight: bold;
+    font-weight: 700;
     text-align: center;
   }
   &:after {
