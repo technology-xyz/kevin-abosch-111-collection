@@ -9,7 +9,7 @@ export const MenuContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #000;
-  
+  overflow-x:hidden;
   position: absolute;
   @media (max-width: 475px) {
     flex-direction:column;
@@ -21,8 +21,7 @@ export const MainImage = styled.div`
     &:hover {
       cursor: pointer;
     }
-    width:100%;
-    height: auto;
+   
   }
 
 `
@@ -194,9 +193,12 @@ export const BottomBar = styled.div`
 export const PlaceHolder = styled.div``;
 export const LeftImg = styled.div`
 position: fixed;
-bottom: 0;
+bottom: -10%;
 left:0;
 cursor: pointer;
+img {
+  margin-top: -48px;
+}
 @media (max-width: 475px) {
     position: relative;
   }
@@ -207,6 +209,7 @@ position:fixed;
 bottom: 0;
 right:0;
 cursor: pointer;
+bottom: -10%;
 @media (max-width: 475px) {
     position: relative;
     

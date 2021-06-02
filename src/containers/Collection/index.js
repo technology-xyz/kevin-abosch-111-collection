@@ -9,6 +9,8 @@ import {
 } from "react-lazy-load-image-component";
 import { useHistory } from "react-router";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
+import LoadingKoi from '../../components/LoadingKoi'
+
 const Collection = ({ scrollPosition }) => {
   const { contents } = useContext(DataContext);
   const history = useHistory();
@@ -62,9 +64,7 @@ const Collection = ({ scrollPosition }) => {
             })}
           </Grid>
         ) : (
-          <Loading>
-            <img src={Logo} />
-          </Loading>
+          <LoadingKoi/>
         )}
       </CollectionWrapper>
     </MetaWrapper>

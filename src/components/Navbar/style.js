@@ -6,9 +6,12 @@ export const Bar = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1% 2%;
-  position: fixed;
+  
+  position:fixed;
+  height:64px;
   top: 0;
   z-index: 3;
+  background-color:black;
 `;
 export const Title = styled.a`
   display: flex;

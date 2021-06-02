@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Redirect,
   Route,
   Switch,
@@ -58,7 +58,7 @@ function App() {
       <BasicStyle />
       <GlobalStyle />
  {!isLoading && (
-      <Router  basename={process.env.PUBLIC_URL}>
+      <Router  >
        
           <Switch>
             <DataContextContainer images={items}>
