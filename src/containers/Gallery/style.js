@@ -180,7 +180,8 @@ export const BidNow = styled.a`
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
-  position: absolute;
+  position:absolute;
+
   bottom: 0;
   width: 100vw;
   img {

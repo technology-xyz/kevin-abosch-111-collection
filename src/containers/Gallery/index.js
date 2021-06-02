@@ -137,13 +137,13 @@ const Gallery = () => {
               )}
             </ImageWrapper>
 
-            {matchMain && (
+            
               <BottomBar
                 left={items[indexId - 1]}
                 right={items[indexId + 1]}
                 index={indexId}
               />
-            )}
+            
           </>
         )}
         {/* {!mobile && matchMain && <Arrow direction="right" indexId={indexId} />} */}

@@ -19,6 +19,7 @@ import { preUrl } from "config";
 import DataContextContainer from "contexts/DataContextContainer";
 
 function App() {
+  const genRand = () => Math.floor(Math.random() * 1001);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [{ data, loading, error }, refetch] = useAxios(
@@ -28,7 +29,6 @@ function App() {
     if (!loading) {
       const nftArray = [];
       let source = "";
-      
       for (const [key, value] of Object.entries(data)) {
         const [name, extension] = key.split(".");
 
@@ -40,7 +40,6 @@ function App() {
             txId: source,
           });
         } else {
-          
           source = value
         }
       }
@@ -59,7 +58,7 @@ function App() {
       <BasicStyle />
       <GlobalStyle />
  {!isLoading && (
-      <Router>
+      <Router  basename={process.env.PUBLIC_URL}>
        
           <Switch>
             <DataContextContainer images={items}>
@@ -67,7 +66,7 @@ function App() {
               <Route
                 exact
                 path="/"
-                render={() => <Redirect to="/gallery/1" />}
+                render={() => <Redirect to={`/gallery/${genRand()}`} />}
               />
 
               <Suspense fallback={<h1>Loading</h1>}>
