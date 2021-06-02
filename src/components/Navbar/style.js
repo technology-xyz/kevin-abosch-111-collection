@@ -11,13 +11,13 @@ export const Bar = styled.div`
   z-index: 3;
 `;
 export const Title = styled.a`
-display: flex;
-align-items:center;
+  display: flex;
+  align-items: center;
   font-size: 16px;
   color: #f5b900;
-  
-  &:hover{
-    text-decoration:none;
+
+  &:hover {
+    text-decoration: none;
     color: var(--yellow);
   }
 `;
@@ -68,14 +68,14 @@ export const Tooltip = styled.span`
   top: 135%;
   left: -220%;
   margin-left: -60px;
-  p{
-    font-size:15px;
-    width:100%;
-    text-align:left;
-    padding:0px 4px;
+  p {
+    font-size: 15px;
+    width: 100%;
+    text-align: left;
+    padding: 0px 4px;
   }
   a {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f5b900;
@@ -117,6 +117,8 @@ export const MenuWrapper = styled.div`
   position: fixed;
   display: flex;
   justify-content: flex-end;
+  padding: 8px;
+  outline:0;
 `;
 export const SideContent = styled.div`
   height: 70%;
@@ -132,7 +134,7 @@ export const SideContent = styled.div`
 export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  justify-content:flex-end;
+  justify-content: flex-end;
   margin: 64px 0px;
 `;
 
@@ -151,13 +153,20 @@ export const Nlink = styled(NavLink)`
 export const KoiLink = styled.a`
   margin: 0 20px;
   color: white;
-  
-    font-size: 18px;
-    color: white;
-    text-align: right;
-    &:hover {
-      color: #f5b900;
-      font-weight: bold;
+display: flex;
+align-items:center;
+  font-size: 18px;
+  color: white;
+  text-align: right;
+  fill: white;
+  svg {
+    margin-right:4px;
+  }
+  &:hover {
+    color: #f5b900;
+    font-weight: bold;
+    svg {
+      fill: var(--yellow);
     }
-  
+  }
 `;
