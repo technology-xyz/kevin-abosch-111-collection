@@ -14,7 +14,7 @@ import {
   BidNow,
   LeftImg,
   RightImg,
-  PlaceHolder
+  PlaceHolder,
 } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -53,10 +53,9 @@ const Gallery = () => {
   useEffect(() => {
     setItems(contents);
     if (contents.length) {
-      getKoi(contents[indexId].txId)
-        .catch((err) => {
-          console.log(err);
-        });
+      getKoi(contents[indexId].txId).catch((err) => {
+        console.log(err);
+      });
     }
   }, [contents]);
 
@@ -87,7 +86,6 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer onWheel={handleScroll} lockScroll={false}>
-        
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
@@ -128,7 +126,11 @@ const Gallery = () => {
                     >
                       Collect
                     </DetailLink>
-                    <BidNow href={`https://space.verto.exchange/asset/${items[indexId].txId}`}>Bid Now</BidNow>
+                    <BidNow
+                      href={`https://space.verto.exchange/asset/${items[indexId].txId}`}
+                    >
+                      Bid Now
+                    </BidNow>
                   </ImageMenu>
                   <Details
                     item={items[indexId]}
@@ -139,36 +141,44 @@ const Gallery = () => {
                 </>
               )}
             </ImageWrapper>
+            {mobile && (
+              <BottomBar
+                left={items[indexId - 1]}
+                right={items[indexId + 1]}
+                index={indexId}
+              />
+            )}
+            {!mobile && (
+              <>
+                <LeftImg>
+                  {indexId === 0 ? (
+                    <PlaceHolder />
+                  ) : (
+                    <LazyLoadImage
+                      onClick={() => history.push(`/gallery/${indexId}`)}
+                      width="170"
+                      height="170"
+                      alt={items[indexId - 1].name}
+                      src={items[indexId - 1].source}
+                      effect="blur"
+                    />
+                  )}
+                </LeftImg>
 
-            <LeftImg>
-        {indexId === 0 ? (
-          <PlaceHolder />
-        ) : (
-          <LazyLoadImage
-            onClick={() => history.push(`/gallery/${indexId}`)}
-            width="170"
-            height="170"
-            alt={items[indexId -1].name}
-            src={items[indexId -1].source}
-            effect="blur"
-          />
-        )}
-      </LeftImg>
-              
                 <RightImg>
-        <LazyLoadImage
-          onClick={() => history.push(`/gallery/${indexId + 2}`)}
-          width="170"
-          height="170"
-          alt={items[indexId + 1].name}
-          src={items[indexId + 1].source}
-          effect="blur"
-        />
-      </RightImg>
-            
+                  <LazyLoadImage
+                    onClick={() => history.push(`/gallery/${indexId + 2}`)}
+                    width="170"
+                    height="170"
+                    alt={items[indexId + 1].name}
+                    src={items[indexId + 1].source}
+                    effect="blur"
+                  />
+                </RightImg>
+              </>
+            )}
           </>
         )}
-      
       </MenuContainer>
     </MetaWrapper>
   );

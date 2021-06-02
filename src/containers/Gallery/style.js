@@ -10,8 +10,10 @@ export const MenuContainer = styled.div`
   align-items: center;
   background-color: #000;
   
-  
-
+  position: absolute;
+  @media (max-width: 475px) {
+    flex-direction:column;
+  }
 `;
 
 export const MainImage = styled.div`
@@ -180,7 +182,7 @@ export const BidNow = styled.a`
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
-  position:absolute;
+  
 
   bottom: 0;
   width: 100vw;
@@ -190,9 +192,28 @@ export const BottomBar = styled.div`
   
 `;
 export const PlaceHolder = styled.div``;
-export const LeftImg = styled.div``;
+export const LeftImg = styled.div`
+position: fixed;
+bottom: 0;
+left:0;
+cursor: pointer;
+@media (max-width: 475px) {
+    position: relative;
+  }
+`;
 
-export const RightImg = styled.div``;
+export const RightImg = styled.div`
+position:fixed;
+bottom: 0;
+right:0;
+cursor: pointer;
+@media (max-width: 475px) {
+    position: relative;
+    
+  }
+`
+
+;
 
 export const ShareView = styled.div`
   width: 100%;
