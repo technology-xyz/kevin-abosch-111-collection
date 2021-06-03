@@ -4,13 +4,14 @@ export const MenuContainer = styled.div`
   display: flex;
 
   width: 100vw;
-  height: 100%;
+  
   /* overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")}; */
   justify-content: center;
   align-items: center;
   background-color: #000;
   overflow-x:hidden;
   position: absolute;
+  
   @media (max-width: 475px) {
     flex-direction:column;
   }
