@@ -1,15 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 import React from "react";
-import { useLocation } from "react-router";
+import { matchPath, useLocation } from "react-router";
 import Navbar from "../components/Navbar";
 import { PageLayoutContainer } from "./style";
-
+import BackArrow from "../components/BackArrow"
 const PageLayout = ({ children }) => {
-  const path = useLocation().pathname;
+  const {pathname} = useLocation()
+  const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
+  const matchAbout = matchPath(pathname, {path: "/about", exact: true})
+  const matchDetail = matchPath(pathname, "/gallery/:id/details");
+  const matchCollect = matchPath(pathname, "/gallery/:id/collect");
   return (
-    <PageLayoutContainer collection={path === "/collection"}>
+    <PageLayoutContainer collection={pathname === "/collection"}>
       <Navbar />
+      
       {children}
     </PageLayoutContainer>
   );

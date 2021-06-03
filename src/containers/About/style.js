@@ -19,4 +19,7 @@ export const AboutText = styled.div`
     font-size: 18px;
     margin: 20px;
   }
+  @media (max-width: 769px) {
+    margin-top: 128px;
+  width: 92%;
 `;

@@ -21,7 +21,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
-
+import BackArrow from "../../components/BackArrow"
 
 const PlaceHoler = () => {
   
@@ -69,9 +69,7 @@ const Gallery = () => {
     }
   }, [contents]);
 
-  useEffect(()=>{
-     
-  },[])
+  
 
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
@@ -100,6 +98,7 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
+        
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
