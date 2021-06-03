@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Details,
   DetailWrapper,
@@ -51,7 +51,10 @@ const ImageDetails = (props) => {
 
   const [share , setShare] = useState(false)
   const { pathname } = useLocation();
-
+  const ref = useRef(null)
+  useEffect(()=>{
+    ref.current.scrollIntoView({behavior:'smooth'})
+  },[])
 
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -73,7 +76,7 @@ const ImageDetails = (props) => {
     setShare(!share)
   }
   const CollectView = () => (
-    <div>
+    <div  >
       <p>852 Profit Sharing Tokens available for purchase.</p>
       <CollectLinks>
         <a href={`https://space.verto.exchange/asset/${props.txId}`}>Bid Now</a>
@@ -89,7 +92,7 @@ const ImageDetails = (props) => {
   );
    
   return (
-    <Details>
+    <Details ref={ref}>
       {matchDetails && DetailView(props.txId)}
       {(matchCollect || matchShare) && CollectView()}
     </Details>
