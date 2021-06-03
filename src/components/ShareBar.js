@@ -1,15 +1,14 @@
 import React from "react";
 import {
   Twitter,
-  discord,
   email,
   facebook,
   linkein,
   sms,
   telegram,
 } from "../../assets/images";
+import styled from "styled-components";
 
-import { SocialBar } from "./styles";
 const ShareBar = () => {
   return (
     <SocialBar>
@@ -41,5 +40,18 @@ const ShareBar = () => {
     </SocialBar>
   );
 };
+
+
+export const SocialBar = styled.div`
+  a {
+    width: auto;
+    border: 0;
+    outline: 0;
+  }
+  margin: 16px 0px;
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+`;
 
 export default ShareBar;

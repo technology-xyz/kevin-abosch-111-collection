@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Logo } from "../../assets/images";
 import Details from "./details";
 import BottomBar from "./bottom";
-import LoadingKoi from '../../components/LoadingKoi'
+import LoadingKoi from "../../components/LoadingKoi";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
 import {
@@ -21,15 +21,9 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
-import BackArrow from "../../components/BackArrow"
-
-const PlaceHoler = () => {
-  
-}
 
 
-
-
+const PlaceHoler = () => {};
 
 const Gallery = () => {
   const { id } = useParams();
@@ -42,7 +36,7 @@ const Gallery = () => {
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
   const mobile = window.matchMedia("(max-width: 768px)").matches;
-  const ref = useRef(null)
+  const ref = useRef(null);
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
@@ -61,6 +55,7 @@ const Gallery = () => {
   };
 
   useEffect(() => {
+
     setItems(contents);
     if (contents.length) {
       getKoi(contents[indexId].txId).catch((err) => {
@@ -69,10 +64,8 @@ const Gallery = () => {
     }
   }, [contents]);
 
-  
-
   const handleScroll = (e) => {
-    let newScrollLimit = scrollLimit - e.deltaY * 0.3;
+    let newScrollLimit = scrollLimit - e.deltaY * 0.075;
 
     if (matchMain && !mobile) {
       if (newScrollLimit < 0) {
@@ -98,7 +91,6 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
-        
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
@@ -141,6 +133,8 @@ const Gallery = () => {
                     </DetailLink>
                     <BidNow
                       href={`https://space.verto.exchange/asset/${items[indexId].txId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Bid Now
                     </BidNow>
