@@ -20,6 +20,7 @@ import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
+import { useRef } from "react";
 
 
 const PlaceHoler = () => {
@@ -41,7 +42,7 @@ const Gallery = () => {
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
   const mobile = window.matchMedia("(max-width: 768px)").matches;
-
+  const ref = useRef(null)
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
@@ -67,6 +68,10 @@ const Gallery = () => {
       });
     }
   }, [contents]);
+
+  useEffect(()=>{
+     
+  },[])
 
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.3;
@@ -94,7 +99,7 @@ const Gallery = () => {
 
   return (
     <MetaWrapper>
-      <MenuContainer onWheel={handleScroll} lockScroll={false}>
+      <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>

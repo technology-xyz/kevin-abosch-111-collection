@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 const Bubbles = keyframes`
    
-    0% { fill:none}
+  
     100% {fill:white}
 
 `;
@@ -13,7 +13,7 @@ export const LoadingContainer = styled.div`
       animation: ${Bubbles};
       animation-duration: 4s;
       animation-iteration-count: infinite;
-      animation-delay: 1s;
+      
     }
     &:nth-child(2) {
       animation: ${Bubbles};

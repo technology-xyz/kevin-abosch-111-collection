@@ -1,21 +1,41 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+
 export const MenuContainer = styled.div`
   display: flex;
 
   width: 100vw;
-  
+
   /* overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")}; */
   justify-content: center;
   align-items: center;
   background-color: #000;
-  overflow-x:hidden;
+  overflow-x: hidden;
   position: absolute;
-  
-  @media (max-width: 475px) {
-    min-height:100%;
-    flex-direction:column;
-    justify-content:space-between;
+
+  @media (max-width: 769px) {
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+`;
+
+export const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4%;
+  flex-direction: column;
+  width: 40%;
+
+  @media (max-width: 769px) {
+    img {
+      width: 100%;
+      height:auto;
+    }
+
+    width: 92%;
+    margin-top: 10%;
   }
 `;
 
@@ -24,11 +44,12 @@ export const MainImage = styled.div`
     &:hover {
       cursor: pointer;
     }
-    width:100%;
-    height: auto;
   }
 
-`
+  @media (max-width: 769px) {
+    margin-top: 64px;
+  }
+`;
 
 export const Details = styled.div`
   width: 100%;
@@ -50,23 +71,23 @@ export const Details = styled.div`
   }
 `;
 export const DetailWrapper = styled.div`
-width: 55vw;
-margin-left:-5vw;
-@media (max-width: 475px) {
+  width: 55vw;
+  margin-left: -5vw;
+  @media (max-width: 769px) {
     width: 100%;
     margin-left: 0;
   }
-
-`
+`;
 export const CollectLinks = styled.div`
   display: flex;
   align-items: center;
-  
+
   a:first-of-type {
     display: flex;
-    align-items:center;
-    justify-content:center;display: flex;
-   
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
     width: 170px;
     font-weight: 700;
     background-color: #f5b900;
@@ -75,19 +96,18 @@ export const CollectLinks = styled.div`
     font-weight: bold;
     text-align: center;
     border: none;
-    padding:0;
+    padding: 0;
   }
   button {
-
     display: flex;
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
     color: white;
     background-color: transparent;
     text-align: center;
     width: 170px;
-    padding:0;
+    padding: 0;
     height: 32px;
     border: 1px solid white;
   }
@@ -102,7 +122,7 @@ export const CurrentOwners = styled.div`
 export const DetailLink = styled(NavLink)`
   background-color: transparent;
   border: none;
-  
+
   outline: 0;
   border-bottom: ${(props) =>
     props.active ? "3px solid var(--yellow)" : "none"};
@@ -131,26 +151,6 @@ export const Tag = styled.div`
   color: #2ebaae;
 `;
 
-export const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4%;
-  flex-direction: column;
-  width: 40%;
-  img {
-    width: 100%;
-  }
-  @media (max-width: 475px) {
-    width: 92%;
-    margin-top: 10%;
-  }
-  @media (max-width: 769px) {
-    width: 92%;
-    margin-top: 10%;
-  }
-`;
-
 export const ImageMenu = styled.div`
   display: flex;
   justify-content: space-between;
@@ -159,7 +159,6 @@ export const ImageMenu = styled.div`
   color: #ffffff;
   margin: 8px 0px;
   span {
-    
     display: block;
     height: 24px;
     border: 1px solid #000;
@@ -169,63 +168,52 @@ export const ImageMenu = styled.div`
   img {
     width: 24px;
   }
-  
 `;
 
 export const BidNow = styled.a`
-
-   
-  color:white;
-    &:hover{
-   
-    color:var(--yellow)
-  
-    }
-  `
+  color: white;
+  &:hover {
+    color: var(--yellow);
+  }
+`;
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items:center;
- 
+  align-items: center;
+
   bottom: -10%;
   width: 100vw;
-  height:64px;
+  height: 64px;
   overflow: hidden;
   position: relative;
   img {
-  
-    
-    cursor:pointer;
+    cursor: pointer;
   }
-  
 `;
 export const PlaceHolder = styled.div``;
 export const LeftImg = styled.div`
-position: fixed;
-bottom: -10%;
-left:0;
-cursor: pointer;
-img {
-  margin-top: -48px;
-}
-@media (max-width: 475px) {
+  position: fixed;
+  bottom: -10%;
+  left: 0;
+  cursor: pointer;
+  img {
+    margin-top: -48px;
+  }
+  @media (max-width: 475px) {
     position: relative;
   }
 `;
 
 export const RightImg = styled.div`
-position:fixed;
-bottom: 0;
-right:0;
-cursor: pointer;
-bottom: -10%;
-@media (max-width: 475px) {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  bottom: -10%;
+  @media (max-width: 475px) {
     position: relative;
-    
   }
-`
-
-;
+`;
 
 export const ShareView = styled.div`
   width: 100%;
@@ -236,7 +224,7 @@ export const Copy = styled.div`
   display: flex;
   height: 32px;
   min-width: 100%;
-  input{
+  input {
     color: white;
     background-color: transparent;
     padding-left: 8px;
