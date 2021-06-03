@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Logo } from "../../assets/images";
 import Details from "./details";
 import BottomBar from "./bottom";
-
+import LoadingKoi from '../../components/LoadingKoi'
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import { DataContext } from "contexts/DataContextContainer";
 import {
@@ -20,6 +20,15 @@ import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
+
+
+const PlaceHoler = () => {
+  
+}
+
+
+
+
 
 const Gallery = () => {
   const { id } = useParams();

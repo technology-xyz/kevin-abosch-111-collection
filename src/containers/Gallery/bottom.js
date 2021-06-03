@@ -15,7 +15,7 @@ const Bottom = ({ left, right, index }) => {
   const mobile = window.matchMedia("(max-width: 768px)").matches;
   return (
     <BottomBar>
-      <LeftImg>
+     
         {index === 0 ? (
           <PlaceHolder />
         ) : (
@@ -28,9 +28,9 @@ const Bottom = ({ left, right, index }) => {
             effect="blur"
           />
         )}
-      </LeftImg>
+     
 
-      <RightImg>
+     
         <LazyLoadImage
           onClick={() => history.push(`/gallery/${index + 2}`)}
           width="170"
@@ -39,7 +39,7 @@ const Bottom = ({ left, right, index }) => {
           src={right.source}
           effect="blur"
         />
-      </RightImg>
+      
     </BottomBar>
   );
 };

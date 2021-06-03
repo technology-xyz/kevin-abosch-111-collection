@@ -13,7 +13,9 @@ export const MenuContainer = styled.div`
   position: absolute;
   
   @media (max-width: 475px) {
+    min-height:100%;
     flex-direction:column;
+    justify-content:space-between;
   }
 `;
 
@@ -22,7 +24,8 @@ export const MainImage = styled.div`
     &:hover {
       cursor: pointer;
     }
-   
+    width:100%;
+    height: auto;
   }
 
 `
@@ -182,11 +185,16 @@ export const BidNow = styled.a`
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
-  
-
-  bottom: 0;
+  align-items:center;
+ 
+  bottom: -10%;
   width: 100vw;
+  height:64px;
+  overflow: hidden;
+  position: relative;
   img {
+  
+    
     cursor:pointer;
   }
   
