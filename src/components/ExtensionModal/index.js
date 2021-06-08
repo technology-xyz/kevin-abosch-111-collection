@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import {ModalWrapper, Modal,ArLink} from "./style"
+
 const EvolveModal = () => {
+   
   return (
     <ModalWrapper>
 

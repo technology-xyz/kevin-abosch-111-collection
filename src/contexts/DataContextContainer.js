@@ -9,7 +9,7 @@ export { DataContext };
 
 function DataContextContainer(props) {
   const [addressEth, setAddressEth] = useLocalStorage("koi-addressEth", null);
-  const [openSeas, setOpenSeas] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
   const [addressAr, setAddressAr] = useLocalStorage("koi-addressAr", null);
   const [keyAr, setKeyAr] = useLocalStorage("koi-keyAr", null);
   const [balanceKoi, setBalanceKoi] = useLocalStorage("koi-balanceKoi", null);
@@ -29,8 +29,8 @@ function DataContextContainer(props) {
         setAddressEth,
         addressAr,
         setAddressAr,
-        openSeas,
-        setOpenSeas,
+        modalOpen,
+        setModalOpen,
         keyAr,
         setKeyAr,
         balanceKoi,
