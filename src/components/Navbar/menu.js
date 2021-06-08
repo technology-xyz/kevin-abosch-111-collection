@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext}  from "react";
 import { Logo } from "../../assets/images";
 import {
   MenuWrapper,
@@ -9,7 +9,10 @@ import {
   EvolveTooltip,
   Elink
 } from "./style";
+import { DataContext } from "contexts/DataContextContainer";
+
 const Menu = () => {
+  const { modalOpen, setModalOpen} = useContext(DataContext);
   const genRand = () => Math.floor(Math.random() * 1001);
   return (
     <MenuWrapper>
@@ -19,7 +22,7 @@ const Menu = () => {
           <Nlink to="/about">About 1111</Nlink>
 
           <Nlink to={`/gallery/${genRand()}`}>Random</Nlink>
-          <Elink to="/about">
+          <Elink onClick={()=> setModalOpen(true)}>
             Evolve my NFT
             <EvolveTooltip>
               <p>
