@@ -33,7 +33,6 @@ const LoadingKoi = () => {
 
 
 const Bubbles = keyframes`
-   
   
     100% {fill:white}
 

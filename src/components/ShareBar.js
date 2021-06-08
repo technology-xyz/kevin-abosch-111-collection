@@ -6,7 +6,7 @@ import {
   linkein,
   sms,
   telegram,
-} from "../../assets/images";
+} from "../assets/images";
 import styled from "styled-components";
 
 const ShareBar = () => {

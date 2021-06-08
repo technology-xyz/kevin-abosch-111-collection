@@ -112,6 +112,65 @@ export const Tooltip = styled.span`
   }
 `;
 
+export const EvolveTooltip = styled.span`
+  visibility: hidden;
+  width: 245px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: #fff;
+
+  text-align: left;
+  align-items: center;
+  padding: 8px;
+  border: 2px solid #f5b900;
+  position: absolute;
+  z-index: 7;
+  top:-55%;
+  right: 120%;
+  
+  }
+  p {
+    font-size: 15px;
+    width: 100%;
+    text-align: left;
+    padding: 0px 4px;
+  }
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5b900;
+    color: #000;
+    width: 170px;
+    height: 32px;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top:5%;
+    left: 100%;
+    margin-top: 3px;
+    border-width: 12px;
+    border-style: solid;
+    border-color: transparent  transparent transparent #000;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top:5%;
+    left: 100%;
+    
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent transparent transparent  #f5b900 ;
+  }
+`;
+
 export const MenuWrapper = styled.div`
   height: 100%;
   width: 100vw;
@@ -148,10 +207,33 @@ export const Nlink = styled(NavLink)`
   display: inline-block;
   font-size: 18px;
   color: white;
+  position: relative;
   &:hover {
     color: #f5b900;
     font-weight: bold;
   }
+`;
+
+export const Elink = styled.button`
+  margin: 20px 20px;
+  color: white;
+  text-align: right;
+  display: inline-block;
+  font-size: 18px;
+  color: white;
+  position: relative;
+  background-color: transparent;
+  border:0;
+  &:hover {
+    color: #f5b900;
+    font-weight: bold;
+    span {
+      visibility: visible;
+      color:white;
+      font-weight: 400;
+    }
+  }
+ 
 `;
 export const KoiLink = styled.a`
   margin: 0 20px;
@@ -171,5 +253,7 @@ align-items:center;
     svg {
       fill: var(--yellow);
     }
+    
+  
   }
 `;
