@@ -1,6 +1,6 @@
 import React from "react";
 import { Logo } from "../../assets/images";
-import { MenuWrapper, SideContent, Nav, Nlink, KoiLink } from "./style";
+import { MenuWrapper, SideContent, Nav, Nlink, KoiLink,Tooltip } from "./style";
 const Menu = () => {
   const genRand = () => Math.floor(Math.random() * 1001);
   return (
@@ -9,7 +9,25 @@ const Menu = () => {
         <Nav>
           <Nlink to="/collection">The Collection</Nlink>
           <Nlink to="/about">About 1111</Nlink>
+          
           <Nlink to={`/gallery/${genRand()}`}>Random</Nlink>
+          <Nlink to="/about">
+            Evolve my NFT
+            <Tooltip>
+              <p>Powered by Koi.</p>
+              <p>
+                Koi is the first framework for building easy, customizable dApps
+                where content earns attention rewards by default.
+              </p>
+
+              <a
+                href="https://openkoi.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn More
+              </a>
+            </Tooltip></Nlink>
         </Nav>
         <KoiLink href="openkoi.com" target="_blank" rel="noopener noreferrer">
           <svg
