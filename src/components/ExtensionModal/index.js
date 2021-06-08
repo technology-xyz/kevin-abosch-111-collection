@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {ModalWrapper, Modal,ArLink} from "./style"
 
 const EvolveModal = () => {
-   
+    useEffect(()=>{
+        if (typeof window.ethereum !== 'undefined') {
+            console.log('MetaMask is installed!');
+          }
+          
+    },[])
   return (
     <ModalWrapper>
 

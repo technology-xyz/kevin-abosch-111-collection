@@ -27,7 +27,11 @@ export const Modal = styled.div`
       height:32px;
       border:0;
       font-weight: 700;
-
+  }
+  label {
+      display: flex;
+      justify-content: space-between;
+      width:100%;
   }
 `;
 
