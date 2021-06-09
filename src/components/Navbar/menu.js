@@ -14,6 +14,10 @@ import { DataContext } from "contexts/DataContextContainer";
 const Menu = () => {
   const { modalOpen, setModalOpen} = useContext(DataContext);
   const genRand = () => Math.floor(Math.random() * 1001);
+  const onEvolve = () => {
+    window.ethereum.request({ method: 'eth_requestAccounts' });
+    setModalOpen(true)
+  }
   return (
     <MenuWrapper>
       <SideContent>
@@ -22,9 +26,9 @@ const Menu = () => {
           <Nlink to="/about">About 1111</Nlink>
 
           <Nlink to={`/gallery/${genRand()}`}>Random</Nlink>
-          <Elink onClick={()=> setModalOpen(true)}>
+          <Elink onClick={onEvolve}>
             Evolve my NFT
-            <EvolveTooltip>
+            <EvolveTooltip>git 
               <p>
                 Store your NFT forever and start earning attention rewards by
                 evolving it into an Atomic NFT. Atomic NFTs are permanently
@@ -36,13 +40,11 @@ const Menu = () => {
                 transaction ID.
               </p>
 
-              <a
-                href="https://openkoi.com/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <div
+                
               >
                 Connect Wallet
-              </a>
+              </div>
             </EvolveTooltip>
           </Elink>
         </Nav>
