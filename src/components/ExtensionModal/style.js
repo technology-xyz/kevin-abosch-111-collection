@@ -12,6 +12,7 @@ export const Modal = styled.div`
   display: flex;
   flex-direction: column;
   background-color: black;
+  position: relative;
   color: #fff;
   width: 400px;
   text-align: left;
@@ -34,5 +35,14 @@ export const Modal = styled.div`
       width:100%;
   }
 `;
-
+export const Exit = styled.svg`
+    position: absolute;
+    top: 0;
+    left: 0;
+`
+export const BackArrow = styled.svg`
+position: absolute;
+    top: 0;
+    right: 0;
+`
 export const ArLink = styled.a``;
