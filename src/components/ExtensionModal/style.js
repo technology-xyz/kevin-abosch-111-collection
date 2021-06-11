@@ -25,6 +25,13 @@ export const Modal = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    input {
+        border-color: var(--yellow);
+        background-color: black;
+        &:focus {
+            outline: none !important;
+        }
+    }
   }
 `;
 export const Exit = styled.button`
@@ -54,4 +61,6 @@ width:170px;
 height:32px;
 
 `
+
+
 export const ArLink = styled.a``;

@@ -1,11 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import queryString from "query-string";
-import { ModalWrapper, Modal, ArLink, Exit, BackArrow,ActionButton } from "./style";
+import {
+  ModalWrapper,
+  Modal,
+  ArLink,
+  Exit,
+  BackArrow,
+  ActionButton,
+} from "./style";
 import { DataContext } from "contexts/DataContextContainer";
 import { alertTimeout } from "config";
-import axios from "../../service/customAxios"
+import axios from "../../service/customAxios";
 import Web3 from "web3";
+import * as Kcommon from "@_koi/sdk/common";
 
 const EvolveModal = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,26 +21,18 @@ const EvolveModal = () => {
   const { address } = queryString.parse(history.location.search);
   const [showAlert, setShowAlert] = useState(false);
   const [errMessage, setErrMessage] = useState(false);
-
-  const {
-    setModalOpen,
-    addressAr,
-    keyAr,
-    addressEth,
-    setAddressEth,
-    setBalanceKoi,
-    setBalanceAr,
-  } = useContext(DataContext);
+    const [userName, setUserName] = useState("")
+  const { setModalOpen, addressAr, keyAr, addressEth, setAddressEth } =
+    useContext(DataContext);
 
   const [iskevinNft, setIskevinNft] = useState(null);
 
   useEffect(() => {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
     if (window.ethereum) {
       setIsLoading(true);
       window.ethereum.send("eth_requestAccounts").then(async (accounts) => {
         console.log(accounts.result[0]);
-        setAddressEth(accounts.result[0])
+        setAddressEth(accounts.result[0]);
         const options = {
           method: "GET",
         };
@@ -52,13 +52,10 @@ const EvolveModal = () => {
               );
             }
 
-
-            if (checkKevinNFT(data.assets)){
-
+            if (checkKevinNFT(data.assets)) {
             }
-            
           })
-    
+
           .catch((err) => {
             console.log(err);
             show_alert(
@@ -72,17 +69,19 @@ const EvolveModal = () => {
     }
   }, [history.location.pathname]);
 
+
+
   function redeem(payload) {
-    console.log('payload......', payload);
-     axios
-         .post('http://localhost:8887/registerKevinNFT', payload)
-         .then(res => {
-             console.log(`statusCode: ${res.statusCode}`)
-             console.log(res)
-         })
-         .catch(error => {
-          //   console.error(error)
-         })
+    console.log("payload......", payload);
+    axios
+      .post("http://localhost:8887/registerKevinNFT", payload)
+      .then((res) => {
+        console.log(`statusCode: ${res.statusCode}`);
+        console.log(res);
+      })
+      .catch((error) => {
+        //   console.error(error)
+      });
   }
 
   const show_alert = (message = "") => {
@@ -94,17 +93,17 @@ const EvolveModal = () => {
     }, alertTimeout);
   };
 
-  const  sign  = (address) => {
+  const sign = (address) => {
     // window.koiWallet.sign(addressAr, accounts[0]).then((res)=>{
     //     payload.signature = res;
     //     console.log('signature', res);
     //     console.log('signature', payload);
     //      redeem(payload);
-    //     // Dong, here we need to submit the payload to server(koi.server), i will provide the api 
-
+    //     // Dong, here we need to submit the payload to server(koi.server), i will provide the api
     //   })
-    
   };
+
+  
 
   const checkKevinNFT = (nfts = []) => {
     for (var i = 0; i < nfts.length; i++) {
@@ -115,11 +114,36 @@ const EvolveModal = () => {
         // if(nfts[i].asset_contract.address === "0x495f947276749ce646f68ac8c248420045cb7b5e") {
         console.log(nfts[i].asset_contract.address);
         setIskevinNft(nfts[i]);
-        return true
+        return true;
       }
     }
   };
+  const onEvolve = () => {
+    const params = {
+      from: addressAr,
+      to: "0xd0000000000",
+      gas: "0x76c0", // 30400
+      gasPrice: "0x9184e72a000", // 10000000000000
+      value: "0x9184e72a", // 2441406250
+      data: iskevinNft,
+    };
 
+    window.ethereum
+      .request({
+        method: "eth_sendTransaction",
+        params,
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        // If the request fails, the Promise will reject with an error.
+      });
+  };
+
+  const onChange = (e) => {
+      setUserName(e.target.value)
+  }
   const onExit = () => {
     setModalOpen(false);
   };
@@ -142,14 +166,12 @@ const EvolveModal = () => {
           Once you’ve downloaded Koi’s secure extension, click Evolve to
           register your 1111 content and start earning rewards.
         </p>
-        <ActionButton>Evolve</ActionButton>
+        <ActionButton onClick={onEvolve}>Evolve</ActionButton>
       </Modal>
 
       <Modal>
         <BackArrow>
-         
-
-           <svg width="24" height="20" viewBox="0 0 24 20" fill="none">
+          <svg width="24" height="20" viewBox="0 0 24 20" fill="none">
             <path
               d="M9.6 0.399994L11.28 2.07999L4.56 8.79999H24V11.2H4.56L11.28 17.92L9.6 19.6L0 9.99999L9.6 0.399994Z"
               fill="white"
@@ -169,7 +191,7 @@ const EvolveModal = () => {
           top content registered with Koi.
         </p>
         <label>
-          Username: <input />
+          Username: <input value={userName} onChange={onChange}/>
         </label>
         <ActionButton>Add Username</ActionButton>
       </Modal>
@@ -185,7 +207,7 @@ const EvolveModal = () => {
         </BackArrow>
         <h3>Confirm Registration</h3>
         <Exit onClick={onExit}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M1 1L15 15" stroke="white" stroke-width="2" />
             <path d="M15 1L1 15" stroke="white" stroke-width="2" />
           </svg>
@@ -202,7 +224,7 @@ const EvolveModal = () => {
         <h3>Succes</h3>
 
         <Exit onClick={onExit}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M1 1L15 15" stroke="white" stroke-width="2" />
             <path d="M15 1L1 15" stroke="white" stroke-width="2" />
           </svg>
