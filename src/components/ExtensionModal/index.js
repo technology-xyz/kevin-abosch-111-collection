@@ -53,16 +53,12 @@ const EvolveModal = () => {
             }
 
 
-            if (checkKevinNFT(data.assets))
+            if (checkKevinNFT(data.assets)){
+
+            }
             
           })
-          .then(() =>{
-              if (iskevinNft) {
-                var payload = {
-                    ownerArAddress: addressAr,
-                  };
-              }
-          })
+    
           .catch((err) => {
             console.log(err);
             show_alert(
@@ -99,14 +95,14 @@ const EvolveModal = () => {
   };
 
   const  sign  = (address) => {
-    window.koiWallet.sign(addressAr, accounts[0]).then((res)=>{
-        payload.signature = res;
-        console.log('signature', res);
-        console.log('signature', payload);
-         redeem(payload);
-        // Dong, here we need to submit the payload to server(koi.server), i will provide the api 
+    // window.koiWallet.sign(addressAr, accounts[0]).then((res)=>{
+    //     payload.signature = res;
+    //     console.log('signature', res);
+    //     console.log('signature', payload);
+    //      redeem(payload);
+    //     // Dong, here we need to submit the payload to server(koi.server), i will provide the api 
 
-      })
+    //   })
     
   };
 
