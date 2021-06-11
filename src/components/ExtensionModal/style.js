@@ -20,7 +20,9 @@ export const Modal = styled.div`
   align-items: center;
   padding: 8px;
   border: 2px solid #f5b900;
-
+    h3 {
+        font-size: 17px;
+    }
   label {
     display: flex;
     justify-content: space-between;
@@ -28,6 +30,7 @@ export const Modal = styled.div`
     input {
         border-color: var(--yellow);
         background-color: black;
+        color: var(--yellow);
         &:focus {
             outline: none !important;
         }
@@ -63,4 +66,13 @@ height:32px;
 `
 
 
-export const ArLink = styled.a``;
+export const ArLink = styled.a`
+display:flex;
+justify-content: center;
+align-items: center;
+border: 1px solid var(--yellow);
+font-size: 15px;
+font-style:italic;
+padding: 4px;
+width:150px;
+`;

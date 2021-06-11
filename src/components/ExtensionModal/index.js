@@ -216,7 +216,7 @@ const EvolveModal = () => {
           Register your Kevin Abosch NFT #0722 on Koi to start earning attention
           rewards
         </p>
-        <p>Username: kayla kroot</p>
+        <p>Username: {userName}</p>
         <ActionButton>Confirm</ActionButton>
       </Modal>
 
