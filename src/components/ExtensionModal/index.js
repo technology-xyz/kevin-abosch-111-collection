@@ -4,6 +4,7 @@ import queryString from "query-string";
 import { ModalWrapper, Modal, ArLink, Exit, BackArrow,ActionButton } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
 import { alertTimeout } from "config";
+import axios from "../../service/customAxios"
 import Web3 from "web3";
 
 const EvolveModal = () => {
@@ -14,10 +15,10 @@ const EvolveModal = () => {
   const [errMessage, setErrMessage] = useState(false);
 
   const {
-    modalOpen,
     setModalOpen,
     addressAr,
     keyAr,
+    addressEth,
     setAddressEth,
     setBalanceKoi,
     setBalanceAr,
@@ -31,6 +32,7 @@ const EvolveModal = () => {
       setIsLoading(true);
       window.ethereum.send("eth_requestAccounts").then(async (accounts) => {
         console.log(accounts.result[0]);
+        setAddressEth(accounts.result[0])
         const options = {
           method: "GET",
         };
@@ -50,8 +52,16 @@ const EvolveModal = () => {
               );
             }
 
-            checkKevinNFT(data.assets);
-            console.log(data.assets);
+
+            if (checkKevinNFT(data.assets))
+            
+          })
+          .then(() =>{
+              if (iskevinNft) {
+                var payload = {
+                    ownerArAddress: addressAr,
+                  };
+              }
           })
           .catch((err) => {
             console.log(err);
@@ -66,6 +76,19 @@ const EvolveModal = () => {
     }
   }, [history.location.pathname]);
 
+  function redeem(payload) {
+    console.log('payload......', payload);
+     axios
+         .post('http://localhost:8887/registerKevinNFT', payload)
+         .then(res => {
+             console.log(`statusCode: ${res.statusCode}`)
+             console.log(res)
+         })
+         .catch(error => {
+          //   console.error(error)
+         })
+  }
+
   const show_alert = (message = "") => {
     setShowAlert(true);
     setErrMessage(message);
@@ -73,6 +96,18 @@ const EvolveModal = () => {
       setShowAlert(false);
       setErrMessage("");
     }, alertTimeout);
+  };
+
+  const  sign  = (address) => {
+    window.koiWallet.sign(addressAr, accounts[0]).then((res)=>{
+        payload.signature = res;
+        console.log('signature', res);
+        console.log('signature', payload);
+         redeem(payload);
+        // Dong, here we need to submit the payload to server(koi.server), i will provide the api 
+
+      })
+    
   };
 
   const checkKevinNFT = (nfts = []) => {
@@ -84,7 +119,7 @@ const EvolveModal = () => {
         // if(nfts[i].asset_contract.address === "0x495f947276749ce646f68ac8c248420045cb7b5e") {
         console.log(nfts[i].asset_contract.address);
         setIskevinNft(nfts[i]);
-        break;
+        return true
       }
     }
   };
@@ -106,7 +141,7 @@ const EvolveModal = () => {
 
       <Modal>
         <p>{showAlert && errMessage}</p>
-        <p>Let’s get started</p>
+        <h3>Let’s get started</h3>
         <p>
           Once you’ve downloaded Koi’s secure extension, click Evolve to
           register your 1111 content and start earning rewards.
@@ -125,7 +160,7 @@ const EvolveModal = () => {
             />
           </svg>
         </BackArrow>
-        <p>Add a Username</p>
+        <h3>Add a Username</h3>
         <Exit onClick={onExit}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M1 1L15 15" stroke="white" stroke-width="2" />
@@ -152,7 +187,7 @@ const EvolveModal = () => {
             />
           </svg>
         </BackArrow>
-        <p>Confirm Registration</p>
+        <h3>Confirm Registration</h3>
         <Exit onClick={onExit}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M1 1L15 15" stroke="white" stroke-width="2" />
@@ -168,7 +203,7 @@ const EvolveModal = () => {
       </Modal>
 
       <Modal>
-        <p>Succes</p>
+        <h3>Succes</h3>
 
         <Exit onClick={onExit}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
