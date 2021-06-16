@@ -65,7 +65,8 @@ const Gallery = () => {
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
       const loadImg = new Image();
-      loadImg.src = image;
+      loadImg.src = image.source;
+      loadImg.key = image.name;
       loadImg.onload = () => {
         resolve(image.source);
       };
@@ -75,7 +76,7 @@ const Gallery = () => {
   };
 
   const up = () => {
-    loadImage(items[indexId + 3].source)
+    loadImage(items[indexId + 3])
       .then(() => console.log("loaded"))
       .catch((err) => console.log("Failed to load images", err));
     setScrollLimit(50);
@@ -83,21 +84,21 @@ const Gallery = () => {
     history.push(`/gallery/${indexId + 2}`);
   };
   const down = () => {
-    loadImage(items[indexId -1].source)
+    loadImage(items[indexId - 1])
       .then(() => console.log("loaded"))
       .catch((err) => console.log("Failed to load images", err));
 
-      setScrollLimit(50);
-        history.push(`/gallery/${indexId}`);
-  }
+    setScrollLimit(50);
+    history.push(`/gallery/${indexId}`);
+  };
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.075;
 
     if (matchMain && !mobile) {
       if (newScrollLimit < 0) {
-        up()
+        up();
       } else if (newScrollLimit > 100) {
-        down()
+        down();
       } else {
         setScrollLimit(newScrollLimit);
       }
@@ -122,12 +123,13 @@ const Gallery = () => {
             <ImageWrapper key={items[indexId].name}>
               <MainImage>
                 <LazyLoadImage
-                key={items[indexId].name}
+                  key={items[indexId].name}
+                  onLoad={handleLoaded}
                   width="580"
                   height="580"
                   alt={items[indexId].name}
                   src={items[indexId].source}
-                  placeholderSrc={items[indexId].source}
+                  visibleByDefault={true}
                   onClick={onShowDetails}
                   effect="opacity"
                 />
@@ -190,7 +192,7 @@ const Gallery = () => {
                     <PlaceHolder />
                   ) : (
                     <LazyLoadImage
-                      key={items[indexId -1].name}
+                      key={items[indexId - 1].name}
                       onClick={down}
                       width="170"
                       height="170"

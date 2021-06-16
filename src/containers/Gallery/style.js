@@ -5,6 +5,7 @@ export const MenuContainer = styled.div`
   display: flex;
 
   width: 100vw;
+  min-height:100vh;
 
   /* overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")}; */
   justify-content: center;
@@ -40,7 +41,10 @@ export const ImageWrapper = styled.div`
 `;
 
 export const MainImage = styled.div`
+ 
+
   img {
+    background-color:black;
     &:hover {
       cursor: pointer;
     }

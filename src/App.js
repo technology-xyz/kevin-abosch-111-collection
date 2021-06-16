@@ -43,7 +43,7 @@ function App() {
           source = value
         }
       }
-
+      
       setItems(nftArray);
       setIsLoading(false);
     }
