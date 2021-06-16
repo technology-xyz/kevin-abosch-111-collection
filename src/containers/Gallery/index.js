@@ -17,7 +17,7 @@ import {
   PlaceHolder,
 } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
@@ -87,7 +87,9 @@ const Gallery = () => {
       history.push(`/gallery/${id}/details`);
     }
   };
-
+const handleLoaded = () => {
+  console.log("LOADED")
+}
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
@@ -96,12 +98,14 @@ const Gallery = () => {
             <ImageWrapper key={items[indexId].name}>
               <MainImage>
                 <LazyLoadImage
+                 
+            
                   width="580"
                   height="580"
                   alt={items[indexId].name}
                   src={items[indexId].source}
                   onClick={onShowDetails}
-                  effect="blur"
+                  effect="opacity"
                 />
               </MainImage>
 
