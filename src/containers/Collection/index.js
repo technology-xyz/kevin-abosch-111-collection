@@ -32,7 +32,7 @@ const Collection = ({ scrollPosition }) => {
       });
     };
 
-    Promise.all(contents.slice(0, 100).map((image) => loadImage(image)))
+    Promise.all(contents.slice(0, 16).map((image) => loadImage(image)))
       .then(() => setImgsLoaded(true))
       .catch((err) => console.log("Failed to load images", err));
   }, [contents]);
@@ -55,8 +55,7 @@ const Collection = ({ scrollPosition }) => {
                   effect="opacity"
                   src={pic.source}
                   alt={pic.name}
-                  threshold="800"
-                  placeholderSrc={pic.source}
+                  threshold="300"
                   width="120"
                   height="120"
                   key={pic.name}

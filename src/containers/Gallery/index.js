@@ -122,6 +122,7 @@ const Gallery = () => {
             <ImageWrapper key={items[indexId].name}>
               <MainImage>
                 <LazyLoadImage
+                key={items[indexId].name}
                   width="580"
                   height="580"
                   alt={items[indexId].name}
@@ -189,6 +190,7 @@ const Gallery = () => {
                     <PlaceHolder />
                   ) : (
                     <LazyLoadImage
+                      key={items[indexId -1].name}
                       onClick={down}
                       width="170"
                       height="170"
@@ -201,6 +203,7 @@ const Gallery = () => {
 
                 <RightImg>
                   <LazyLoadImage
+                    key={items[indexId + 1].name}
                     onClick={up}
                     width="170"
                     height="170"
