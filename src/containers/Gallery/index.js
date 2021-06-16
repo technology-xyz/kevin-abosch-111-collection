@@ -22,7 +22,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
 
-
 const PlaceHoler = () => {};
 
 const Gallery = () => {
@@ -55,7 +54,6 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-
     setItems(contents);
     if (contents.length) {
       getKoi(contents[indexId].txId).catch((err) => {
@@ -64,13 +62,33 @@ const Gallery = () => {
     }
   }, [contents]);
 
+  const loadImage = (image) => {
+    return new Promise((resolve, reject) => {
+      const loadImg = new Image();
+      loadImg.src = image;
+      loadImg.onload = () => {
+        resolve(image.source);
+      };
+
+      loadImg.onerror = (err) => reject(err);
+    });
+  };
+
+  const up = () => {
+    loadImage(items[indexId + 3].source)
+      .then(() => console.log("loaded"))
+      .catch((err) => console.log("Failed to load images", err));
+    setScrollLimit(50);
+
+    history.push(`/gallery/${indexId + 2}`);
+  };
+
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.075;
 
     if (matchMain && !mobile) {
       if (newScrollLimit < 0) {
-        setScrollLimit(50);
-        history.push(`/gallery/${indexId + 2}`);
+        up()
       } else if (newScrollLimit > 100) {
         setScrollLimit(50);
         history.push(`/gallery/${indexId}`);
@@ -87,9 +105,9 @@ const Gallery = () => {
       history.push(`/gallery/${id}/details`);
     }
   };
-const handleLoaded = () => {
-  console.log("LOADED")
-}
+  const handleLoaded = () => {
+    console.log("LOADED");
+  };
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
@@ -98,12 +116,11 @@ const handleLoaded = () => {
             <ImageWrapper key={items[indexId].name}>
               <MainImage>
                 <LazyLoadImage
-                 
-            
                   width="580"
                   height="580"
                   alt={items[indexId].name}
                   src={items[indexId].source}
+                  placeholderSrc={items[indexId].source}
                   onClick={onShowDetails}
                   effect="opacity"
                 />
@@ -178,7 +195,7 @@ const handleLoaded = () => {
 
                 <RightImg>
                   <LazyLoadImage
-                    onClick={() => history.push(`/gallery/${indexId + 2}`)}
+                    onClick={up()}
                     width="170"
                     height="170"
                     alt={items[indexId + 1].name}
