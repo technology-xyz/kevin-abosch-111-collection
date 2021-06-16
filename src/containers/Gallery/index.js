@@ -82,7 +82,14 @@ const Gallery = () => {
 
     history.push(`/gallery/${indexId + 2}`);
   };
+  const down = () => {
+    loadImage(items[indexId -1].source)
+      .then(() => console.log("loaded"))
+      .catch((err) => console.log("Failed to load images", err));
 
+      setScrollLimit(50);
+        history.push(`/gallery/${indexId}`);
+  }
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.075;
 
@@ -90,8 +97,7 @@ const Gallery = () => {
       if (newScrollLimit < 0) {
         up()
       } else if (newScrollLimit > 100) {
-        setScrollLimit(50);
-        history.push(`/gallery/${indexId}`);
+        down()
       } else {
         setScrollLimit(newScrollLimit);
       }
@@ -183,7 +189,7 @@ const Gallery = () => {
                     <PlaceHolder />
                   ) : (
                     <LazyLoadImage
-                      onClick={() => history.push(`/gallery/${indexId}`)}
+                      onClick={down}
                       width="170"
                       height="170"
                       alt={items[indexId - 1].name}
@@ -195,7 +201,7 @@ const Gallery = () => {
 
                 <RightImg>
                   <LazyLoadImage
-                    onClick={up()}
+                    onClick={up}
                     width="170"
                     height="170"
                     alt={items[indexId + 1].name}

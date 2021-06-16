@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CollectionWrapper, Grid, Loading } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 import { Logo } from "../../assets/images";
 import {
   LazyLoadImage,
@@ -26,13 +26,13 @@ const Collection = ({ scrollPosition }) => {
         loadImg.onload = () =>
           setTimeout(() => {
             resolve(image.source);
-          }, 3000);
+          }, 2000);
 
         loadImg.onerror = (err) => reject(err);
       });
     };
 
-    Promise.all(contents.slice(0, 16).map((image) => loadImage(image)))
+    Promise.all(contents.slice(0, 100).map((image) => loadImage(image)))
       .then(() => setImgsLoaded(true))
       .catch((err) => console.log("Failed to load images", err));
   }, [contents]);
@@ -52,10 +52,11 @@ const Collection = ({ scrollPosition }) => {
                   }
                   visibleByDefault={id < 17}
                   scrollPosition={scrollPosition}
-                  effect="blur"
+                  effect="opacity"
                   src={pic.source}
                   alt={pic.name}
-                  threshold="600"
+                  threshold="800"
+                  placeholderSrc={pic.source}
                   width="120"
                   height="120"
                   key={pic.name}
