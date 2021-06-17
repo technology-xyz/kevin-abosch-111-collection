@@ -50,6 +50,7 @@ const Pagination = (props) => {
         return (
           <PaginationItem
             onClick={() => onPageChange(pageNumber)}
+            selected={pageNumber === currentPage}
           >
             {pageNumber}
           </PaginationItem>
@@ -90,7 +91,7 @@ const PaginationItem = styled.li`
     cursor: ${props => props.dots ? `default` : ` pointer` }
   }
  
-  ${(props) => props.selected && `background-color: rgba(0, 0, 0, 0.08);`}
+  ${(props) => props.selected && `border: 1px solid var(--yellow);`}
 `;
 
 const Arrow = styled.div`
@@ -105,9 +106,9 @@ const Arrow = styled.div`
         border-right: 0.12em solid var(--yellow);
         border-top: 0.12em solid var(--yellow);
       }
-      ${(props) => props.right && `transform: rotate(45deg);`}
+        ${(props) => props.right && `transform: rotate(45deg);`}
         ${(props) => props.left && `transform: rotate(-135deg) translate(-50%);`}
-      ${(props) => props.disabled &&
+        ${(props) => props.disabled &&
         `pointer-events: none;
         &:before {
         border-right: 0.12em solid rgba(0, 0, 0, 0.43);
