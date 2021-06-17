@@ -124,12 +124,12 @@ const Gallery = () => {
               <MainImage>
                 <LazyLoadImage
                   key={items[indexId].name}
-                  onLoad={handleLoaded}
+              
                   width="580"
                   height="580"
                   alt={items[indexId].name}
                   src={items[indexId].source}
-                  visibleByDefault={true}
+                
                   onClick={onShowDetails}
                   effect="opacity"
                 />

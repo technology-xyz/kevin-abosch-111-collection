@@ -10,32 +10,39 @@ import {
 import { useHistory } from "react-router";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import LoadingKoi from '../../components/LoadingKoi'
-
+const itemsPerPage = 50
 const Collection = ({ scrollPosition }) => {
   const { contents } = useContext(DataContext);
   const history = useHistory();
-
+  const [currentPage, setCurrentPage] = useState(22)
   const [imgsLoaded, setImgsLoaded] = useState(false);
+
+  const indexOfLastPost = currentPage * itemsPerPage;
+  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+  const currentPosts = contents.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
     const loadImage = (image) => {
       return new Promise((resolve, reject) => {
         const loadImg = new Image();
         loadImg.src = image.source;
-        // wait 2 seconds to simulate loading time
+
         loadImg.onload = () =>
           setTimeout(() => {
             resolve(image.source);
-          }, 2000);
-
+          }, 3000);
+          
         loadImg.onerror = (err) => reject(err);
       });
     };
 
-    Promise.all(contents.slice(0, 16).map((image) => loadImage(image)))
+    Promise.all(currentPosts.map((image) => loadImage(image)))
       .then(() => setImgsLoaded(true))
       .catch((err) => console.log("Failed to load images", err));
-  }, [contents]);
+  }, [currentPosts]);
+
+  
+
   return (
     <MetaWrapper>
       <CollectionWrapper>
@@ -44,18 +51,19 @@ const Collection = ({ scrollPosition }) => {
             <h2>
               1111
             </h2>
-            {contents.map((pic, id) => {
+            {currentPosts.map((pic) => {
               return (
                 <LazyLoadImage
                   onClick={() =>
-                    history.push(`/gallery/${parseInt(id) + 1}/details`)
+                    history.push(`/gallery/${parseInt(pic.id) + 1}/details`)
                   }
-                  visibleByDefault={id < 17}
+                  placeholder={<LoadingKoi/>}
                   scrollPosition={scrollPosition}
+                  visibleByDefault={true}
                   effect="opacity"
                   src={pic.source}
                   alt={pic.name}
-                  threshold="300"
+                  threshold="400"
                   width="120"
                   height="120"
                   key={pic.name}
@@ -66,6 +74,7 @@ const Collection = ({ scrollPosition }) => {
         ) : (
           <LoadingKoi/>
         )}
+
       </CollectionWrapper>
     </MetaWrapper>
   );

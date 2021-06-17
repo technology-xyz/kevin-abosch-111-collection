@@ -29,6 +29,7 @@ function App() {
     if (!loading) {
       const nftArray = [];
       let source = "";
+      let id = 0
       for (const [key, value] of Object.entries(data)) {
         const [name, extension] = key.split(".");
 
@@ -38,7 +39,9 @@ function App() {
             source: `${preUrl}${source}?t=${Math.random() * 999999}`,
             json: `${preUrl}${value}?t=${Math.random() * 999999}`,
             txId: source,
+            id:id
           });
+          id++
         } else {
           source = value
         }
