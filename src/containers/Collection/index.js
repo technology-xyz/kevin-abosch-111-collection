@@ -3,6 +3,7 @@ import { CollectionWrapper, Grid, Loading } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
 import "react-lazy-load-image-component/src/effects/opacity.css";
 import { Logo } from "../../assets/images";
+import Pagination from "./pagination"
 import {
   LazyLoadImage,
   trackWindowScroll,
@@ -14,7 +15,7 @@ const itemsPerPage = 50
 const Collection = ({ scrollPosition }) => {
   const { contents } = useContext(DataContext);
   const history = useHistory();
-  const [currentPage, setCurrentPage] = useState(22)
+  const [currentPage, setCurrentPage] = useState(23)
   const [imgsLoaded, setImgsLoaded] = useState(false);
 
   const indexOfLastPost = currentPage * itemsPerPage;
@@ -74,6 +75,13 @@ const Collection = ({ scrollPosition }) => {
         ) : (
           <LoadingKoi/>
         )}
+        <Pagination
+            currentPage={currentPage}
+            totalCount={contents.length}
+            pageSize={itemsPerPage}
+            onPageChange={page => setCurrentPage(page)}
+          />
+       
 
       </CollectionWrapper>
     </MetaWrapper>
