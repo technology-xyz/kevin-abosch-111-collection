@@ -41,6 +41,7 @@ const Gallery = () => {
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
 
   const getKoi = async (txId) => {
+    
     const Ktools = new Kcommon.Common();
     try {
       let nftRewards = await Ktools.getNftReward(txId);
@@ -124,12 +125,10 @@ const Gallery = () => {
               <MainImage>
                 <LazyLoadImage
                   key={items[indexId].name}
-              
                   width="580"
                   height="580"
                   alt={items[indexId].name}
                   src={items[indexId].source}
-                
                   onClick={onShowDetails}
                   effect="opacity"
                 />

@@ -8,21 +8,28 @@ import {
   LazyLoadImage,
   trackWindowScroll,
 } from "react-lazy-load-image-component";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import LoadingKoi from '../../components/LoadingKoi'
-const itemsPerPage = 50
+const itemsPerPage = 24
+
 const Collection = ({ scrollPosition }) => {
   const { contents } = useContext(DataContext);
   const history = useHistory();
-  const [currentPage, setCurrentPage] = useState(23)
-  const [imgsLoaded, setImgsLoaded] = useState(false);
-
+  const [currentPage, setCurrentPage] = useState(1)
+  const [imgsLoaded, setImgsLoaded] = useState(true);
+  const [loaded, setLoaded] = useState([Array(itemsPerPage).fill(false)])
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = contents.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+    const nextPageEnd = (currentPage + 1 * itemsPerPage)
+    const nextPageStart = (nextPageEnd - itemsPerPage)
+
+    const nextPage = contents.slice(nextPageStart, nextPageEnd);
+
     const loadImage = (image) => {
       return new Promise((resolve, reject) => {
         const loadImg = new Image();
@@ -38,11 +45,15 @@ const Collection = ({ scrollPosition }) => {
     };
 
     Promise.all(currentPosts.map((image) => loadImage(image)))
-      .then(() => setImgsLoaded(true))
-      .catch((err) => console.log("Failed to load images", err));
+    Promise.all(nextPage.map((image) => loadImage(image)))
+   
   }, [currentPosts]);
 
-  
+
+  const handleAfterLoad = (i) => {
+    console.log(i)
+    loaded[i] = true
+  }
 
   return (
     <MetaWrapper>
@@ -52,15 +63,16 @@ const Collection = ({ scrollPosition }) => {
             <h2>
               1111
             </h2>
-            {currentPosts.map((pic) => {
+            {currentPosts.map((pic,i) => {
               return (
-                <LazyLoadImage
+                <>
+                <img
                   onClick={() =>
                     history.push(`/gallery/${parseInt(pic.id) + 1}/details`)
                   }
-                  placeholder={<LoadingKoi/>}
-                  scrollPosition={scrollPosition}
-                  visibleByDefault={true}
+                 
+                  onLoad={handleAfterLoad(i)}
+      
                   effect="opacity"
                   src={pic.source}
                   alt={pic.name}
@@ -68,7 +80,10 @@ const Collection = ({ scrollPosition }) => {
                   width="120"
                   height="120"
                   key={pic.name}
-                />
+                /> 
+                {!loaded[i] && <LoadingKoi/>}  
+            
+                </>
               );
             })}
           </Grid>
@@ -80,6 +95,7 @@ const Collection = ({ scrollPosition }) => {
             totalCount={contents.length}
             pageSize={itemsPerPage}
             onPageChange={page => setCurrentPage(page)}
+            selected={currentPage}
           />
        
 
