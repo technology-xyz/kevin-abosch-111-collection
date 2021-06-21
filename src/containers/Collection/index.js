@@ -14,6 +14,7 @@ import LoadingKoi from '../../components/LoadingKoi'
 const itemsPerPage = 24
 
 const Collection = ({ scrollPosition }) => {
+  
   const { contents } = useContext(DataContext);
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1)

@@ -21,7 +21,8 @@ const EvolveModal = () => {
   const { address } = queryString.parse(history.location.search);
   const [showAlert, setShowAlert] = useState(false);
   const [errMessage, setErrMessage] = useState(false);
-    const [userName, setUserName] = useState("")
+  const [userName, setUserName] = useState("");
+  
   const { setModalOpen, addressAr, keyAr, addressEth, setAddressEth } =
     useContext(DataContext);
 
@@ -69,8 +70,6 @@ const EvolveModal = () => {
     }
   }, [history.location.pathname]);
 
-
-
   function redeem(payload) {
     console.log("payload......", payload);
     axios
@@ -103,8 +102,6 @@ const EvolveModal = () => {
     //   })
   };
 
-  
-
   const checkKevinNFT = (nfts = []) => {
     for (var i = 0; i < nfts.length; i++) {
       if (
@@ -122,9 +119,6 @@ const EvolveModal = () => {
     const params = {
       from: addressAr,
       to: "0xd0000000000",
-      gas: "0x76c0", // 30400
-      gasPrice: "0x9184e72a000", // 10000000000000
-      value: "0x9184e72a", // 2441406250
       data: iskevinNft,
     };
 
@@ -134,16 +128,18 @@ const EvolveModal = () => {
         params,
       })
       .then((result) => {
+          //verify burn and send to server for verification.
+          
         console.log(result);
       })
       .catch((error) => {
-        // If the request fails, the Promise will reject with an error.
+        throw(error)
       });
   };
 
   const onChange = (e) => {
-      setUserName(e.target.value)
-  }
+    setUserName(e.target.value);
+  };
   const onExit = () => {
     setModalOpen(false);
   };
@@ -191,7 +187,7 @@ const EvolveModal = () => {
           top content registered with Koi.
         </p>
         <label>
-          Username: <input value={userName} onChange={onChange}/>
+          Username: <input value={userName} onChange={onChange} />
         </label>
         <ActionButton>Add Username</ActionButton>
       </Modal>

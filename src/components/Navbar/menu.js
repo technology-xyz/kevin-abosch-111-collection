@@ -26,7 +26,7 @@ const Menu = () => {
           <Nlink to="/about">About 1111</Nlink>
 
           <Nlink to={`/gallery/${genRand()}`}>Random</Nlink>
-          {/* <Elink onClick={onEvolve}>
+          <Elink onClick={onEvolve}>
             Evolve my NFT
             <EvolveTooltip>git 
               <p>
@@ -46,7 +46,7 @@ const Menu = () => {
                 Connect Wallet
               </div>
             </EvolveTooltip>
-          </Elink> */}
+          </Elink>
         </Nav>
         <KoiLink href="openkoi.com" target="_blank" rel="noopener noreferrer">
           <svg width="28" height="20" viewBox="0 0 28 20">
