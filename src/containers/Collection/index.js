@@ -51,10 +51,7 @@ const Collection = ({ scrollPosition }) => {
   }, [currentPosts]);
 
 
-  const handleAfterLoad = (i) => {
-    console.log(i)
-    loaded[i] = true
-  }
+  
 
   return (
     <MetaWrapper>
@@ -67,13 +64,11 @@ const Collection = ({ scrollPosition }) => {
             {currentPosts.map((pic,i) => {
               return (
                 <>
-                <img
+                <LazyLoadImage
                   onClick={() =>
                     history.push(`/gallery/${parseInt(pic.id) + 1}/details`)
                   }
-                 
-                  onLoad={handleAfterLoad(i)}
-      
+                  visibleByDefault={i < 9}
                   effect="opacity"
                   src={pic.source}
                   alt={pic.name}
@@ -82,7 +77,7 @@ const Collection = ({ scrollPosition }) => {
                   height="120"
                   key={pic.name}
                 /> 
-                {!loaded[i] && <LoadingKoi/>}  
+              
             
                 </>
               );
