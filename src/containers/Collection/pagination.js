@@ -69,6 +69,7 @@ const Pagination = (props) => {
 const PaginationContainer = styled.ul`
   display: flex;
   list-style-type: none;
+  margin:8px;
 `;
 
 const PaginationItem = styled.li`
