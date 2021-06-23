@@ -15,6 +15,7 @@ function DataContextContainer(props) {
   const [balanceKoi, setBalanceKoi] = useLocalStorage("koi-balanceKoi", null);
   const [balanceAr, setBalanceAr] = useLocalStorage("koi-balanceAr", null);
   const [contents, setContents] = useState([]);
+  const [kevinNft, setKevinNft] = useState([]);
   const [totalViewCt, setTotalViewCt] = useLocalStorage("koi-totalViewCt", 0);
   const [totalKoiCt, setTotalKoiCt] = useLocalStorage("koi-totalKoiCt", 0);
 
@@ -43,6 +44,8 @@ function DataContextContainer(props) {
         setTotalViewCt,
         totalKoiCt,
         setTotalKoiCt,
+        kevinNft,
+        setKevinNft
       }}
     >
       {props.children}

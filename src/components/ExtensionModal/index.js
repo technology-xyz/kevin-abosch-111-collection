@@ -10,7 +10,7 @@ import {
   ActionButton,
 } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
-import { alertTimeout } from "config";
+
 import axios from "../../service/customAxios";
 import Web3 from "web3";
 import * as Kcommon from "@_koi/sdk/common";
@@ -19,56 +19,12 @@ const EvolveModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [showAlert, setShowAlert] = useState(false);
-  const [errMessage, setErrMessage] = useState(false);
-  const [userName, setUserName] = useState("");
   
-  const { setModalOpen, addressAr, keyAr, addressEth, setAddressEth } =
+  const [userName, setUserName] = useState("");
+
+  const { setModalOpen, addressAr, iskevinNft } =
     useContext(DataContext);
 
-  const [iskevinNft, setIskevinNft] = useState(null);
-
-  useEffect(() => {
-    if (window.ethereum) {
-      setIsLoading(true);
-      window.ethereum.send("eth_requestAccounts").then(async (accounts) => {
-        console.log(accounts.result[0]);
-        setAddressEth(accounts.result[0]);
-        const options = {
-          method: "GET",
-        };
-
-        fetch(
-          `https://api.opensea.io/api/v1/assets?owner=${accounts.result[0]}&order_direction=desc&offset=0&limit=20`,
-          options
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then(async (data) => {
-            console.log(data.assets.length);
-            if (data.assets.length === 0) {
-              show_alert(
-                `Our school of koi couldn't find anything on OpenSea NFTs associated with that wallet[${accounts.result[0]}].`
-              );
-            }
-
-            if (checkKevinNFT(data.assets)) {
-            }
-          })
-
-          .catch((err) => {
-            console.log(err);
-            show_alert(
-              `Our school of koi couldn't find anything on OpenSea NFTs associated with that wallet[${address}].`
-            );
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
-      });
-    }
-  }, [history.location.pathname]);
 
   function redeem(payload) {
     console.log("payload......", payload);
@@ -83,38 +39,31 @@ const EvolveModal = () => {
       });
   }
 
-  const show_alert = (message = "") => {
-    setShowAlert(true);
-    setErrMessage(message);
-    setTimeout(() => {
-      setShowAlert(false);
-      setErrMessage("");
-    }, alertTimeout);
-  };
-
+ 
   const sign = (address) => {
-    // window.koiWallet.sign(addressAr, accounts[0]).then((res)=>{
-    //     payload.signature = res;
-    //     console.log('signature', res);
-    //     console.log('signature', payload);
-    //      redeem(payload);
-    //     // Dong, here we need to submit the payload to server(koi.server), i will provide the api
-    //   })
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    if (addressAr) {
+      var payload = {
+        ownerArAddress: addressAr,
+      };
+    } else {
+   
+    }
+
+    window.ethereum.enable().then(async (accounts) =>
+      web3.eth.personal.sign(addressAr, accounts[0]).then((res) => {
+        payload.signature = res;
+        console.log('signature', res);
+        console.log('signature', payload);
+        redeem(payload);
+
+        // Dong, here we need to submit the payload to server(koi.server), i will provide the api 
+
+      })
+    );
   };
 
-  const checkKevinNFT = (nfts = []) => {
-    for (var i = 0; i < nfts.length; i++) {
-      if (
-        nfts[i].asset_contract.address ===
-        "0x7f72528229f85c99d8843c0317ef91f4a2793edf"
-      ) {
-        // if(nfts[i].asset_contract.address === "0x495f947276749ce646f68ac8c248420045cb7b5e") {
-        console.log(nfts[i].asset_contract.address);
-        setIskevinNft(nfts[i]);
-        return true;
-      }
-    }
-  };
+  
   const onEvolve = () => {
     const params = {
       from: addressAr,
@@ -128,12 +77,12 @@ const EvolveModal = () => {
         params,
       })
       .then((result) => {
-          //verify burn and send to server for verification.
-          
+        //verify burn and send to server for verification.
+        
         console.log(result);
       })
       .catch((error) => {
-        throw(error)
+        throw (error)
       });
   };
 
