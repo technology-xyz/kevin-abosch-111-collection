@@ -9,6 +9,7 @@ import {
   BackArrow,
   ActionButton,
 } from "./style";
+
 import { DataContext } from "contexts/DataContextContainer";
 
 import axios from "../../service/customAxios";
@@ -16,7 +17,7 @@ import Web3 from "web3";
 import * as Kcommon from "@_koi/sdk/common";
 
 const EvolveModal = () => {
-  const [isLoading, setIsLoading] = useState(false);
+
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
   
@@ -33,6 +34,7 @@ const EvolveModal = () => {
       .then((res) => {
         console.log(`statusCode: ${res.statusCode}`);
         console.log(res);
+        //Register with Koi
       })
       .catch((error) => {
         //   console.error(error)
@@ -56,8 +58,6 @@ const EvolveModal = () => {
         console.log('signature', res);
         console.log('signature', payload);
         redeem(payload);
-
-        // Dong, here we need to submit the payload to server(koi.server), i will provide the api 
 
       })
     );
@@ -105,7 +105,7 @@ const EvolveModal = () => {
       </Modal> */}
 
       <Modal>
-        <p>{showAlert && errMessage}</p>
+       
         <h3>Let’s get started</h3>
         <p>
           Once you’ve downloaded Koi’s secure extension, click Evolve to
