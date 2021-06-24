@@ -15,6 +15,7 @@ import {
   LeftImg,
   RightImg,
   PlaceHolder,
+  EvolveButton
 } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/opacity.css";
@@ -31,7 +32,7 @@ const Gallery = () => {
   const [items, setItems] = useState([]);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
-  const { contents } = useContext(DataContext);
+  const { contents, kevinNft, setModaOpen } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
   const mobile = window.matchMedia("(max-width: 768px)").matches;
@@ -141,6 +142,7 @@ const Gallery = () => {
                   <img src={Logo} alt="koi-logo" />
                 </span>
                 {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} */}
+                {kevinNft && <EvolveButton onClick={()=>{setModaOpen(true)}}>EVOLVE</EvolveButton>}
               </ImageMenu>
 
               {!matchMain && (
@@ -160,13 +162,16 @@ const Gallery = () => {
                     >
                       Collect
                     </DetailLink>
-                    <BidNow
+                    {kevinNft?
+                    <EvolveButton onClick={()=>{setModaOpen(true)}}>EVOLVE</EvolveButton>
+                    :  <BidNow
                       href={`https://space.verto.exchange/asset/${items[indexId].txId}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Bid Now
-                    </BidNow>
+                    </BidNow>}
+                   
                   </ImageMenu>
                   <Details
                     item={items[indexId]}

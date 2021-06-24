@@ -5,7 +5,7 @@ export const MenuContainer = styled.div`
   display: flex;
 
   width: 100vw;
-  min-height:100vh;
+  min-height: 100vh;
 
   /* overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")}; */
   justify-content: center;
@@ -20,7 +20,17 @@ export const MenuContainer = styled.div`
     justify-content: space-between;
   }
 `;
-
+export const EvolveButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 17px;
+  background-color: var(--yellow);
+  border: 0;
+  width: 170px;
+  height: 32px;
+`;
 export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -32,7 +42,7 @@ export const ImageWrapper = styled.div`
   @media (max-width: 769px) {
     img {
       width: 100%;
-      height:auto;
+      height: auto;
     }
 
     width: 92%;
@@ -41,10 +51,8 @@ export const ImageWrapper = styled.div`
 `;
 
 export const MainImage = styled.div`
- 
-
   img {
-    background-color:black;
+    background-color: black;
     &:hover {
       cursor: pointer;
     }
