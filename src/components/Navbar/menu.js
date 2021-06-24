@@ -1,4 +1,4 @@
-import React, {useContext}  from "react";
+import React, {useContext, useState}  from "react";
 import { Logo } from "../../assets/images";
 import {
   MenuWrapper,
@@ -10,14 +10,83 @@ import {
   Elink
 } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
-
+import { alertTimeout } from "config";
+import { useHistory } from "react-router-dom";
 const Menu = () => {
-  const { modalOpen, setModalOpen} = useContext(DataContext);
+  const history = useHistory()
+  const { modalOpen, setModalOpen, setAddressEth, setIskevinNft} = useContext(DataContext);
+  const [showAlert, setShowAlert] = useState(false);
+  const [errMessage, setErrMessage] = useState(false);
+
+
   const genRand = () => Math.floor(Math.random() * 1001);
+
   const onEvolve = () => {
-    window.ethereum.request({ method: 'eth_requestAccounts' });
+    window.ethereum.request({ method: 'eth_requestAccounts' }).then(async (accounts) => {
+      console.log(accounts[0]);
+      setAddressEth(accounts[0]);
+      const options = {
+        method: "GET",
+      };
+
+      fetch(
+        `https://api.opensea.io/api/v1/assets?owner=${accounts[0]}&order_direction=desc&offset=0&limit=20`,
+        options
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then(async (data) => {
+          console.log(data.assets.length);
+          if (data.assets.length === 0) {
+            show_alert(
+              `Our school of koi couldn't find anything on OpenSea NFTs associated with that wallet[${accounts[0]}].`
+            );
+          }
+
+          if (checkKevinNFT(data.assets)) {
+              modalOpen(true)
+          }
+          else {
+            console.log('you dont have any 1111 NFTS')
+          }
+        })
+
+        .catch((err) => {
+          console.log(err);
+          
+        })
+        .finally(() => {
+          
+        });
+    });
+    
     setModalOpen(true)
   }
+  const show_alert = (message = "") => {
+    setShowAlert(true);
+    setErrMessage(message);
+    setTimeout(() => {
+      setShowAlert(false);
+      setErrMessage("");
+    }, alertTimeout);
+  };
+
+  const checkKevinNFT = (nfts = []) => {
+    for (var i = 0; i < nfts.length; i++) {
+      if (
+        nfts[i].asset_contract.address ===
+        "0x495f947276749ce646f68ac8c248420045cb7b5e"
+      ) {
+        
+        console.log(nfts[i].asset_contract.address);
+        console.log(nfts[i])
+        // route to nft with name,need to verify what name looks like
+        setIskevinNft(nfts[i]);
+        return true;
+      }
+    }
+  };
   return (
     <MenuWrapper>
       <SideContent>

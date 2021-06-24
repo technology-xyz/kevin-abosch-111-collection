@@ -24,18 +24,24 @@ const Collection = ({ scrollPosition }) => {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = contents.slice(indexOfFirstPost, indexOfLastPost);
 
+
+
+
+  const createPage = (pageNum) => {
+    const pageEnd = (currentPage + pageNum * itemsPerPage)
+    const pageStart = (pageEnd - itemsPerPage)
+    const page = contents.slice(pageStart, pageEnd);
+    return page
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0)
-    const nextPageEnd = (currentPage + 1 * itemsPerPage)
-    const nextPageStart = (nextPageEnd - itemsPerPage)
-
-    const nextPage = contents.slice(nextPageStart, nextPageEnd);
+    const nextPage = createPage(1)
 
     const loadImage = (image) => {
       return new Promise((resolve, reject) => {
         const loadImg = new Image();
         loadImg.src = image.source;
-
         loadImg.onload = () =>
           setTimeout(() => {
             resolve(image.source);
@@ -49,9 +55,6 @@ const Collection = ({ scrollPosition }) => {
     Promise.all(nextPage.map((image) => loadImage(image)))
    
   }, [currentPosts]);
-
-
-  
 
   return (
     <MetaWrapper>

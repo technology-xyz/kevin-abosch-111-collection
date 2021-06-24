@@ -12,6 +12,7 @@ import { MenuIcon, Logo } from "../../assets/images";
 import Menu from "./menu";
 import { matchPath, useLocation } from "react-router";
 import BackArrow from "../BackArrow"
+
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(false);
   const showMenu = () => {
@@ -22,6 +23,7 @@ const Navbar = () => {
   const matchAbout = matchPath(pathname, { path: "/about", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
+  
   return (
     <NavigationWrapper>
       <Bar>

@@ -20,7 +20,7 @@ const EvolveModal = () => {
 
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  
+  const [modalStep, setModalStep] = useState(2)
   const [userName, setUserName] = useState("");
 
   const { setModalOpen, addressAr, iskevinNft } =
@@ -41,7 +41,7 @@ const EvolveModal = () => {
       });
   }
 
- 
+
   const sign = (address) => {
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
     if (addressAr) {
@@ -49,11 +49,11 @@ const EvolveModal = () => {
         ownerArAddress: addressAr,
       };
     } else {
-   
+      
     }
 
     window.ethereum.enable().then(async (accounts) =>
-      web3.eth.personal.sign(addressAr, accounts[0]).then((res) => {
+      web3.eth.personal.sign(address, accounts[0]).then((res) => {
         payload.signature = res;
         console.log('signature', res);
         console.log('signature', payload);
@@ -63,27 +63,28 @@ const EvolveModal = () => {
     );
   };
 
-  
-  const onEvolve = () => {
-    const params = {
-      from: addressAr,
-      to: "0xd0000000000",
-      data: iskevinNft,
-    };
 
-    window.ethereum
-      .request({
-        method: "eth_sendTransaction",
-        params,
-      })
-      .then((result) => {
-        //verify burn and send to server for verification.
-        
-        console.log(result);
-      })
-      .catch((error) => {
-        throw (error)
-      });
+  const onEvolve = () => {
+    // const params = {
+    //   from: addressAr,
+    //   to: "0xd0000000000",
+    //   data: iskevinNft,
+    // };
+
+    // window.ethereum
+    //   .request({
+    //     method: "eth_sendTransaction",
+    //     params,
+    //   })
+    //   .then((result) => {
+    //     //verify burn and send to server for verification.
+
+    //     console.log(result);
+    //   })
+    //   .catch((error) => {
+    //     throw (error)
+    //   });
+    sign(address)
   };
 
   const onChange = (e) => {
@@ -94,7 +95,7 @@ const EvolveModal = () => {
   };
   return (
     <ModalWrapper>
-      {/* <Modal>
+      {modalStep === 1 && <Modal>
         <p>Need a Koi & Arweave compatible wallet?</p>
         <p>
           Use the Koi browser extension. Create, then securely manage your
@@ -102,19 +103,19 @@ const EvolveModal = () => {
           each one. It’s simple and easy to get started.
         </p>
         <button>Get Koi Extension</button>
-      </Modal> */}
+      </Modal>}
 
-      <Modal>
-       
+      {modalStep === 2 && <Modal>
+
         <h3>Let’s get started</h3>
         <p>
           Once you’ve downloaded Koi’s secure extension, click Evolve to
           register your 1111 content and start earning rewards.
         </p>
         <ActionButton onClick={onEvolve}>Evolve</ActionButton>
-      </Modal>
+      </Modal>}
 
-      <Modal>
+      {modalStep === 3 && <Modal>
         <BackArrow>
           <svg width="24" height="20" viewBox="0 0 24 20" fill="none">
             <path
@@ -139,9 +140,11 @@ const EvolveModal = () => {
           Username: <input value={userName} onChange={onChange} />
         </label>
         <ActionButton>Add Username</ActionButton>
-      </Modal>
+      </Modal>}
 
-      <Modal>
+
+
+      {modalStep === 4 && <Modal>
         <BackArrow>
           <svg width="24" height="20" viewBox="0 0 24 20" fill="none">
             <path
@@ -163,9 +166,9 @@ const EvolveModal = () => {
         </p>
         <p>Username: {userName}</p>
         <ActionButton>Confirm</ActionButton>
-      </Modal>
+      </Modal>}
 
-      <Modal>
+      {modalStep === 5 && <Modal>
         <h3>Succes</h3>
 
         <Exit onClick={onExit}>
@@ -185,7 +188,8 @@ const EvolveModal = () => {
           earning.
         </p>
         <ActionButton>Share</ActionButton>
-      </Modal>
+      </Modal>}
+
     </ModalWrapper>
   );
 };
