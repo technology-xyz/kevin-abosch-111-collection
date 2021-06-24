@@ -20,10 +20,10 @@ const EvolveModal = () => {
 
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [modalStep, setModalStep] = useState(2)
+  const [modalStep, setModalStep] = useState(3)
   const [userName, setUserName] = useState("");
 
-  const { setModalOpen, addressAr, iskevinNft } =
+  const { setModalOpen, addressAr, kevinNft } =
     useContext(DataContext);
 
 

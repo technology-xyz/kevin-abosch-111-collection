@@ -14,7 +14,7 @@ import { alertTimeout } from "config";
 import { useHistory } from "react-router-dom";
 const Menu = () => {
   const history = useHistory()
-  const { modalOpen, setModalOpen, setAddressEth, setIskevinNft} = useContext(DataContext);
+  const { modalOpen, setModalOpen, setAddressEth, setKevinNft} = useContext(DataContext);
   const [showAlert, setShowAlert] = useState(false);
   const [errMessage, setErrMessage] = useState(false);
 
@@ -45,7 +45,7 @@ const Menu = () => {
           }
 
           if (checkKevinNFT(data.assets)) {
-              modalOpen(true)
+            console.log("trade")
           }
           else {
             console.log('you dont have any 1111 NFTS')
@@ -61,7 +61,7 @@ const Menu = () => {
         });
     });
     
-    setModalOpen(true)
+
   }
   const show_alert = (message = "") => {
     setShowAlert(true);
@@ -78,11 +78,19 @@ const Menu = () => {
         nfts[i].asset_contract.address ===
         "0x495f947276749ce646f68ac8c248420045cb7b5e"
       ) {
-        
+        const MOCK_NAME ="1111 #0245"
+        const extractName = (name) => {
+            
+            let start = name.indexOf('#')
+            let route = parseInt(name.slice(start +1),10)
+            return route
+        }
+        const route = extractName(MOCK_NAME)
+        history.push(`/gallery/${route}/`)
         console.log(nfts[i].asset_contract.address);
-        console.log(nfts[i])
+        console.log(nfts[i].name)
         // route to nft with name,need to verify what name looks like
-        setIskevinNft(nfts[i]);
+        setKevinNft(nfts[i]);
         return true;
       }
     }
