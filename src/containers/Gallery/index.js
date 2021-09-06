@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Logo } from "../../assets/images";
+// import { Logo } from "../../assets/images";
 import Details from "./details";
 import BottomBar from "./bottom";
 import LoadingKoi from "../../components/LoadingKoi";
@@ -23,12 +23,13 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
 
-const PlaceHoler = () => {};
+// const PlaceHoler = () => {};
 
 const Gallery = () => {
   const { id } = useParams();
   const history = useHistory();
   const { pathname } = useLocation();
+  const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
@@ -62,6 +63,7 @@ const Gallery = () => {
         console.log(err);
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
 
   const loadImage = (image) => {
@@ -78,6 +80,7 @@ const Gallery = () => {
   };
 
   const up = () => {
+    setLoading(true)
     loadImage(items[indexId + 3])
       .then(() => console.log("loaded"))
       .catch((err) => console.log("Failed to load images", err));
@@ -120,6 +123,7 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
+        {loading && <LoadingKoi />}
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>
