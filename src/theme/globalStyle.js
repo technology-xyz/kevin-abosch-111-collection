@@ -294,7 +294,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
   .custom-notification-error{
-      background-color: ${colors.errorBackground};
+      background-color: white; // ${colors.errorBackground};
   }
   .custom-notification-success{
       background-color: ${colors.successBackground};

@@ -123,7 +123,7 @@ const Gallery = () => {
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
-        {loading && <LoadingKoi />}
+        {/* {loading && <LoadingKoi />} */}
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId].name}>

@@ -11,54 +11,59 @@ import {
 import { DataContext } from "contexts/DataContextContainer";
 import { alertTimeout } from "config";
 import { useHistory } from "react-router-dom";
+
 const Menu = () => {
   const history = useHistory()
   const { modalOpen, setModalOpen, setAddressEth, setKevinNft} = useContext(DataContext);
   const [showAlert, setShowAlert] = useState(false);
   const [errMessage, setErrMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
-
 
   const genRand = () => Math.floor(Math.random() * 1001);
 
   const onEvolve = () => {
-    setLoading(true)
+    if (window.ethereum) {
+      window.ethereum.enable().then(async (accounts) => {
+          console.log(accounts[0])
+          let address = accounts[0]
+          fetch(
+            // `https://api.opensea.io/api/v1/assets?owner=0xd703accc62251189a67106f22d54cd470494de40&order_direction=desc&offset=0&limit=20`,
+            // `https://api.opensea.io/api/v1/assets?owner=0x8dea9139b0e84d5cc2933072f5ba43c2b043f6db&order_direction=desc&offset=0&limit=20`,
+            `https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=0&limit=20`,
+            { method: "GET"}
+          )
+          .then((response) => {
+            return response.json();
+          })
+          .then(async (data) => {
+            console.log({ data });
+            if (data.assets.length === 0) {
+              show_alert(
+                `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${address}].`
+              );
+            }
 
-    window.ethereum.enable().then(async (accounts) => {
-        console.log(accounts[0])
-        let address = accounts[0]
-        fetch(
-          // `https://api.opensea.io/api/v1/assets?owner=0xd703accc62251189a67106f22d54cd470494de40&order_direction=desc&offset=0&limit=20`,
-          // `https://api.opensea.io/api/v1/assets?owner=0x8dea9139b0e84d5cc2933072f5ba43c2b043f6db&order_direction=desc&offset=0&limit=20`,
-          `https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=0&limit=20`,
-          options
-        )
-        .then((response) => {
-          return response.json();
-        })
-        .then(async (data) => {
-          console.log({ data });
-          if (data.assets.length === 0) {
+            // setOpenSeas(data.assets);
+            // checkKevinNFT(data.assets);
+            console.log(data.assets);
+          })
+          .catch((err) => {
+            console.log(err);
             show_alert(
               `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${address}].`
             );
-          }
-
-          // setOpenSeas(data.assets);
-          // checkKevinNFT(data.assets);
-          console.log(data.assets);
-        })
-        .catch((err) => {
-          console.log(err);
-          show_alert(
-            `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${address}].`
-          );
-        })
-        .finally(() => {
-          setLoading(false);
-        })
-      }
-    )
+          })
+          .finally(() => {
+          })
+        }
+      )
+    } else {
+      // metamask extension didn't install
+      // show_notification("Please install metamask extension first.", "KOII");
+      setTimeout(() => {
+        let url = "https://metamask.io/download.html";
+        window.open(url, "_blank");
+      }, 1000);
+    }
     
     // window.ethereum.request({ method: 'eth_requestAccounts' }).then(async (accounts) => {
     //   console.log(accounts[0]);
