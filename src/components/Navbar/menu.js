@@ -16,49 +16,88 @@ const Menu = () => {
   const { modalOpen, setModalOpen, setAddressEth, setKevinNft} = useContext(DataContext);
   const [showAlert, setShowAlert] = useState(false);
   const [errMessage, setErrMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   const genRand = () => Math.floor(Math.random() * 1001);
 
   const onEvolve = () => {
-    window.ethereum.request({ method: 'eth_requestAccounts' }).then(async (accounts) => {
-      console.log(accounts[0]);
-      setAddressEth(accounts[0]);
-      const options = {
-        method: "GET",
-      };
+    setLoading(true)
 
-      fetch(
-        `https://api.opensea.io/api/v1/assets?owner=${accounts[0]}&order_direction=desc&offset=0&limit=20`,
-        options
-      )
+    window.ethereum.enable().then(async (accounts) => {
+        console.log(accounts[0])
+        let address = accounts[0]
+        fetch(
+          // `https://api.opensea.io/api/v1/assets?owner=0xd703accc62251189a67106f22d54cd470494de40&order_direction=desc&offset=0&limit=20`,
+          // `https://api.opensea.io/api/v1/assets?owner=0x8dea9139b0e84d5cc2933072f5ba43c2b043f6db&order_direction=desc&offset=0&limit=20`,
+          `https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&offset=0&limit=20`,
+          options
+        )
         .then((response) => {
           return response.json();
         })
         .then(async (data) => {
-          console.log(data.assets.length);
+          console.log({ data });
           if (data.assets.length === 0) {
             show_alert(
-              `Our school of koi couldn't find anything on OpenSea NFTs associated with that wallet[${accounts[0]}].`
+              `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${address}].`
             );
           }
 
-          if (checkKevinNFT(data.assets)) {
-            console.log("trade")
-          }
-          else {
-            console.log('you dont have any 1111 NFTS')
-          }
+          // setOpenSeas(data.assets);
+          // checkKevinNFT(data.assets);
+          console.log(data.assets);
         })
-
         .catch((err) => {
           console.log(err);
-          
+          show_alert(
+            `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${address}].`
+          );
         })
         .finally(() => {
+          setLoading(false);
+        })
+      }
+    )
+    
+    // window.ethereum.request({ method: 'eth_requestAccounts' }).then(async (accounts) => {
+    //   console.log(accounts[0]);
+    //   setAddressEth(accounts[0]);
+    //   const options = {
+    //     method: "GET",
+    //   };
+
+    //   fetch(
+    //     `https://api.opensea.io/api/v1/assets?owner=${accounts[0]}&order_direction=desc&offset=0&limit=20`,
+    //     options
+    //   )
+    //     .then((response) => {
+    //       return response.json();
+    //     })
+    //     .then(async (data) => {
+    //       console.log(data.assets.length);
+    //       if (data.assets.length === 0) {
+    //         show_alert(
+    //           `Our school of koi couldn't find anything on OpenSea NFTs associated with that wallet[${accounts[0]}].`
+    //         );
+    //       }
+
+    //       if (checkKevinNFT(data.assets)) {
+    //         console.log("trade")
+    //       }
+    //       else {
+    //         console.log('you dont have any 1111 NFTS')
+    //       }
+    //     })
+
+    //     .catch((err) => {
+    //       console.log(err);
           
-        });
-    });
+    //     })
+    //     .finally(() => {
+          
+    //     });
+    // });
     
 
   }
