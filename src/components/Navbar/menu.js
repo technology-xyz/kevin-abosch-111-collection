@@ -1,5 +1,4 @@
 import React, {useContext, useState}  from "react";
-import { Logo } from "../../assets/images";
 import {
   MenuWrapper,
   SideContent,
