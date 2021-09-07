@@ -65,23 +65,25 @@ function App() {
       <Router  >
        
           <Switch>
-            <DataContextContainer images={items}>
-            
-              <Route
-                exact
-                path="/"
-                render={() => <Redirect to={`/gallery/${genRand()}`} />}
-              />
+            <ModalContextContainer>
+              <DataContextContainer images={items}>
+              
+                <Route
+                  exact
+                  path="/"
+                  render={() => <Redirect to={`/gallery/${genRand()}`} />}
+                />
 
-              <Suspense fallback={<h1>Loading</h1>}>
-                <MyRoute path="/gallery/:id" component={Gallery} />
-              </Suspense>
+                <Suspense fallback={<h1>Loading</h1>}>
+                  <MyRoute path="/gallery/:id" component={Gallery} />
+                </Suspense>
 
-              <MyRoute exact path="/about" component={About} />
-             
+                <MyRoute exact path="/about" component={About} />
+              
 
-              <MyRoute exact path="/collection" component={Collection} />
-            </DataContextContainer>
+                <MyRoute exact path="/collection" component={Collection} />
+              </DataContextContainer>
+            </ModalContextContainer>
             <Route
               exact
               path="/gallery"
