@@ -61,37 +61,30 @@ function App() {
     <div className="App">
       <BasicStyle />
       <GlobalStyle />
- {!isLoading && (
-      <Router  >
-       
+      {!isLoading && (
+        <Router  >
           <Switch>
             <ModalContextContainer>
               <DataContextContainer images={items}>
-              
                 <Route
                   exact
                   path="/"
                   render={() => <Redirect to={`/gallery/${genRand()}`} />}
                 />
-
                 <Suspense fallback={<h1>Loading</h1>}>
                   <MyRoute path="/gallery/:id" component={Gallery} />
                 </Suspense>
-
                 <MyRoute exact path="/about" component={About} />
-              
-
                 <MyRoute exact path="/collection" component={Collection} />
+                <Route
+                  exact
+                  path="/gallery"
+                  render={() => <Redirect to="/gallery/1" />}
+                  />
               </DataContextContainer>
             </ModalContextContainer>
-            <Route
-              exact
-              path="/gallery"
-              render={() => <Redirect to="/gallery/1" />}
-            />
           </Switch>
-       
-      </Router>
+        </Router>
        )}
     </div>
   );

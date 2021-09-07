@@ -5,12 +5,12 @@ export const MenuContainer = styled.div`
   display: flex;
   flex : 1;  
   width: 100vw;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 
   /* overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")}; */
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: #fff; //#000;
   overflow-x: hidden;
   /* position: absolute; */
 
