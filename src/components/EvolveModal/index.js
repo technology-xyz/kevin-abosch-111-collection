@@ -17,18 +17,16 @@ import Web3 from "web3";
 import * as Kcommon from "@_koi/sdk/common";
 
 const EvolveModal = ({
-  hide,
+  hide = () => {},
   initStep = 0,
 }) => {
-
+  console.log({initStep})
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
   const [modalStep, setModalStep] = useState(initStep)
   const [userName, setUserName] = useState("");
 
-  const { setModalOpen, addressAr, kevinNft } =
-    useContext(DataContext);
-
+  const { addressAr, kevinNft } = useContext(DataContext);
 
   function redeem(payload) {
     console.log("payload......", payload);
@@ -43,7 +41,6 @@ const EvolveModal = ({
         //   console.error(error)
       });
   }
-
 
   const sign = (address) => {
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
@@ -65,7 +62,6 @@ const EvolveModal = ({
       })
     );
   };
-
 
   const onEvolve = () => {
     // const params = {
@@ -94,7 +90,7 @@ const EvolveModal = ({
     setUserName(e.target.value);
   };
   const onExit = () => {
-    setModalOpen(false);
+    hide()
   };
   return (
     <ModalWrapper>

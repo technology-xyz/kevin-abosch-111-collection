@@ -69,7 +69,7 @@ const Navbar = () => {
       )}
       </Bar>
       
-      {activeMenu && <Menu />}
+      {activeMenu && <Menu hide={() => setActiveMenu(false)}/>}
     </NavigationWrapper>
   );
 };

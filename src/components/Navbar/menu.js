@@ -13,7 +13,9 @@ import { alertTimeout } from "config";
 import { useHistory } from "react-router-dom";
 import {ModalContext} from 'contexts/ModalContext'
 
-const Menu = () => {
+const Menu = ({
+  hide = () => {}
+}) => {
   const history = useHistory()
   const { modalOpen, setModalOpen, setAddressEth, setKevinNft} = useContext(DataContext);
   const [showAlert, setShowAlert] = useState(false);
@@ -27,9 +29,9 @@ const Menu = () => {
       window.ethereum.enable().then(async (accounts) => {
           console.log(accounts[0])
           let address = accounts[0]
-          show_alert(address)
+          hide()
           setAddressEth(address)
-          setModalInfo({address, step: 0})
+          setModalInfo({address, step: 3})
         }
       )
     } else {
