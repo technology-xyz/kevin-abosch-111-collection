@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     letter-spacing:1px;
   }
   .App {
-    /* height: 100vh; */
+    height: 100vh;
     display: flex;
   }
   .bk-white{

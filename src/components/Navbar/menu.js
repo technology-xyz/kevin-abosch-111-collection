@@ -27,6 +27,8 @@ const Menu = () => {
       window.ethereum.enable().then(async (accounts) => {
           console.log(accounts[0])
           let address = accounts[0]
+          show_alert(address)
+          setAddressEth(address)
           setModalInfo({address, headerText: 'basic'})
           /*
           fetch(
