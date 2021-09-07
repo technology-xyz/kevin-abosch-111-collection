@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
   .App {
     height: 100vh;
+    display: flex;
   }
   .bk-white{
     background: ${colors.white} !important; 

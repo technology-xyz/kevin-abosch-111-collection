@@ -7,7 +7,7 @@ const ModalContext = React.createContext({
 export { ModalContext };
 const ModalContextContainer = (props) => {
   const [modal, setModal] = useState({
-    show: false,
+    show: true,
     type: 'CONTENT', // IMG || CONTENT
     headerText: '',
     bodyText: '',
