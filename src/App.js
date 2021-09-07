@@ -17,6 +17,7 @@ import Collection from "containers/Collection";
 import { preUrl } from "config";
 
 import DataContextContainer from "contexts/DataContextContainer";
+import ModalContextContainer from "contexts/ModalContext";
 
 function App() {
   const genRand = () => Math.floor(Math.random() * 1001);
