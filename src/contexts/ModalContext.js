@@ -3,11 +3,13 @@ import { Modal, Button } from 'antd';
 
 const ModalContext = React.createContext({
   setModalInfo: () => {},
+  onHide: () => {}
 })
 export { ModalContext };
 const ModalContextContainer = (props) => {
   const [modal, setModal] = useState({
     show: false,
+    step: 0,
     type: 'CONTENT', // IMG || CONTENT
     headerText: '',
     bodyText: '',
@@ -20,6 +22,7 @@ const ModalContextContainer = (props) => {
   const onHide = () => {
     setModal({
       show: false,
+      step: 0,
       type: 'basic',
       headerText: '',
       bodyText: '',
@@ -30,12 +33,8 @@ const ModalContextContainer = (props) => {
     <ModalContext.Provider value={{
       modal,
       setModalInfo,
+      onHide
     }}>
-      <Modal title={modal.headerText} className="modal-90w global-modal-container" visible={modal.show} onOk={onHide} onCancel={onHide}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>
       {props.children}
     </ModalContext.Provider>
   );
