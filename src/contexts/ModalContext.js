@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import { Modal, Button } from 'antd';
 
-const GlobalModalContext = React.createContext({
+const ModalContext = React.createContext({
   setModalInfo: () => {},
 })
-export { GlobalModalContext };
-const GlobalModalContextContainer = (props) => {
+export { ModalContext };
+const ModalContextContainer = (props) => {
   const [modal, setModal] = useState({
     show: false,
-    type: 'IMG', // IMG || CONTENT
+    type: 'CONTENT', // IMG || CONTENT
     headerText: '',
     bodyText: '',
     img: '',
@@ -27,17 +27,17 @@ const GlobalModalContextContainer = (props) => {
     })
   }
   return (
-    <GlobalModalContext.Provider value={{
+    <ModalContext.Provider value={{
       modal,
       setModalInfo,
     }}>
-      <Modal title="Basic Modal" className="modal-90w global-modal-container" visible={modal.show} onOk={onHide} onCancel={onHide}>
+      <Modal title={modal.headerText} className="modal-90w global-modal-container" visible={modal.show} onOk={onHide} onCancel={onHide}>
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Modal>
       {props.children}
-    </GlobalModalContext.Provider>
+    </ModalContext.Provider>
   );
 }
-export default GlobalModalContextContainer
+export default ModalContextContainer
