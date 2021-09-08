@@ -15,14 +15,28 @@ export const Modal = styled.div`
   background-color: black;
   position: relative;
   color: #fff;
-  width: 400px;
+  &.small{
+    max-width: 460px;
+  }
+  max-width: 910px;
   text-align: left;
   align-items: center;
   padding: 8px;
   border: 2px solid #f5b900;
-    h3 {
-        font-size: 17px;
-    }
+   
+  h3{
+    /* Connect your Ethereum wallet & Verify your NFT */
+    font-size: 24px;
+    line-height: 30px;
+  }
+  .lbl-cap1{
+    font-size: 15px;
+    line-height: 19px;
+  }
+  .lbl-cap2{
+    font-size: 17px;
+    line-height: 22px;
+  }
   label {
     display: flex;
     justify-content: space-between;
@@ -42,7 +56,7 @@ export const Exit = styled.button`
   border: 0;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 5px;
 `;
 export const BackArrow = styled.button`
   background-color: transparent;
@@ -66,13 +80,14 @@ height:32px;
 `
 
 
-export const ArLink = styled.a`
-display:flex;
-justify-content: center;
-align-items: center;
-border: 1px solid var(--yellow);
-font-size: 15px;
-font-style:italic;
-padding: 4px;
-width:150px;
+export const NFTStageArea = styled.div`
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  .img-area{
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    background-color: var(--yellow);
+  }
 `;
