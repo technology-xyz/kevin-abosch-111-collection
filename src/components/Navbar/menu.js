@@ -31,7 +31,7 @@ const Menu = ({
           let address = accounts[0]
           hide()
           setAddressEth(address)
-          setModalInfo({address, step: 'show_nft'}) // connect_opensea
+          setModalInfo({address, step: 'connect_opensea'}) // connect_opensea || show_nft
         }
       )
     } else {

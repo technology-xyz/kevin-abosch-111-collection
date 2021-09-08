@@ -1,28 +1,57 @@
 import { 
-    NFTStage1,
-    NFTStage2,
-    NFTStage3,
-    NFTStage4,
-    NFTStage5,
+    ItemTemp
 } from "assets/images";
 import React from "react";
 import {
-    NFTStageArea,
-    ActionButton
+    ActionButton,
+    SliderArea
 } from "./style";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 const ShowOpensea = ({
     back = () => {},
     kevinNft = []
 }) => {
+    const showShortString = (content, str_length) => {
+        let new_content_name = content;
+        if (content.length > str_length)
+          new_content_name = new_content_name.substr(0, str_length) + "...";
+        return new_content_name;
+    };
+
     return (
     <>
         <h3 className="m-t-5 f-bold">The Real Deal</h3>
-        <div className="lbl-cap1 m-t-25">
-            {kevinNft.map( k => {
-                return (<p>{k.asset_contract.address}</p>)
-            })}
-        </div>
+        <SliderArea className="m-t-5">
+            <div className="flex1 card-slider">
+                <Carousel
+                    showArrows={true}
+                    showThumbs={false}
+                    showStatus={false}
+                >
+                    {kevinNft.map((item, _i) => {
+                        console.log({item})
+                        return (
+                            <div className="card-content" key={_i}>
+                                <div className="w114 d-flex align-items-center">
+                                    <img src={item.image_thumbnail_url || ItemTemp} className="w120 br-4"/>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </Carousel>
+            </div>
+            <div className="slider-caption">
+                <div className="lbl-cap1">We found</div>
+                <div className="lbl-cap1 f-bold">
+                    {
+                        kevinNft.map((item, _i) => { if( _i < 3 ) return '#' + item.id; else return null;} ).join(' ,')
+                    }
+                </div>
+                <div className="lbl-cap1">In your wallet!</div>
+            </div>
+        </SliderArea>
 
         <div className="lbl-cap1 m-t-15 f-bold">Now it’s time to <span className="f-yellow">level up</span>.</div>
         <div className="lbl-cap1 m-t-15 f-bold">

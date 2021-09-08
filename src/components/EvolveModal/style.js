@@ -8,6 +8,7 @@ export const ModalWrapper = styled.div`
   z-index: 4;
   width: 100vw;
   height: 100vh;
+  letter-spacing: 0px;
 `;
 export const Modal = styled.div`
   display: flex;
@@ -113,3 +114,36 @@ export const NFTStageArea = styled.div`
     min-height: 90px;
   }
 `;
+
+export const SliderArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  .card-slider{
+    margin: 0 25px;
+    width: 160px;
+  }
+  .carousel.carousel-slider{ height: 155px; }
+  .carousel .control-dots .dot{
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 8px;
+    background: black;
+    border: 1px solid #F5B900;
+  }
+  .card-content{
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    height: 120px;
+  }
+  .slider-caption{
+    text-align: left;
+    flex: 1;
+  }
+  .w120{ width: 120px;}
+`
