@@ -67,16 +67,18 @@ position: absolute;
 `;
 
 export const ActionButton = styled.button`
-display:flex;
-justify-content:center;
-align-items:center;
-font-weight:700;
-font-size:17px;
-background-color:var(--yellow);
-border:0;
-width:170px;
-height:32px;
-
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 21px;
+  text-align: center;
+  color: #000000;
+  padding: 5px 22px;
+  background-color: var(--yellow);
+  border-radius: 1px;
+  border: 2px solid #F5B900;
 `
 
 
@@ -84,10 +86,26 @@ export const NFTStageArea = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
+  .a-stage{
+    flex: 1;
+    padding: 0 10px;
+    text-align: center;
+  }
+  .img-part{
+    display: flex;
+    justify-content: center;
+  }
   .img-area{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 25px;
     width: 108px;
     height: 108px;
     border-radius: 50%;
     background-color: var(--yellow);
+  }
+  .content-part{
+    min-height: 90px;
   }
 `;

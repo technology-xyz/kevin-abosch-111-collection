@@ -39,6 +39,8 @@ const GlobalStyle = createGlobalStyle`
   .m-t-25 { margin-top: 25px; }
   .m-t-30 { margin-top: 30px; }
   .m-t-40 { margin-top: 40px; }
+
+  .m-b-35 { margin-bottom: 35px; }
 `;
 
 export default GlobalStyle;
