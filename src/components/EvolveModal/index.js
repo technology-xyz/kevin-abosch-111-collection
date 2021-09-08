@@ -16,6 +16,7 @@ import axios from "../../service/customAxios";
 import Web3 from "web3";
 import * as Kcommon from "@_koi/sdk/common";
 import ConnectOpensea from "./connect";
+import ShowOpensea from "./showOpensea";
 import { IconClose } from "assets/images";
 
 const EvolveModal = ({
@@ -94,13 +95,17 @@ const EvolveModal = ({
   const onExit = () => {
     hide()
   };
+  const getNFTwallet = () => {
+    setModalStep(1)
+  }
   return (
     <ModalWrapper>
       <Modal>
         <Exit onClick={onExit}>
           <img src={IconClose} alt="modal close" />
         </Exit>
-        {modalStep === 0 && <ConnectOpensea /> }
+        {modalStep === 0 && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
+        {modalStep === 1 && <ShowOpensea /> }
       </Modal>
     </ModalWrapper>
   );
