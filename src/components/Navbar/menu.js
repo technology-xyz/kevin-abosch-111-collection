@@ -31,7 +31,7 @@ const Menu = ({
           let address = accounts[0]
           hide()
           setAddressEth(address)
-          setModalInfo({address, step: 0})
+          setModalInfo({address, step: 'show_nft'}) // connect_opensea
         }
       )
     } else {
@@ -53,29 +53,6 @@ const Menu = ({
     }, alertTimeout);
   };
 
-  const checkKevinNFT = (nfts = []) => {
-    for (var i = 0; i < nfts.length; i++) {
-      if (
-        nfts[i].asset_contract.address ===
-        "0x495f947276749ce646f68ac8c248420045cb7b5e"
-      ) {
-        const MOCK_NAME ="1111 #0245"
-        const extractName = (name) => {
-            
-            let start = name.indexOf('#')
-            let route = parseInt(name.slice(start +1),10)
-            return route
-        }
-        const route = extractName(MOCK_NAME)
-        history.push(`/gallery/${route}/`)
-        console.log(nfts[i].asset_contract.address);
-        console.log(nfts[i].name)
-        // route to nft with name,need to verify what name looks like
-        setKevinNft(nfts[i]);
-        return true;
-      }
-    }
-  };
   return (
     <MenuWrapper>
       <SideContent>

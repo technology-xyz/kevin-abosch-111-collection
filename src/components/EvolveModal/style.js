@@ -19,7 +19,7 @@ export const Modal = styled.div`
     max-width: 460px;
   }
   max-width: 910px;
-  text-align: left;
+  text-align: center;
   align-items: center;
   padding: 8px;
   border: 2px solid #f5b900;
@@ -36,6 +36,10 @@ export const Modal = styled.div`
   .lbl-cap2{
     font-size: 17px;
     line-height: 22px;
+  }
+  .lbl-cap2{
+    font-size: 12px;
+    line-height: 15px;
   }
   label {
     display: flex;

@@ -12,67 +12,25 @@ import {
 } from "./style";
 
 const ShowOpensea = ({
-    getNFTwallet = () => {}
+    back = () => {},
+    kevinNft = []
 }) => {
     return (
     <>
-        <h3 className="m-t-5 f-bold">Show opensea</h3>
-        <div className="lbl-cap1 m-t-5">Make sure your 1111 piece is the real thing by connecting your Ethereum wallet.</div>
-        <div className="lbl-cap1 m-t-15">Then evolve yours to an <span className="f-underline f-bold f-yellow">Atomic NFT</span>, stored permanently and forever earning attention rewards.</div>
-        <div className="lbl-cap2 m-t-25 f-bold">Just a few reasons to evolve your 1111 NFT</div>
-        <NFTStageArea className="m-t-10 nft-stage-area">
-            <div className="a-stage">
-                <div className="img-part">
-                    <div className="img-area">
-                        <img src={NFTStage1} alt="nft stage img1" />
-                    </div>
-                </div>
-                <div className="content-part m-t-10">
-                    <div className="lbl-cap1">Each NFT is split into 1,111 PSTs. Each one holds <span className="f-yellow">voting power in a DAO.</span></div>
-                </div>
-            </div>
-            <div className="a-stage">
-                <div className="img-part">
-                    <div className="img-area">
-                        <img src={NFTStage2} alt="nft stage img2" />
-                    </div>
-                </div>
-                <div className="content-part m-t-10">
-                    <div className="lbl-cap1">The DAO might control a satellite soon.</div>
-                </div>
-            </div>
-            <div className="a-stage">
-                <div className="img-part">
-                    <div className="img-area">
-                        <img src={NFTStage3} alt="nft stage img3" />
-                    </div>
-                </div>
-                <div className="content-part m-t-10">
-                    <div className="lbl-cap1">Atomic NFTs earn attention rewards.</div>
-                </div>
-            </div>
-            <div className="a-stage">
-                <div className="img-part">
-                    <div className="img-area">
-                        <img src={NFTStage4} alt="nft stage img4" />
-                    </div>
-                </div>
-                <div className="content-part m-t-10">
-                    <div className="lbl-cap1">No more crazy gas fees. Storage costs &lt;$0.01 per MB.</div>
-                </div>
-            </div>
-            <div className="a-stage">
-                <div className="img-part">
-                    <div className="img-area">
-                        <img src={NFTStage5} alt="nft stage img5" />
-                    </div>
-                </div>
-                <div className="content-part m-t-10">
-                    <div className="lbl-cap1">Atomic NFTs are stored <span className="f-yellow">forever</span> with Koii on Arweave’s permaweb.</div>
-                </div>
-            </div>
-        </NFTStageArea>
-        <ActionButton onClick={getNFTwallet} className="m-b-35">Connect ETH Wallet</ActionButton>
+        <h3 className="m-t-5 f-bold">The Real Deal</h3>
+        <div className="lbl-cap1 m-t-25">
+            {kevinNft.map( k => {
+                return (<p>{k.asset_contract.address}</p>)
+            })}
+        </div>
+
+        <div className="lbl-cap1 m-t-15 f-bold">Now it’s time to <span className="f-yellow">level up</span>.</div>
+        <div className="lbl-cap1 m-t-15 f-bold">
+            Atomic NFTs are stored on Arweave’s permaweb and can never be removed. They also earn attention rewards in KOII tokens whenever they are viewed, anywhere on the internet.
+        </div>
+        
+        <ActionButton onClick={back} className="m-t-30">Evolve my NFT</ActionButton>
+        <div className="lbl-cap3 m-t-15">*Kevin Abosch envisioned the 1111 collection as a collection of Atomic NFTs.</div>
     </>
     )
 }

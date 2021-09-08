@@ -19,6 +19,7 @@ import ConnectOpensea from "./connect";
 import ShowOpensea from "./showOpensea";
 import { IconClose } from "assets/images";
 import { show_notification } from "service/utils";
+import LoadingArea from "./loading";
 
 const EvolveModal = ({
   hide = () => {},
@@ -27,9 +28,10 @@ const EvolveModal = ({
   console.log({initStep})
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [modalStep, setModalStep] = useState(initStep)
-
-  const { addressEth, addressAr, kevinNft } = useContext(DataContext);
+  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading
+  const [errorNFT, setErrorNFT] = useState('')
+  
+  const { addressEth, addressAr, kevinNft, setKevinNft } = useContext(DataContext);
 
   function redeem(payload) {
     console.log("payload......", payload);
@@ -90,10 +92,29 @@ const EvolveModal = ({
   };
 
   const onExit = () => {
+    setErrorNFT('')
     hide()
+  };
+  const checkKevinNFT = (nfts = []) => {
+    let kevinNFTs = [];
+    for (var i = 0; i < nfts.length; i++) {
+      if ( nfts[i].asset_contract.address === "0x7f72528229f85c99d8843c0317ef91f4a2793edf" ) {
+        console.log(nfts[i].asset_contract.address);
+        kevinNFTs.push(nfts[i]);
+      }
+    }
+    if(kevinNFTs.length > 0){
+      setKevinNft(kevinNFTs);
+      setModalStep('show_nft')
+    }else{
+      // show error loading
+      setErrorNFT('There is no kevinNFT')
+      setModalStep('loading')
+    }
   };
   const getNFTwallet = () => {
     const tempEth = '0xe35a42153fecf7710733252fd8ef16b92fac4b95'
+    setModalStep('loading')
     fetch(
       //  `https://api.opensea.io/api/v1/assets?owner=0x8dea9139b0e84d5cc2933072f5ba43c2b043f6db&order_direction=desc&offset=0&limit=20`,
       //  `https://api.opensea.io/api/v1/assets?owner=0x9428E55418755b2F902D3B1f898A871AB5634182&order_direction=desc&offset=0&limit=100`,
@@ -112,33 +133,34 @@ const EvolveModal = ({
           );
         }
 
-        let newest_nfts = [];
         let temp_opensea = data.assets;
-        if (temp_opensea.length > 0) {
-          console.log({ newest_nfts });
-          checkKevinNFT(temp_opensea);
-        }
+        checkKevinNFT(temp_opensea);
+        
       })
       .catch((err) => {
         console.log(err);
-        show_alert(
-          `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
-        );
+        setErrorNFT(`Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`)
       })
       .finally(() => {
-        // show_alert('It looks like you don\'t have enough AR tokens.<br> Please visit the <a href="https://faucet.arweave.net/" target="_blank">Arweave Faucet</a> to get some— it\'s free!', 'danger', true)
-        setLoading(false);
+        // go to next step
+        // setModalStep('show_nft')
       });
-    setModalStep(1)
+  }
+  const getModalSize = () => {
+    if(modalStep === 'loading' || modalStep === 'show_nft') 
+      return true
+    else 
+      return false
   }
   return (
     <ModalWrapper>
-      <Modal>
+      <Modal className={`${getModalSize() ? 'small' : ''}`}>
         <Exit onClick={onExit}>
           <img src={IconClose} alt="modal close" />
         </Exit>
-        {modalStep === 0 && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
-        {modalStep === 1 && <ShowOpensea /> }
+        {modalStep === 'loading' && <LoadingArea error={errorNFT} back={onExit} /> }
+        {modalStep === 'connect_opensea' && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
+        {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} back={onExit} /> }
       </Modal>
     </ModalWrapper>
   );
