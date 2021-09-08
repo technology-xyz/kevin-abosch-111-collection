@@ -31,7 +31,7 @@ const Menu = ({
           let address = accounts[0]
           hide()
           setAddressEth(address)
-          setModalInfo({address, step: 3})
+          setModalInfo({address, step: 0})
         }
       )
     } else {

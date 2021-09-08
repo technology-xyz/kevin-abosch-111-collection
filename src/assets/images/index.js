@@ -11,3 +11,5 @@ export { default as telegram} from "./telegram.svg"
 
 export { default as IconUpload } from "./IconUpload.svg";
 export { default as IconUploadPng } from "./IconUpload.png";
+
+export { default as IconClose } from "./IconClose.svg";
