@@ -17,7 +17,7 @@ const Menu = ({
   hide = () => {}
 }) => {
   const history = useHistory()
-  const { modalOpen, setModalOpen, setAddressEth, setKevinNft} = useContext(DataContext);
+  const { setAddressEth, setKevinNft} = useContext(DataContext);
   const [showAlert, setShowAlert] = useState(false);
   const [errMessage, setErrMessage] = useState(false);
   const {setModalInfo} = useContext(ModalContext)
@@ -43,47 +43,6 @@ const Menu = ({
         window.open(url, "_blank");
       }, 1000);
     }
-    
-    // window.ethereum.request({ method: 'eth_requestAccounts' }).then(async (accounts) => {
-    //   console.log(accounts[0]);
-    //   setAddressEth(accounts[0]);
-    //   const options = {
-    //     method: "GET",
-    //   };
-
-    //   fetch(
-    //     `https://api.opensea.io/api/v1/assets?owner=${accounts[0]}&order_direction=desc&offset=0&limit=20`,
-    //     options
-    //   )
-    //     .then((response) => {
-    //       return response.json();
-    //     })
-    //     .then(async (data) => {
-    //       console.log(data.assets.length);
-    //       if (data.assets.length === 0) {
-    //         show_alert(
-    //           `Our school of koi couldn't find anything on OpenSea NFTs associated with that wallet[${accounts[0]}].`
-    //         );
-    //       }
-
-    //       if (checkKevinNFT(data.assets)) {
-    //         console.log("trade")
-    //       }
-    //       else {
-    //         console.log('you dont have any 1111 NFTS')
-    //       }
-    //     })
-
-    //     .catch((err) => {
-    //       console.log(err);
-          
-    //     })
-    //     .finally(() => {
-          
-    //     });
-    // });
-    
-
   }
   const show_alert = (message = "") => {
     setShowAlert(true);
