@@ -22,7 +22,7 @@ const ShowOpensea = ({
 
     return (
     <>
-        <h3 className="m-t-5 f-bold">The Real Deal</h3>
+        <h3 className="m-t-15 f-bold">The Real Deal</h3>
         <SliderArea className="m-t-5">
             <div className="flex1 card-slider">
                 <Carousel

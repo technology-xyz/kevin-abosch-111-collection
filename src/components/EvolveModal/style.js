@@ -60,7 +60,7 @@ export const Exit = styled.button`
   background-color: transparent;
   border: 0;
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 5px;
 `;
 export const BackArrow = styled.button`
