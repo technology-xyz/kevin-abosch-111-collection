@@ -29,7 +29,7 @@ const EvolveModal = ({
   console.log({initStep})
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft
+  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft || no_finnie
   const [errorNFT, setErrorNFT] = useState('')
   const [errorTitle, setErrorTitle] = useState('')
   
@@ -152,6 +152,12 @@ const EvolveModal = ({
     try {
       // Does it exist?
       let extensionObj = await window.koiWallet;
+      if(extensionObj === undefined) {
+        // eslint-disable-next-line no-throw-literal
+        console.log("error undefined finnie")
+        return false  
+      }
+      console.log({extensionObj})
       // Is it connected?
       let res = await extensionObj.getPermissions();
   
@@ -159,7 +165,10 @@ const EvolveModal = ({
       else return false;
     } catch (error) {
       // Have to throw error to trigger rejected
-      throw new Error("Extension does not exist");
+      // eslint-disable-next-line no-throw-literal
+      // throw "Extension does not exist";
+      console.log("error chk finnie", error)
+      return false
     }
   }
   const connectFinnie = async () => {
@@ -169,16 +178,16 @@ const EvolveModal = ({
       console.log("Extension", res);
       if (res.status === 200) return true;
 
-      throw new Error(res.data);
+      throw res.data;
     } catch (error) {
-      throw new Error(error);
+      throw error.message;
     }
   }
   const getEvolveArt = async () => {
     try {
-      if(checkFinnie()){
+      if(await checkFinnie()){
         // installed finnie and connect finnie
-        if(connectFinnie()) {
+        if(await connectFinnie()) {
           // go to show art page
           console.log('go to show art page')
         }else{
@@ -188,9 +197,11 @@ const EvolveModal = ({
       }else{
         // show connect finnie page
         console.log('show connect finnie page')
+        setModalStep('no_finnie')
       }
     } catch (error) {
       console.log('error connect finnie', error)
+      setModalStep('no_finnie')
     }
   }
   const getModalSize = () => {
