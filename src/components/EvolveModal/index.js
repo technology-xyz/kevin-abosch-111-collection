@@ -114,8 +114,8 @@ const EvolveModal = ({
     }
   };
   const getNFTwallet = () => {
-    // const tempEth = '0xe35a42153fecf7710733252fd8ef16b92fac4b95'
-    const tempEth = addressEth
+    const tempEth = '0xe35a42153fecf7710733252fd8ef16b92fac4b95'
+    // const tempEth = addressEth
     setModalStep('loading')
     fetch(
       //  `https://api.opensea.io/api/v1/assets?owner=0x8dea9139b0e84d5cc2933072f5ba43c2b043f6db&order_direction=desc&offset=0&limit=20`,
@@ -148,6 +148,51 @@ const EvolveModal = ({
         // setModalStep('show_nft')
       });
   }
+  const checkFinnie = async () => {
+    try {
+      // Does it exist?
+      let extensionObj = await window.koiWallet;
+      // Is it connected?
+      let res = await extensionObj.getPermissions();
+  
+      if (res.status === 200 && res.data.length) return true;
+      else return false;
+    } catch (error) {
+      // Have to throw error to trigger rejected
+      throw new Error("Extension does not exist");
+    }
+  }
+  const connectFinnie = async () => {
+    const extension = window.koiWallet;
+    try {
+      let res = await extension.connect();
+      console.log("Extension", res);
+      if (res.status === 200) return true;
+
+      throw new Error(res.data);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  const getEvolveArt = async () => {
+    try {
+      if(checkFinnie()){
+        // installed finnie and connect finnie
+        if(connectFinnie()) {
+          // go to show art page
+          console.log('go to show art page')
+        }else{
+          // error connect finnie
+          console.log('error connect finnie')
+        }
+      }else{
+        // show connect finnie page
+        console.log('show connect finnie page')
+      }
+    } catch (error) {
+      console.log('error connect finnie', error)
+    }
+  }
   const getModalSize = () => {
     if(modalStep === 'loading' || modalStep === 'show_nft') 
       return true
@@ -163,7 +208,7 @@ const EvolveModal = ({
         {modalStep === 'loading' && <LoadingArea error={errorNFT} back={onExit} title={errorTitle} /> }
         {modalStep === 'no_nft' && <ErrorNFT /> }
         {modalStep === 'connect_opensea' && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
-        {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} back={onExit} /> }
+        {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} action={getEvolveArt} /> }
       </Modal>
     </ModalWrapper>
   );

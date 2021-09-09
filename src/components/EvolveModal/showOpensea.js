@@ -10,7 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 
 const ShowOpensea = ({
-    back = () => {},
+    action = () => {},
     kevinNft = []
 }) => {
     const showShortString = (content, str_length) => {
@@ -58,7 +58,7 @@ const ShowOpensea = ({
             Atomic NFTs are stored on Arweave’s permaweb and can never be removed. They also earn attention rewards in KOII tokens whenever they are viewed, anywhere on the internet.
         </div>
         
-        <ActionButton onClick={back} className="m-t-30">Evolve my NFT</ActionButton>
+        <ActionButton onClick={action} className="m-t-30">Evolve my NFT</ActionButton>
         <div className="lbl-cap3 m-t-15">*Kevin Abosch envisioned the 1111 collection as a collection of Atomic NFTs.</div>
     </>
     )
