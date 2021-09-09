@@ -10,7 +10,7 @@ import {
     ActionButton
 } from "./style";
 
-const LoadingArea = ({
+const Error = ({
     error = '',
     title = '',
     back = () => {}
@@ -25,4 +25,4 @@ const LoadingArea = ({
     )
 }
 
-export default LoadingArea
+export default Error
