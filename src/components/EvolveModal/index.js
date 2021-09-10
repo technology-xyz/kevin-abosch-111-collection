@@ -32,7 +32,7 @@ const EvolveModal = ({
   console.log({initStep})
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [modalStep, setModalStep] = useState('atomic_nft') // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art || atomic_nft
+  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art || atomic_nft
   const [errorNFT, setErrorNFT] = useState('')
   const [koiiAddress, setKoiiAddress] = useState('')
   
