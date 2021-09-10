@@ -30,7 +30,7 @@ const EvolveModal = ({
   console.log({initStep})
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft || no_finnie
+  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art
   const [errorNFT, setErrorNFT] = useState('')
   const [errorTitle, setErrorTitle] = useState('')
   
@@ -158,12 +158,13 @@ const EvolveModal = ({
         console.log("error undefined finnie")
         return false  
       }
-      console.log({extensionObj})
+      // console.log({extensionObj})
+      return true
       // Is it connected?
-      let res = await extensionObj.getPermissions();
-  
-      if (res.status === 200 && res.data.length) return true;
-      else return false;
+      // let res = await extensionObj.getPermissions();
+      // console.log("Extension1", res);
+      // if (res.status === 200 && res.data.length) return true;
+      // else return false;
     } catch (error) {
       // Have to throw error to trigger rejected
       // eslint-disable-next-line no-throw-literal
@@ -191,9 +192,11 @@ const EvolveModal = ({
         if(await connectFinnie()) {
           // go to show art page
           console.log('go to show art page')
+          setModalStep('show_art')
         }else{
           // error connect finnie
           console.log('error connect finnie')
+          setModalStep('no_finnie')
         }
       }else{
         // show connect finnie page
@@ -222,6 +225,7 @@ const EvolveModal = ({
         {modalStep === 'connect_opensea' && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
         {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} action={getEvolveArt} /> }
         {modalStep === 'no_finnie' && <NoFinnie /> }
+        {modalStep === 'show_art' && <NoFinnie /> }
       </Modal>
     </ModalWrapper>
   );

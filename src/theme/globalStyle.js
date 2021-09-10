@@ -31,6 +31,11 @@ const GlobalStyle = createGlobalStyle`
   .f-underline {text-decoration: underline;}
   .f-yellow{ color : var(--yellow);}
   .f-bold{ font-weight: bold; }
+  .c-pointer{ cursor: pointer; }
+  .m-l-r-auto{
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .m-t-5 { margin-top: 5px; }
   .m-t-10 { margin-top: 10px; }
