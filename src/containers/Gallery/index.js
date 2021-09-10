@@ -167,7 +167,7 @@ const Gallery = () => {
                       Collect
                     </DetailLink>
                     {kevinNft?
-                    <EvolveButton onClick={()=>{setModalOpen(true)}}>EVOLVE</EvolveButton>
+                    <>&nbsp;</>//<EvolveButton onClick={()=>{setModalOpen(true)}}>EVOLVE</EvolveButton>
                     :  <BidNow
                       href={`https://space.verto.exchange/asset/${items[indexId].txId}`}
                       target="_blank"
