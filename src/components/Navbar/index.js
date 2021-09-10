@@ -8,7 +8,7 @@ import {
   NavigationWrapper,
   Tooltip,
 } from "./style";
-import { MenuIcon, Logo } from "../../assets/images";
+import { MenuIcon, NewLogo } from "../../assets/images";
 import Menu from "./menu";
 import { matchPath, useLocation } from "react-router";
 import BackArrow from "../BackArrow"
@@ -30,7 +30,7 @@ const Navbar = () => {
         <Title href="https://www.kevinabosch.com/">Studio Kevin Abosch</Title>
         <Right>
           <Koi>
-            <img src={Logo} alt="koi-logo" />
+            <img src={NewLogo} alt="koi-logo" />
             <Tooltip>
               <p>Powered by Koi.</p>
               <p>

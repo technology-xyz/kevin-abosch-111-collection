@@ -33,7 +33,7 @@ const Gallery = () => {
   const [items, setItems] = useState([]);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
-  const { contents, kevinNft, setModaOpen } = useContext(DataContext);
+  const { contents, kevinNft, setModalOpen } = useContext(DataContext);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
   const mobile = window.matchMedia("(max-width: 768px)").matches;
@@ -146,7 +146,7 @@ const Gallery = () => {
                   <img src={Logo} alt="koi-logo" />
                 </span>
                 {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} */}
-                {kevinNft && <EvolveButton onClick={()=>{setModaOpen(true)}}>EVOLVE</EvolveButton>}
+                {kevinNft && <EvolveButton onClick={()=>{setModalOpen(true)}}>EVOLVE</EvolveButton>}
               </ImageMenu>
 
               {!matchMain && (
@@ -167,7 +167,7 @@ const Gallery = () => {
                       Collect
                     </DetailLink>
                     {kevinNft?
-                    <EvolveButton onClick={()=>{setModaOpen(true)}}>EVOLVE</EvolveButton>
+                    <EvolveButton onClick={()=>{setModalOpen(true)}}>EVOLVE</EvolveButton>
                     :  <BidNow
                       href={`https://space.verto.exchange/asset/${items[indexId].txId}`}
                       target="_blank"

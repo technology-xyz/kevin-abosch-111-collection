@@ -35,6 +35,17 @@ export const Koi = styled.div`
     }
   }
 `;
+export const KoiiBtn = styled.button`
+  position: relative;
+  display: inline-block;
+  margin: 0px 16px;
+
+  &:hover {
+    span {
+      visibility: visible;
+    }
+  }
+`;
 export const MenuIconWrapper = styled.button`
   outline: 0;
   background-color: transparent;
