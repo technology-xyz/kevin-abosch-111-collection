@@ -76,7 +76,19 @@ const getKoi = async (keyAr) => {
         throw err.message
     }
 }
+const transferNFTtoFinnie = async (tx_id, ownerAddress, wallet = null) => {
+    try {
+        const ktools = new kweb.Web();
+        let arweave = await initArweave();
+        const res = await ktools.registerData(tx_id, ownerAddress, wallet, arweave);
+        console.log(res)    
+    } catch (error) {
+        console.log('transfer error', error)
+    }
+    
+}
 
 export {
     getKoi,
+    transferNFTtoFinnie
 }
