@@ -42,17 +42,12 @@ export const Modal = styled.div`
     font-size: 12px;
     line-height: 15px;
   }
-  label {
+  .atomic-btn-area{
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    width: 100%;
-    input {
-        border-color: var(--yellow);
-        background-color: black;
-        color: var(--yellow);
-        &:focus {
-            outline: none !important;
-        }
+    button{
+      width: 45%;
     }
   }
 `;
@@ -84,6 +79,13 @@ export const ActionButton = styled.button`
   background-color: var(--yellow);
   border-radius: 1px;
   border: 2px solid #F5B900;
+  &.black-btn{
+    background: #000000;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 1px;
+    color: white;
+  }
 `
 
 

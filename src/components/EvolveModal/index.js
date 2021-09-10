@@ -23,6 +23,7 @@ import LoadingArea from "./loading";
 import ErrorNFT from "./errorNFT";
 import NoFinnie from "./noFinnie";
 import ShowArt from "./showArt";
+import AtomicNFT from "./atomicNFT";
 
 const EvolveModal = ({
   hide = () => {},
@@ -31,7 +32,7 @@ const EvolveModal = ({
   console.log({initStep})
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art
+  const [modalStep, setModalStep] = useState('atomic_nft') // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art || atomic_nft
   const [errorNFT, setErrorNFT] = useState('')
   const [koiiAddress, setKoiiAddress] = useState('')
   
@@ -216,7 +217,8 @@ const EvolveModal = ({
     }
   }
   const getModalSize = () => {
-    if(modalStep === 'loading' || modalStep === 'show_nft' || modalStep === 'no_finnie' || modalStep === 'show_art') 
+    if(modalStep === 'loading' || modalStep === 'show_nft' || modalStep === 'no_finnie' || 
+      modalStep === 'show_art' || modalStep === 'atomic_nft') 
       return true
     else 
       return false
@@ -233,6 +235,7 @@ const EvolveModal = ({
         {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} action={getEvolveArt} /> }
         {modalStep === 'no_finnie' && <NoFinnie /> }
         {modalStep === 'show_art' && <ShowArt koiiAddress={koiiAddress} kevinNft={kevinNft} action={getEvolveArt} /> }
+        {modalStep === 'atomic_nft' && <AtomicNFT kevinNft={kevinNft} back={onExit} /> }
       </Modal>
     </ModalWrapper>
   );
