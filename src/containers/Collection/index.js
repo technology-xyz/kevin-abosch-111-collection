@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import { CollectionWrapper, Grid, Loading } from "./style";
+import { CollectionWrapper, Grid } from "./style";
 import { DataContext } from "contexts/DataContextContainer";
 import "react-lazy-load-image-component/src/effects/opacity.css";
-import { Logo } from "../../assets/images";
+// import { Logo } from "../../assets/images";
 import Pagination from "./pagination"
 import {
   LazyLoadImage,
   trackWindowScroll,
 } from "react-lazy-load-image-component";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import MetaWrapper from "components/Wrappers/MetaWrapper";
 import LoadingKoi from '../../components/LoadingKoi'
 const itemsPerPage = 24
@@ -19,7 +19,7 @@ const Collection = ({ scrollPosition }) => {
   const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1)
   const [imgsLoaded, setImgsLoaded] = useState(true);
-  const [loaded, setLoaded] = useState([Array(itemsPerPage).fill(false)])
+  // const [loaded, setLoaded] = useState([Array(itemsPerPage).fill(false)])
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const currentPosts = contents.slice(indexOfFirstPost, indexOfLastPost);
@@ -54,6 +54,7 @@ const Collection = ({ scrollPosition }) => {
     Promise.all(currentPosts.map((image) => loadImage(image)))
     Promise.all(nextPage.map((image) => loadImage(image)))
    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPosts]);
 
   return (

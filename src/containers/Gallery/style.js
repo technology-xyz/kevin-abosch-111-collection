@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export const MenuContainer = styled.div`
   display: flex;
-
+  flex : 1;  
   width: 100vw;
   min-height: 100vh;
 
@@ -12,7 +12,7 @@ export const MenuContainer = styled.div`
   align-items: center;
   background-color: #000;
   overflow-x: hidden;
-  position: absolute;
+  /* position: absolute; */
 
   @media (max-width: 769px) {
     min-height: 100%;

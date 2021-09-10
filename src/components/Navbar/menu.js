@@ -1,5 +1,4 @@
 import React, {useContext, useState}  from "react";
-import { Logo } from "../../assets/images";
 import {
   MenuWrapper,
   SideContent,
@@ -12,56 +11,38 @@ import {
 import { DataContext } from "contexts/DataContextContainer";
 import { alertTimeout } from "config";
 import { useHistory } from "react-router-dom";
-const Menu = () => {
+import {ModalContext} from 'contexts/ModalContext'
+
+const Menu = ({
+  hide = () => {}
+}) => {
   const history = useHistory()
-  const { modalOpen, setModalOpen, setAddressEth, setKevinNft} = useContext(DataContext);
+  const { setAddressEth, setKevinNft} = useContext(DataContext);
   const [showAlert, setShowAlert] = useState(false);
   const [errMessage, setErrMessage] = useState(false);
-
+  const {setModalInfo} = useContext(ModalContext)
 
   const genRand = () => Math.floor(Math.random() * 1001);
 
   const onEvolve = () => {
-    window.ethereum.request({ method: 'eth_requestAccounts' }).then(async (accounts) => {
-      console.log(accounts[0]);
-      setAddressEth(accounts[0]);
-      const options = {
-        method: "GET",
-      };
-
-      fetch(
-        `https://api.opensea.io/api/v1/assets?owner=${accounts[0]}&order_direction=desc&offset=0&limit=20`,
-        options
+    if (window.ethereum) {
+      window.ethereum.enable().then(async (accounts) => {
+          console.log(accounts[0])
+          let address = accounts[0]
+          hide()
+          setAddressEth(address)
+          setModalInfo({address, step: 'connect_opensea'}) // connect_opensea || show_nft
+        }
       )
-        .then((response) => {
-          return response.json();
-        })
-        .then(async (data) => {
-          console.log(data.assets.length);
-          if (data.assets.length === 0) {
-            show_alert(
-              `Our school of koi couldn't find anything on OpenSea NFTs associated with that wallet[${accounts[0]}].`
-            );
-          }
-
-          if (checkKevinNFT(data.assets)) {
-            console.log("trade")
-          }
-          else {
-            console.log('you dont have any 1111 NFTS')
-          }
-        })
-
-        .catch((err) => {
-          console.log(err);
-          
-        })
-        .finally(() => {
-          
-        });
-    });
-    
-
+    } else {
+      // metamask extension didn't install
+      // show_notification("Please install metamask extension first.", "KOII");
+      show_alert('Please install metamask extension first.')
+      setTimeout(() => {
+        let url = "https://metamask.io/download.html";
+        window.open(url, "_blank");
+      }, 1000);
+    }
   }
   const show_alert = (message = "") => {
     setShowAlert(true);
@@ -72,29 +53,6 @@ const Menu = () => {
     }, alertTimeout);
   };
 
-  const checkKevinNFT = (nfts = []) => {
-    for (var i = 0; i < nfts.length; i++) {
-      if (
-        nfts[i].asset_contract.address ===
-        "0x495f947276749ce646f68ac8c248420045cb7b5e"
-      ) {
-        const MOCK_NAME ="1111 #0245"
-        const extractName = (name) => {
-            
-            let start = name.indexOf('#')
-            let route = parseInt(name.slice(start +1),10)
-            return route
-        }
-        const route = extractName(MOCK_NAME)
-        history.push(`/gallery/${route}/`)
-        console.log(nfts[i].asset_contract.address);
-        console.log(nfts[i].name)
-        // route to nft with name,need to verify what name looks like
-        setKevinNft(nfts[i]);
-        return true;
-      }
-    }
-  };
   return (
     <MenuWrapper>
       <SideContent>
