@@ -22,7 +22,7 @@ export const Modal = styled.div`
   max-width: 910px;
   text-align: center;
   align-items: center;
-  padding: 8px;
+  padding: 8px 15px;
   border: 2px solid #f5b900;
    
   h3{
@@ -66,7 +66,7 @@ export const Exit = styled.button`
 export const BackArrow = styled.button`
   background-color: transparent;
   border: 0;
-position: absolute;
+  position: absolute;
   top: 0;
   right: 0;
 `;
@@ -146,4 +146,20 @@ export const SliderArea = styled.div`
     flex: 1;
   }
   .w120{ width: 120px;}
+`
+
+export const NoFinnieArea = styled.div`
+  text-align: center;
+  .koii-img-area{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .koii-img{
+      width: 68px;
+      margin: 0 20px;
+    }
+    .description{
+      flex: 1;
+    }
+  }
 `

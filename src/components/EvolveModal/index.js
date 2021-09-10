@@ -21,6 +21,7 @@ import { IconClose } from "assets/images";
 import { show_notification } from "service/utils";
 import LoadingArea from "./loading";
 import ErrorNFT from "./errorNFT";
+import NoFinnie from "./noFinnie";
 
 const EvolveModal = ({
   hide = () => {},
@@ -205,7 +206,7 @@ const EvolveModal = ({
     }
   }
   const getModalSize = () => {
-    if(modalStep === 'loading' || modalStep === 'show_nft') 
+    if(modalStep === 'loading' || modalStep === 'show_nft' || modalStep === 'no_finnie') 
       return true
     else 
       return false
@@ -220,6 +221,7 @@ const EvolveModal = ({
         {modalStep === 'no_nft' && <ErrorNFT /> }
         {modalStep === 'connect_opensea' && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
         {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} action={getEvolveArt} /> }
+        {modalStep === 'no_finnie' && <NoFinnie /> }
       </Modal>
     </ModalWrapper>
   );
