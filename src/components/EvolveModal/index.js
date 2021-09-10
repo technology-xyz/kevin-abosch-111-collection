@@ -22,6 +22,7 @@ import { show_notification } from "service/utils";
 import LoadingArea from "./loading";
 import ErrorNFT from "./errorNFT";
 import NoFinnie from "./noFinnie";
+import ShowArt from "./showArt";
 
 const EvolveModal = ({
   hide = () => {},
@@ -32,7 +33,7 @@ const EvolveModal = ({
   const { address } = queryString.parse(history.location.search);
   const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art
   const [errorNFT, setErrorNFT] = useState('')
-  const [errorTitle, setErrorTitle] = useState('')
+  const [koiiAddress, setKoiiAddress] = useState('')
   
   const { addressEth, addressAr, kevinNft, setKevinNft } = useContext(DataContext);
 
@@ -158,7 +159,7 @@ const EvolveModal = ({
         console.log("error undefined finnie")
         return false  
       }
-      // console.log({extensionObj})
+      console.log({extensionObj})
       return true
       // Is it connected?
       // let res = await extensionObj.getPermissions();
@@ -178,11 +179,17 @@ const EvolveModal = ({
     try {
       let res = await extension.connect();
       console.log("Extension", res);
-      if (res.status === 200) return true;
+      if (res.status === 200) {
+        let koii_address = await extension.getAddress();
+        // console.log({koii_address})
+        setKoiiAddress(koii_address.data)
+        return true;
+      }
 
-      throw res.data;
+      return false
     } catch (error) {
-      throw error.message;
+      console.log('finnie connect error', error)
+      return false
     }
   }
   const getEvolveArt = async () => {
@@ -209,7 +216,7 @@ const EvolveModal = ({
     }
   }
   const getModalSize = () => {
-    if(modalStep === 'loading' || modalStep === 'show_nft' || modalStep === 'no_finnie') 
+    if(modalStep === 'loading' || modalStep === 'show_nft' || modalStep === 'no_finnie' || modalStep === 'show_art') 
       return true
     else 
       return false
@@ -220,12 +227,12 @@ const EvolveModal = ({
         <Exit onClick={onExit}>
           <img src={IconClose} alt="modal close" />
         </Exit>
-        {modalStep === 'loading' && <LoadingArea error={errorNFT} back={onExit} title={errorTitle} /> }
+        {modalStep === 'loading' && <LoadingArea error={errorNFT} back={onExit}/> }
         {modalStep === 'no_nft' && <ErrorNFT /> }
         {modalStep === 'connect_opensea' && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
         {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} action={getEvolveArt} /> }
         {modalStep === 'no_finnie' && <NoFinnie /> }
-        {modalStep === 'show_art' && <NoFinnie /> }
+        {modalStep === 'show_art' && <ShowArt koiiAddress={koiiAddress} kevinNft={kevinNft} action={getEvolveArt} /> }
       </Modal>
     </ModalWrapper>
   );

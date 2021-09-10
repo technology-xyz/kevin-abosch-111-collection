@@ -163,3 +163,14 @@ export const NoFinnieArea = styled.div`
     }
   }
 `
+export const ShowArtArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+`
+export const KoiiAddress = styled.div`
+  display: flex;
+  flex-direction: row;
+  .w100{ width: 100px; text-align: left; }
+`
