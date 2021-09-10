@@ -147,6 +147,7 @@ const EvolveModal = ({
         setErrorNFT(`Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`)
       })
       .finally(() => {
+        console.log('finally :  checkKevinNFT')
         // go to next step
         // setModalStep('show_nft')
       });
