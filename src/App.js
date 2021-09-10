@@ -17,6 +17,7 @@ import Collection from "containers/Collection";
 import { preUrl } from "config";
 
 import DataContextContainer from "contexts/DataContextContainer";
+import ModalContextContainer from "contexts/ModalContext";
 
 function App() {
   const genRand = () => Math.floor(Math.random() * 1001);
@@ -60,35 +61,30 @@ function App() {
     <div className="App">
       <BasicStyle />
       <GlobalStyle />
- {!isLoading && (
-      <Router  >
-       
+      {!isLoading && (
+        <Router  >
           <Switch>
-            <DataContextContainer images={items}>
-            
-              <Route
-                exact
-                path="/"
-                render={() => <Redirect to={`/gallery/${genRand()}`} />}
-              />
-
-              <Suspense fallback={<h1>Loading</h1>}>
-                <MyRoute path="/gallery/:id" component={Gallery} />
-              </Suspense>
-
-              <MyRoute exact path="/about" component={About} />
-             
-
-              <MyRoute exact path="/collection" component={Collection} />
-            </DataContextContainer>
-            <Route
-              exact
-              path="/gallery"
-              render={() => <Redirect to="/gallery/1" />}
-            />
+            <ModalContextContainer>
+              <DataContextContainer images={items}>
+                <Route
+                  exact
+                  path="/"
+                  render={() => <Redirect to={`/gallery/${genRand()}`} />}
+                />
+                <Suspense fallback={<h1>Loading</h1>}>
+                  <MyRoute path="/gallery/:id" component={Gallery} />
+                </Suspense>
+                <MyRoute exact path="/about" component={About} />
+                <MyRoute exact path="/collection" component={Collection} />
+                <Route
+                  exact
+                  path="/gallery"
+                  render={() => <Redirect to="/gallery/1" />}
+                  />
+              </DataContextContainer>
+            </ModalContextContainer>
           </Switch>
-       
-      </Router>
+        </Router>
        )}
     </div>
   );

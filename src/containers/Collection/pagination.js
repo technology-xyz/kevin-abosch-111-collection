@@ -10,7 +10,6 @@ const Pagination = (props) => {
     siblingCount = 1,
     currentPage,
     pageSize,
-    className,
   } = props;
 
   const paginationRange = usePagination({
@@ -33,7 +32,7 @@ const Pagination = (props) => {
     onPageChange(currentPage - 1);
   };
 
-  let lastPage = paginationRange[paginationRange.length - 1];
+  // let lastPage = paginationRange[paginationRange.length - 1];
   return (
     <PaginationContainer>
       {/* Left navigation arrow */}

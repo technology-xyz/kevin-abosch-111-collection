@@ -1,18 +1,18 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {
   BottomBar,
-  LeftImg,
-  RightImg,
+  // LeftImg,
+  // RightImg,
   PlaceHolder,
-  LeftArrow,
-  RightArrow,
+  // LeftArrow,
+  // RightArrow,
 } from "./style";
 import React from "react";
-import Arrow from "../../components/Arrows";
+// import Arrow from "../../components/Arrows";
 import { useHistory } from "react-router";
 const Bottom = ({ left, right, index }) => {
   const history = useHistory();
-  const mobile = window.matchMedia("(max-width: 768px)").matches;
+  // const mobile = window.matchMedia("(max-width: 768px)").matches;
   return (
     <BottomBar>
      

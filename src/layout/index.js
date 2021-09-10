@@ -4,18 +4,22 @@ import React, {useContext} from "react";
 import {  useLocation } from "react-router";
 import Navbar from "../components/Navbar";
 import { PageLayoutContainer } from "./style";
-import EvolveModal from "../components/ExtensionModal"
+import * as OldModal from "../components/ExtensionModal"
+import EvolveModal from "../components/EvolveModal"
 import { DataContext } from "contexts/DataContextContainer";
+import { ModalContext } from "contexts/ModalContext";
 
 
 const PageLayout = ({ children }) => {
-  const { modalOpen} = useContext(DataContext);
+  const { modalOpen } = useContext(DataContext);
+  const { modal, onHide } = useContext(ModalContext);
   const {pathname} = useLocation()
 
   return (
     <PageLayoutContainer collection={pathname === "/collection"}>
       <Navbar />
-      {modalOpen&& <EvolveModal/>}
+      {modalOpen && <OldModal/>}
+      {modal.show && <EvolveModal initStep={modal.step} hide={onHide} />}
       {children}
     </PageLayoutContainer>
   );
