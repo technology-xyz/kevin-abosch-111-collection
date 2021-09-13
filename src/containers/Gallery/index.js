@@ -122,10 +122,8 @@ const Gallery = () => {
       history.push(`/gallery/${id}/details`);
     }
   };
-  const handleLoaded = () => {
-    console.log("LOADED");
-  };
   const afterLoadMain = () => {
+    console.log('afterloadMain')
     setLoadingMain(true)
   }
   return (
@@ -142,25 +140,22 @@ const Gallery = () => {
                   height="580"
                   alt={items[indexId].name || 'kevin 1111 NFT image'}
                   src={items[indexId].source}
-                  // placeholderSrc={LoaderGif}
-                  placeholder={<div className="loader-cp">Test loading</div>}
                   onClick={onShowDetails}
                   effect="opacity"
                   visibleByDefault={true}
                 /> :
                 <LazyLoadImage
                   key={items[indexId].name}
-                  width="0"
-                  height="0"
+                  width="580"
+                  height="580"
                   alt={items[indexId].name || 'kevin 1111 NFT image'}
                   src={items[indexId].source}
-                  // placeholderSrc={LoaderGif}
+                  placeholderSrc={LoaderGif}
                   afterLoad={afterLoadMain}
-                  placeholder={<div className="loader-cp">Test loading</div>}
                   onClick={onShowDetails}
                   effect="opacity"
                 />}
-                {/* <div className="loader-cp">Test loading</div> */}
+                <div className="loader-cp"><img src={LoaderGif} alt="test"></img></div>
               </MainImage>
               <ImageMenu>
                 <span>#{items[indexId].name}</span>
