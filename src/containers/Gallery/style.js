@@ -60,9 +60,9 @@ export const MainImage = styled.div`
   .loader-cp {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 100%;
     justify-content: center;
+    width: 580px;
+    height: 580px;
     img{
       background-color: white;
       text-align: center;

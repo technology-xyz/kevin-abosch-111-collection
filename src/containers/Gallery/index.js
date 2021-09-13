@@ -134,29 +134,17 @@ const Gallery = () => {
           <>
             <ImageWrapper key={items[indexId]?.name || 'kevin 1111 NFT image'}>
               <MainImage>
-                {loadingMain ? <LazyLoadImage
-                  key={items[indexId]?.name}
-                  width="580"
-                  height="580"
-                  alt={items[indexId]?.name || 'kevin 1111 NFT image'}
-                  src={items[indexId]?.source}
-                  onClick={onShowDetails}
-                  effect="opacity"
-                  visibleByDefault={true}
-                /> :
+                {!loadingMain && <div className="loader-cp"><img src={LoaderGif} alt="test"></img></div>}
                 <LazyLoadImage
                   key={items[indexId]?.name}
-                  width="580"
-                  height="580"
+                  width={loadingMain ? 580 : 0}
+                  height={loadingMain ? 580 : 0}
                   alt={items[indexId]?.name || 'kevin 1111 NFT image'}
-                  src={items[indexId]?.source}
-                  placeholderSrc={LoaderGif}
-                  wrapperClassName="loader-cp"
+                  src={items[indexId]?.source || null}
                   afterLoad={afterLoadMain}
                   onClick={onShowDetails}
                   effect="opacity"
-                />}
-                <div className="loader-cp"><img src={LoaderGif} alt="test"></img></div>
+                />
               </MainImage>
               <ImageMenu>
                 <span>#{items[indexId]?.name || 'undefined'}</span>
