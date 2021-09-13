@@ -57,6 +57,12 @@ export const MainImage = styled.div`
       cursor: pointer;
     }
   }
+  .loader-cp {
+    background-color: white;
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+  }
 
   @media (max-width: 769px) {
     margin-top: 64px;

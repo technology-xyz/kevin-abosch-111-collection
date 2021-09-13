@@ -32,7 +32,9 @@ const Gallery = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const { contents, kevinNft, setModalOpen } = useContext(DataContext);
-  const [loading, setLoading] = useState(false);
+  const [loadingMain, setLoadingMain] = useState(false);
+  const [loadingUp, setLoadingUp] = useState(false);
+  const [loadingDown, setLoadingDown] = useState(false);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
   const [items, setItems] = useState([]);
@@ -84,7 +86,6 @@ const Gallery = () => {
   };
 
   const up = () => {
-    setLoading(true)
     loadImage(items[indexId + 3])
       .then(() => console.log("loaded"))
       .catch((err) => console.log("Failed to load images", err));
@@ -124,6 +125,9 @@ const Gallery = () => {
   const handleLoaded = () => {
     console.log("LOADED");
   };
+  const afterLoadMain = () => {
+    setLoadingMain(true)
+  }
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
@@ -132,18 +136,32 @@ const Gallery = () => {
           <>
             <ImageWrapper key={items[indexId].name}>
               <MainImage>
-                <LazyLoadImage
+                {loadingMain ? <LazyLoadImage
                   key={items[indexId].name}
                   width="580"
                   height="580"
                   alt={items[indexId].name || 'kevin 1111 NFT image'}
                   src={items[indexId].source}
-                  placeholderSrc={LoaderGif}
+                  // placeholderSrc={LoaderGif}
+                  placeholder={<div className="loader-cp">Test loading</div>}
                   onClick={onShowDetails}
                   effect="opacity"
-                />
+                  visibleByDefault={true}
+                /> :
+                <LazyLoadImage
+                  key={items[indexId].name}
+                  width="0"
+                  height="0"
+                  alt={items[indexId].name || 'kevin 1111 NFT image'}
+                  src={items[indexId].source}
+                  // placeholderSrc={LoaderGif}
+                  afterLoad={afterLoadMain}
+                  placeholder={<div className="loader-cp">Test loading</div>}
+                  onClick={onShowDetails}
+                  effect="opacity"
+                />}
+                {/* <div className="loader-cp">Test loading</div> */}
               </MainImage>
-
               <ImageMenu>
                 <span>#{items[indexId].name}</span>
                 {/* <span>
