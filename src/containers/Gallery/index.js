@@ -20,6 +20,7 @@ import {
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/opacity.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
 import { LoaderGif } from "assets/images";
@@ -34,7 +35,7 @@ const Gallery = () => {
   const [loading, setLoading] = useState(false);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
-  const [items, setItems] = useState(contents || []);
+  const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
   const mobile = window.matchMedia("(max-width: 768px)").matches;
@@ -58,8 +59,9 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-    // setItems(contents);
+    setItems(contents);
     if (contents.length) {
+      console.log('here123')
       if(contents.length > 0 && contents[indexId]) {
         getKoi(contents[indexId].txId).catch((err) => {
           console.log(err);
@@ -139,7 +141,7 @@ const Gallery = () => {
                   src={items[indexId].source + '111'}
                   placeholderSrc={LoaderGif}
                   onClick={onShowDetails}
-                  effect="opacity"
+                  effect="blur"
                 />
               </MainImage>
 
