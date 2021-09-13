@@ -20,8 +20,10 @@ import {
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/opacity.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
+import { LoaderGif } from "assets/images";
 
 // const PlaceHoler = () => {};
 
@@ -29,11 +31,11 @@ const Gallery = () => {
   const { id } = useParams();
   const history = useHistory();
   const { pathname } = useLocation();
+  const { contents, kevinNft, setModalOpen } = useContext(DataContext);
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState([]);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
-  const { contents, kevinNft, setModalOpen } = useContext(DataContext);
+  const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
   const mobile = window.matchMedia("(max-width: 768px)").matches;
@@ -59,9 +61,11 @@ const Gallery = () => {
   useEffect(() => {
     setItems(contents);
     if (contents.length) {
-      getKoi(contents[indexId].txId).catch((err) => {
-        console.log(err);
-      });
+      if(contents.length > 0 && contents[indexId]) {
+        getKoi(contents[indexId].txId).catch((err) => {
+          console.log(err);
+        });
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
@@ -132,8 +136,9 @@ const Gallery = () => {
                   key={items[indexId].name}
                   width="580"
                   height="580"
-                  alt={items[indexId].name}
+                  alt={items[indexId].name || 'kevin 1111 NFT image'}
                   src={items[indexId].source}
+                  placeholderSrc={LoaderGif}
                   onClick={onShowDetails}
                   effect="opacity"
                 />
