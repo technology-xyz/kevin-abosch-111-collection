@@ -138,10 +138,10 @@ const Gallery = () => {
                   width="580"
                   height="580"
                   alt={items[indexId].name || 'kevin 1111 NFT image'}
-                  src={items[indexId].source + '111'}
+                  src={LoaderGif}
                   placeholderSrc={LoaderGif}
                   onClick={onShowDetails}
-                  effect="blur"
+                  effect="opacity"
                 />
               </MainImage>
 
