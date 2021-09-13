@@ -35,6 +35,20 @@ export const Koi = styled.div`
     }
   }
 `;
+export const KoiiBtn = styled.button`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 21px;
+  text-align: center;
+  color: #000000;
+  padding: 5px 22px;
+  background-color: var(--yellow);
+  border-radius: 1px;
+  border: 2px solid #F5B900;
+`;
 export const MenuIconWrapper = styled.button`
   outline: 0;
   background-color: transparent;
