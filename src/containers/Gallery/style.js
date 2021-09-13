@@ -58,10 +58,16 @@ export const MainImage = styled.div`
     }
   }
   .loader-cp {
-    background-color: white;
-    text-align: center;
+    display: flex;
+    align-items: center;
     width: 100%;
-    font-size: 50px;
+    height: 100%;
+    justify-content: center;
+    img{
+      background-color: white;
+      text-align: center;
+      opacity: 1;
+    }
   }
 
   @media (max-width: 769px) {

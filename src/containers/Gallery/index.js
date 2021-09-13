@@ -132,25 +132,26 @@ const Gallery = () => {
         {/* {loading && <LoadingKoi />} */}
         {items[id] && (
           <>
-            <ImageWrapper key={items[indexId].name}>
+            <ImageWrapper key={items[indexId]?.name || 'kevin 1111 NFT image'}>
               <MainImage>
                 {loadingMain ? <LazyLoadImage
-                  key={items[indexId].name}
+                  key={items[indexId]?.name}
                   width="580"
                   height="580"
-                  alt={items[indexId].name || 'kevin 1111 NFT image'}
-                  src={items[indexId].source}
+                  alt={items[indexId]?.name || 'kevin 1111 NFT image'}
+                  src={items[indexId]?.source}
                   onClick={onShowDetails}
                   effect="opacity"
                   visibleByDefault={true}
                 /> :
                 <LazyLoadImage
-                  key={items[indexId].name}
+                  key={items[indexId]?.name}
                   width="580"
                   height="580"
-                  alt={items[indexId].name || 'kevin 1111 NFT image'}
-                  src={items[indexId].source}
+                  alt={items[indexId]?.name || 'kevin 1111 NFT image'}
+                  src={items[indexId]?.source}
                   placeholderSrc={LoaderGif}
+                  wrapperClassName="loader-cp"
                   afterLoad={afterLoadMain}
                   onClick={onShowDetails}
                   effect="opacity"
@@ -158,7 +159,7 @@ const Gallery = () => {
                 <div className="loader-cp"><img src={LoaderGif} alt="test"></img></div>
               </MainImage>
               <ImageMenu>
-                <span>#{items[indexId].name}</span>
+                <span>#{items[indexId]?.name || 'undefined'}</span>
                 {/* <span>
                   {nftInfo}
                   <img src={Logo} alt="koi-logo" />
@@ -218,12 +219,12 @@ const Gallery = () => {
                     <PlaceHolder />
                   ) : (
                     <LazyLoadImage
-                      key={items[indexId - 1].name}
+                      key={items[indexId - 1]?.name}
                       onClick={down}
                       width="170"
                       height="170"
-                      alt={items[indexId - 1].name}
-                      src={items[indexId - 1].source}
+                      alt={items[indexId - 1]?.name}
+                      src={items[indexId - 1]?.source}
                       effect="blur"
                     />
                   )}
@@ -231,12 +232,12 @@ const Gallery = () => {
 
                 <RightImg>
                   <LazyLoadImage
-                    key={items[indexId + 1].name}
+                    key={items[indexId + 1]?.name}
                     onClick={up}
                     width="170"
                     height="170"
-                    alt={items[indexId + 1].name}
-                    src={items[indexId + 1].source}
+                    alt={items[indexId + 1]?.name}
+                    src={items[indexId + 1]?.source}
                     effect="blur"
                   />
                 </RightImg>
