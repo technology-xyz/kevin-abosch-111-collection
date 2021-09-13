@@ -57,6 +57,18 @@ export const MainImage = styled.div`
       cursor: pointer;
     }
   }
+  .loader-cp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 580px;
+    height: 580px;
+    img{
+      background-color: white;
+      text-align: center;
+      opacity: 1;
+    }
+  }
 
   @media (max-width: 769px) {
     margin-top: 64px;

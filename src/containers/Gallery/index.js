@@ -32,7 +32,9 @@ const Gallery = () => {
   const history = useHistory();
   const { pathname } = useLocation();
   const { contents, kevinNft, setModalOpen } = useContext(DataContext);
-  const [loading, setLoading] = useState(false);
+  const [loadingMain, setLoadingMain] = useState(false);
+  const [loadingUp, setLoadingUp] = useState(false);
+  const [loadingDown, setLoadingDown] = useState(false);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
   const [items, setItems] = useState([]);
@@ -84,7 +86,6 @@ const Gallery = () => {
   };
 
   const up = () => {
-    setLoading(true)
     loadImage(items[indexId + 3])
       .then(() => console.log("loaded"))
       .catch((err) => console.log("Failed to load images", err));
@@ -121,31 +122,32 @@ const Gallery = () => {
       history.push(`/gallery/${id}/details`);
     }
   };
-  const handleLoaded = () => {
-    console.log("LOADED");
-  };
+  const afterLoadMain = () => {
+    console.log('afterloadMain')
+    setLoadingMain(true)
+  }
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
         {/* {loading && <LoadingKoi />} */}
         {items[id] && (
           <>
-            <ImageWrapper key={items[indexId].name}>
+            <ImageWrapper key={items[indexId]?.name || 'kevin 1111 NFT image'}>
               <MainImage>
+                {!loadingMain && <div className="loader-cp"><img src={LoaderGif} alt="test"></img></div>}
                 <LazyLoadImage
-                  key={items[indexId].name}
-                  width="580"
-                  height="580"
-                  alt={items[indexId].name || 'kevin 1111 NFT image'}
-                  src={items[indexId].source}
-                  placeholderSrc={LoaderGif}
+                  key={items[indexId]?.name}
+                  width={loadingMain ? 580 : 0}
+                  height={loadingMain ? 580 : 0}
+                  alt={items[indexId]?.name || 'kevin 1111 NFT image'}
+                  src={items[indexId]?.source || null}
+                  afterLoad={afterLoadMain}
                   onClick={onShowDetails}
                   effect="opacity"
                 />
               </MainImage>
-
               <ImageMenu>
-                <span>#{items[indexId].name}</span>
+                <span>#{items[indexId]?.name || 'undefined'}</span>
                 {/* <span>
                   {nftInfo}
                   <img src={Logo} alt="koi-logo" />
@@ -205,12 +207,12 @@ const Gallery = () => {
                     <PlaceHolder />
                   ) : (
                     <LazyLoadImage
-                      key={items[indexId - 1].name}
+                      key={items[indexId - 1]?.name}
                       onClick={down}
                       width="170"
                       height="170"
-                      alt={items[indexId - 1].name}
-                      src={items[indexId - 1].source}
+                      alt={items[indexId - 1]?.name}
+                      src={items[indexId - 1]?.source}
                       effect="blur"
                     />
                   )}
@@ -218,12 +220,12 @@ const Gallery = () => {
 
                 <RightImg>
                   <LazyLoadImage
-                    key={items[indexId + 1].name}
+                    key={items[indexId + 1]?.name}
                     onClick={up}
                     width="170"
                     height="170"
-                    alt={items[indexId + 1].name}
-                    src={items[indexId + 1].source}
+                    alt={items[indexId + 1]?.name}
+                    src={items[indexId + 1]?.source}
                     effect="blur"
                   />
                 </RightImg>
