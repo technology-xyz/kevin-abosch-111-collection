@@ -61,7 +61,6 @@ const Gallery = () => {
   useEffect(() => {
     setItems(contents);
     if (contents.length) {
-      console.log('here123')
       if(contents.length > 0 && contents[indexId]) {
         getKoi(contents[indexId].txId).catch((err) => {
           console.log(err);
@@ -138,7 +137,7 @@ const Gallery = () => {
                   width="580"
                   height="580"
                   alt={items[indexId].name || 'kevin 1111 NFT image'}
-                  src={LoaderGif}
+                  src={items[indexId].source}
                   placeholderSrc={LoaderGif}
                   onClick={onShowDetails}
                   effect="opacity"
