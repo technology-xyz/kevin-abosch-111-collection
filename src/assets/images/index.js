@@ -15,6 +15,8 @@ export { default as IconUploadPng } from "./IconUpload.png";
 export { default as ItemTemp } from "./item_temp.svg";
 export { default as NewKoiiLogo } from "./new_koii.svg";
 export { default as NewLogo } from "./logo.svg";
+export { default as emptyPng } from "./empty.png";
+export { default as LoaderGif } from "./loader.gif";
 export { default as IconClose } from "./IconClose.svg";
 export { default as NFTStage1 } from "./nft_stage1.svg";
 export { default as NFTStage2 } from "./nft_stage2.svg";

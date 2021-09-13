@@ -22,6 +22,7 @@ import "react-lazy-load-image-component/src/effects/opacity.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import * as Kcommon from "@_koi/sdk/common";
 import { useRef } from "react";
+import { LoaderGif } from "assets/images";
 
 // const PlaceHoler = () => {};
 
@@ -56,12 +57,9 @@ const Gallery = () => {
     }
   };
 
-  /*
   useEffect(() => {
-    console.log("heere1", contents)
-    setItems(contents);
+    // setItems(contents);
     if (contents.length) {
-      console.log("here1" , contents[indexId])
       if(contents.length > 0 && contents[indexId]) {
         getKoi(contents[indexId].txId).catch((err) => {
           console.log(err);
@@ -70,7 +68,6 @@ const Gallery = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
-  */
 
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
@@ -138,9 +135,9 @@ const Gallery = () => {
                   key={items[indexId].name}
                   width="580"
                   height="580"
-                  alt={items[indexId].name}
-                  src={items[indexId].source}
-                  // placeholderSrc={}
+                  alt={items[indexId].name || 'kevin 1111 NFT image'}
+                  src={items[indexId].source + '111'}
+                  placeholderSrc={LoaderGif}
                   onClick={onShowDetails}
                   effect="opacity"
                 />
