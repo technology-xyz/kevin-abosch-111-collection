@@ -30,7 +30,7 @@ function App() {
     if (!loading) {
       const nftArray = [];
       let source = "";
-      let id = 0
+      let id = 0;
       for (const [key, value] of Object.entries(data)) {
         const [name, extension] = key.split(".");
 
@@ -40,29 +40,29 @@ function App() {
             source: `${preUrl}${source}?t=${Math.random() * 999999}`,
             json: `${preUrl}${value}?t=${Math.random() * 999999}`,
             txId: source,
-            id:id
+            id: id,
           });
-          id++
+          id++;
         } else {
-          source = value
+          source = value;
         }
       }
-      
+
       setItems(nftArray);
       setIsLoading(false);
     }
-    if(error){
-      console.log(error)
-      refetch()
+    if (error) {
+      console.log(error);
+      refetch();
     }
-  }, [loading, data,error,refetch]);
+  }, [loading, data, error, refetch]);
 
   return (
     <div className="App">
       <BasicStyle />
       <GlobalStyle />
       {!isLoading && (
-        <Router  >
+        <Router>
           <Switch>
             <ModalContextContainer>
               <DataContextContainer images={items}>
@@ -80,12 +80,12 @@ function App() {
                   exact
                   path="/gallery"
                   render={() => <Redirect to="/gallery/1" />}
-                  />
+                />
               </DataContextContainer>
             </ModalContextContainer>
           </Switch>
         </Router>
-       )}
+      )}
     </div>
   );
 }
