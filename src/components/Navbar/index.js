@@ -11,7 +11,7 @@ import {
 import { MenuIcon, NewLogo } from "../../assets/images";
 import Menu from "./menu";
 import { matchPath, useLocation } from "react-router";
-import BackArrow from "../BackArrow"
+import BackArrow from "../BackArrow";
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -23,11 +23,17 @@ const Navbar = () => {
   const matchAbout = matchPath(pathname, { path: "/about", exact: true });
   const matchDetail = matchPath(pathname, "/gallery/:id/details");
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
-  
+
   return (
     <NavigationWrapper>
       <Bar>
-        <Title href="https://www.kevinabosch.com/">Studio Kevin Abosch</Title>
+        <Title
+          href="https://www.kevinabosch.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Studio Kevin Abosch
+        </Title>
         <Right>
           <Koi>
             <img src={NewLogo} alt="koi-logo" />
@@ -65,11 +71,11 @@ const Navbar = () => {
           </MenuIconWrapper>
         </Right>
         {!matchMain && (matchCollect || matchDetail || matchAbout) && (
-        <BackArrow />
-      )}
+          <BackArrow />
+        )}
       </Bar>
-      
-      {activeMenu && <Menu hide={() => setActiveMenu(false)}/>}
+
+      {activeMenu && <Menu hide={() => setActiveMenu(false)} />}
     </NavigationWrapper>
   );
 };

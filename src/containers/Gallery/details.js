@@ -1,14 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Details,
-  DetailWrapper,
-  CollectLinks,
-  CurrentOwners,
+import { Details, DetailWrapper, CollectLinks, CurrentOwners } from "./style";
 
-} from "./style";
-
-import Share from './share'
-import { matchPath, useLocation, } from "react-router";
+import Share from "./share";
+import { matchPath, useLocation } from "react-router";
 
 const DetailView = (txId) => (
   <DetailWrapper>
@@ -19,8 +13,6 @@ const DetailView = (txId) => (
     >
       Explore Block
     </a>
-
-
   </DetailWrapper>
 );
 
@@ -36,15 +28,13 @@ const OwnersView = (owners) => {
   );
 };
 
-
 const ImageDetails = (props) => {
-
-  const [share, setShare] = useState(false)
+  const [share, setShare] = useState(false);
   const { pathname } = useLocation();
-  const ref = useRef(null)
+  const ref = useRef(null);
   useEffect(() => {
-    ref.current.scrollIntoView({ behavior: 'smooth' })
-  }, [])
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const matchDetails = matchPath(pathname, {
     path: "/gallery/:id/details",
@@ -63,18 +53,21 @@ const ImageDetails = (props) => {
     strict: false,
   });
   const onShare = () => {
-    setShare(!share)
-  }
+    setShare(!share);
+  };
   const CollectView = () => (
     <div>
       <p>852 Profit Sharing Tokens</p>
       <CollectLinks>
-        <a href={`https://space.verto.exchange/asset/${props.txId}`}>Bid Now</a>
-        <button
-          onClick={onShare}
+        <a
+          href="https://opensea.io/collection/1111-by-kevin-abosch"
+          target="_blank"
+          rel="noopener noreferrer"
+          // href={`https://opensea.io/collection/1111-by-kevin-abosch/${props.txId}`}
         >
-          {share ? "Owners" : "Share"}
-        </button>
+          Bid Now
+        </a>
+        <button onClick={onShare}>{share ? "Owners" : "Share"}</button>
       </CollectLinks>
       {share && <Share />}
       {!share && OwnersView(props.owners)}

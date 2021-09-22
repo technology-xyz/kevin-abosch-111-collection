@@ -15,7 +15,7 @@ import {
   LeftImg,
   RightImg,
   PlaceHolder,
-  EvolveButton
+  EvolveButton,
 } from "./style";
 import { useHistory, useParams, useLocation, matchPath } from "react-router";
 import "react-lazy-load-image-component/src/effects/opacity.css";
@@ -47,7 +47,6 @@ const Gallery = () => {
   const matchCollect = matchPath(pathname, "/gallery/:id/collect");
 
   const getKoi = async (txId) => {
-    
     const Ktools = new Kcommon.Common();
     try {
       let nftRewards = await Ktools.getNftReward(txId);
@@ -63,13 +62,13 @@ const Gallery = () => {
   useEffect(() => {
     setItems(contents);
     if (contents.length) {
-      if(contents.length > 0 && contents[indexId]) {
+      if (contents.length > 0 && contents[indexId]) {
         getKoi(contents[indexId].txId).catch((err) => {
           console.log(err);
         });
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
 
   const loadImage = (image) => {
@@ -123,23 +122,27 @@ const Gallery = () => {
     }
   };
   const afterLoadMain = () => {
-    console.log('afterloadMain')
-    setLoadingMain(true)
-  }
+    console.log("afterloadMain");
+    setLoadingMain(true);
+  };
   return (
     <MetaWrapper>
       <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
         {/* {loading && <LoadingKoi />} */}
         {items[id] && (
           <>
-            <ImageWrapper key={items[indexId]?.name || 'kevin 1111 NFT image'}>
+            <ImageWrapper key={items[indexId]?.name || "kevin 1111 NFT image"}>
               <MainImage>
-                {!loadingMain && <div className="loader-cp"><img src={LoaderGif} alt="test"></img></div>}
+                {!loadingMain && (
+                  <div className="loader-cp">
+                    <img src={LoaderGif} alt="test"></img>
+                  </div>
+                )}
                 <LazyLoadImage
                   key={items[indexId]?.name}
                   width={loadingMain ? 580 : 0}
                   height={loadingMain ? 580 : 0}
-                  alt={items[indexId]?.name || 'kevin 1111 NFT image'}
+                  alt={items[indexId]?.name || "kevin 1111 NFT image"}
                   src={items[indexId]?.source || null}
                   afterLoad={afterLoadMain}
                   onClick={onShowDetails}
@@ -147,13 +150,21 @@ const Gallery = () => {
                 />
               </MainImage>
               <ImageMenu>
-                <span>#{items[indexId]?.name || 'undefined'}</span>
+                <span>#{items[indexId]?.name || "undefined"}</span>
                 {/* <span>
                   {nftInfo}
                   <img src={Logo} alt="koi-logo" />
                 </span>
                 {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} */}
-                {kevinNft && <EvolveButton onClick={()=>{setModalOpen(true)}}>EVOLVE</EvolveButton>}
+                {kevinNft && (
+                  <EvolveButton
+                    onClick={() => {
+                      setModalOpen(true);
+                    }}
+                  >
+                    EVOLVE
+                  </EvolveButton>
+                )}
               </ImageMenu>
 
               {!matchMain && (
@@ -173,16 +184,18 @@ const Gallery = () => {
                     >
                       Collect
                     </DetailLink>
-                    {kevinNft?
-                    <>&nbsp;</>//<EvolveButton onClick={()=>{setModalOpen(true)}}>EVOLVE</EvolveButton>
-                    :  <BidNow
-                      href={`https://space.verto.exchange/asset/${items[indexId].txId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Bid Now
-                    </BidNow>}
-                   
+                    {kevinNft ? (
+                      <>&nbsp;</> //<EvolveButton onClick={()=>{setModalOpen(true)}}>EVOLVE</EvolveButton>
+                    ) : (
+                      <BidNow
+                        href="https://opensea.io/collection/1111-by-kevin-abosch"
+                        // href={`https://opensea.io/collection/1111-by-kevin-abosch/${items[indexId].txId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Bid Now
+                      </BidNow>
+                    )}
                   </ImageMenu>
                   <Details
                     item={items[indexId]}
