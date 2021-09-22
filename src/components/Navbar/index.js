@@ -8,11 +8,11 @@ import {
   NavigationWrapper,
   Tooltip,
 } from "./style";
-import { MenuIcon, NewLogo } from "../../assets/images";
+import { MenuIcon } from "../../assets/images";
 import Menu from "./menu";
 import { matchPath, useLocation } from "react-router";
 import BackArrow from "../BackArrow";
-
+import { ReactComponent as NewLogo } from "assets/images/logo.svg";
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(false);
   const showMenu = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
         </Title>
         <Right>
           <Koi>
-            <img src={NewLogo} alt="koi-logo" />
+            <NewLogo fill="white" />
             <Tooltip>
               <p>Powered by Koi.</p>
               <p>

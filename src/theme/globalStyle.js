@@ -2,7 +2,12 @@ import { createGlobalStyle } from "styled-components";
 import { fonts } from "theme";
 
 const GlobalStyle = createGlobalStyle`
-
+.koii-logo {
+  fill: white;
+  &:hover {
+    fill: #f5b900;
+  }
+}
   body {
     font-family: ${fonts.main};
     margin: 0;

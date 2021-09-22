@@ -6,12 +6,12 @@ export const Bar = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1% 2%;
-  
-  position:fixed;
-  height:64px;
+
+  position: fixed;
+  height: 64px;
   top: 0;
   z-index: 3;
-  background-color:black;
+  background-color: black;
 `;
 export const Title = styled.a`
   display: flex;
@@ -36,9 +36,9 @@ export const Koi = styled.div`
   }
 `;
 export const KoiiBtn = styled.button`
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
   font-size: 17px;
   line-height: 21px;
@@ -47,7 +47,7 @@ export const KoiiBtn = styled.button`
   padding: 5px 22px;
   background-color: var(--yellow);
   border-radius: 1px;
-  border: 2px solid #F5B900;
+  border: 2px solid #f5b900;
 `;
 export const MenuIconWrapper = styled.button`
   outline: 0;
@@ -58,6 +58,9 @@ export const MenuIconWrapper = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  &:focus {
+    outline: none;
+  }
 `;
 export const Right = styled.div`
   display: flex;
@@ -194,7 +197,7 @@ export const MenuWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 8px;
-  outline:0;
+  outline: 0;
 `;
 export const SideContent = styled.div`
   height: 70%;
@@ -215,7 +218,7 @@ export const Nav = styled.nav`
 `;
 
 export const Nlink = styled(NavLink)`
-  margin: 20px 20px;
+  margin: 20px 35px 20px 20px;
   color: white;
   text-align: right;
   display: inline-block;
@@ -229,37 +232,37 @@ export const Nlink = styled(NavLink)`
 `;
 
 export const Elink = styled.button`
-  margin: 20px 20px;
+  margin: 20px 35px 20px 20px;
   color: white;
+  padding: 0px;
   text-align: right;
   display: inline-block;
   font-size: 18px;
   color: white;
   position: relative;
   background-color: transparent;
-  border:0;
+  border: 0;
   &:hover {
     color: #f5b900;
     font-weight: bold;
     span {
       visibility: visible;
-      color:white;
+      color: white;
       font-weight: 400;
     }
   }
- 
 `;
 export const KoiLink = styled.a`
-  margin: 0 20px;
+  margin: 0px 35px 0px 20px;
   color: white;
-display: flex;
-align-items:center;
+  display: flex;
+  align-items: center;
   font-size: 18px;
   color: white;
   text-align: right;
   fill: white;
   svg {
-    margin-right:4px;
+    margin-right: 4px;
   }
   &:hover {
     color: #f5b900;
@@ -267,7 +270,5 @@ align-items:center;
     svg {
       fill: var(--yellow);
     }
-    
-  
   }
 `;

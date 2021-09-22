@@ -13,11 +13,9 @@ import { DataContext } from "contexts/DataContextContainer";
 import { alertTimeout } from "config";
 import { useHistory } from "react-router-dom";
 import { ModalContext } from "contexts/ModalContext";
-import { NewLogo } from "assets/images";
-import axios from "axios";
+import { ReactComponent as NewLogo } from "assets/images/logo.svg";
 
 const Menu = ({ hide = () => {} }) => {
-  const [koiAddress, setKoiAddress] = useState();
   const history = useHistory();
   const { setAddressEth, setKevinNft } = useContext(DataContext);
   const [showAlert, setShowAlert] = useState(false);
@@ -64,6 +62,7 @@ const Menu = ({ hide = () => {} }) => {
       setErrMessage("");
     }, alertTimeout);
   };
+
   const poll = (fn, timeout, interval) => {
     var endTime = Number(new Date()) + (timeout || 2000);
     interval = interval || 100;
@@ -152,8 +151,8 @@ const Menu = ({ hide = () => {} }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src={NewLogo} alt="new koii logo white" />
-          &nbsp;&nbsp;&nbsp;Powered By Koi
+          <NewLogo className="koii-logo" />
+          Powered By Koi
         </KoiLink>
       </SideContent>
     </MenuWrapper>
