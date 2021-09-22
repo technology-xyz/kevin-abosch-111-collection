@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./style.css";
 import {
   Bar,
   Title,
@@ -35,6 +36,8 @@ const Navbar = () => {
           Studio Kevin Abosch
         </Title>
         <Right>
+          <div className="veryfy-btn">Verify your NFTs</div>
+
           <Koi>
             <NewLogo fill="white" />
             <Tooltip>
@@ -53,6 +56,7 @@ const Navbar = () => {
               </a>
             </Tooltip>
           </Koi>
+
           <MenuIconWrapper onClick={showMenu}>
             {!activeMenu ? (
               <img src={MenuIcon} alt="menu icon" />
