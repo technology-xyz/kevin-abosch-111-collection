@@ -4,10 +4,10 @@ export const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin-top: 10%;
   position: absolute;
   z-index: 4;
-  width: 100vw;
-  height: 100vh;
   letter-spacing: 0px;
 `;
 export const Modal = styled.div`
@@ -20,6 +20,7 @@ export const Modal = styled.div`
     max-width: 460px;
   }
   max-width: 910px;
+  margin: 20px;
   text-align: center;
   align-items: center;
   padding: 8px 15px;
@@ -114,6 +115,13 @@ export const NFTStageArea = styled.div`
   }
   .content-part{
     min-height: 90px;
+  }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    .a-stage{
+      min-width: 150px;
+      max-width: 200px;
+    }
   }
 `;
 
