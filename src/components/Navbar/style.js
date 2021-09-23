@@ -66,6 +66,23 @@ export const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .veryfy-btn{
+    margin-right: 3rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border: solid 1px white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border-radius: 2px;
+    &:hover{
+      color: #f5b900;
+      cursor: pointer;
+      border: solid 1px #f5b900;
+    }
+  }
 `;
 export const NavigationWrapper = styled.div`
   position: static;
