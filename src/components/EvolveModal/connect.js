@@ -72,7 +72,7 @@ const ConnectOpensea = ({
                 </div>
             </div>
         </NFTStageArea>
-        <ActionButton onClick={getNFTwallet} className="m-b-35">Connect ETH Wallet</ActionButton>
+        <ActionButton onClick={getNFTwallet} className="m-b-35">Scan Wallet for 1111 NFTs</ActionButton>
     </>
     )
 }
