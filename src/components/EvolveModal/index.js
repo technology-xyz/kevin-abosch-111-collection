@@ -132,11 +132,15 @@ const EvolveModal = ({
       })
       .then(async (data) => {
         console.log({ data });
-        if (data.assets.length === 0) {
-          show_notification(
-            `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
-          );
-        }
+        /* Navbar/index.js and this(line 139 - 40) use of show_notification is 
+        currently just showing a near transparent background message, instead 
+        of a notification that can be triggered on click and given config options
+        */
+        // if (data.assets.length === 0) {
+        //   show_notification(
+        //     `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
+        //   );
+        // }
 
         let temp_opensea = data.assets;
         checkKevinNFT(temp_opensea);

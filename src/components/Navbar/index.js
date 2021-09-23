@@ -15,7 +15,6 @@ import { matchPath, useLocation } from "react-router";
 import BackArrow from "../BackArrow";
 import { ReactComponent as NewLogo } from "assets/images/logo.svg";
 import { DataContext } from "contexts/DataContextContainer";
-import { alertTimeout } from "config";
 import { ModalContext } from "contexts/ModalContext";
 
 
@@ -59,21 +58,13 @@ const Navbar = () => {
     } else {
       // metamask extension didn't install
       // show_notification("Please install metamask extension first.", "KOII");
-      show_alert("Please install metamask extension first.");
       setTimeout(() => {
         let url = "https://metamask.io/download.html";
         window.open(url, "_blank");
       }, 1000);
     }
   };
-  const show_alert = (message = "") => {
-    setShowAlert(true);
-    setErrMessage(message);
-    setTimeout(() => {
-      setShowAlert(false);
-      // setErrMessage("");
-    }, alertTimeout);
-  };
+
 
   return (
     <NavigationWrapper>
