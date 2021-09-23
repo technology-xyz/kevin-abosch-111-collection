@@ -51,6 +51,11 @@ export const Modal = styled.div`
       width: 45%;
     }
   }
+  .loading-gif{
+    width: 300px;
+    height: 150px;
+    object-fit: none;
+  }
 `;
 export const Exit = styled.button`
   background-color: transparent;
