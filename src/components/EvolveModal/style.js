@@ -161,6 +161,9 @@ export const SliderArea = styled.div`
     flex: 1;
   }
   .w120{ width: 120px;}
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
 `
 
 export const NoFinnieArea = styled.div`
