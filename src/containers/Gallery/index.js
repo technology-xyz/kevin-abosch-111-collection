@@ -156,7 +156,7 @@ const Gallery = () => {
                   <img src={Logo} alt="koi-logo" />
                 </span>
                 {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} */}
-                {kevinNft && (
+                {/* {kevinNft && (
                   <EvolveButton
                     onClick={() => {
                       setModalOpen(true);
@@ -164,7 +164,7 @@ const Gallery = () => {
                   >
                     EVOLVE
                   </EvolveButton>
-                )}
+                )} */}
               </ImageMenu>
 
               {!matchMain && (
