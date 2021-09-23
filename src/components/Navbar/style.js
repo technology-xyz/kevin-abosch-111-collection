@@ -82,6 +82,9 @@ export const Right = styled.div`
       cursor: pointer;
       border: solid 1px #f5b900;
     }
+    @media (max-width: 510px) {
+      display: none;
+    }
   }
 `;
 export const NavigationWrapper = styled.div`
