@@ -15,3 +15,8 @@
   * Run ```$npm start``` to open the page on a local browser
   * Run ```$npx cypress run``` to run the tests
 * To access via deployed link through github pages click [here](https://1111.koi.rocks/#/)
+
+## Deployment
+* After making changes to origin main, checkout to your local main branch and double-check to make sure it is up-to-date and there is nothing needed to be pulled down or committed at this point
+* Run npm run build in the command line
+* Run npm run deploy in the command line
