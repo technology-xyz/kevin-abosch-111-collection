@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
   .f-yellow{ color : var(--yellow);}
   .f-bold{ font-weight: bold; }
   .c-pointer{ cursor: pointer; }
+  .word-break{ word-break: break-word; }
   .m-l-r-auto{
     margin-left: auto;
     margin-right: auto;

@@ -39,24 +39,6 @@ const ShowOpensea = ({
                             </div>
                         );
                     })}
-                    {kevinNft.map((item, _i) => {
-                        return (
-                            <div className="card-content" key={_i}>
-                                <div className="w114 d-flex align-items-center">
-                                    <img src={item.image_thumbnail_url || ItemTemp} className="w120 br-4" alt="kevin1111 nft img"/>
-                                </div>
-                            </div>
-                        );
-                    })}
-                    {kevinNft.map((item, _i) => {
-                        return (
-                            <div className="card-content" key={_i}>
-                                <div className="w114 d-flex align-items-center">
-                                    <img src={item.image_thumbnail_url || ItemTemp} className="w120 br-4" alt="kevin1111 nft img"/>
-                                </div>
-                            </div>
-                        );
-                    })}
                 </Carousel>
             </div>
             <div className="slider-caption">

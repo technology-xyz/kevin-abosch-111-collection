@@ -17,7 +17,7 @@ export const Modal = styled.div`
   position: relative;
   color: #fff;
   &.small{
-    max-width: 460px;
+    max-width: 470px;
   }
   max-width: 910px;
   margin: 20px;
