@@ -140,8 +140,8 @@ const Gallery = () => {
                 )}
                 <LazyLoadImage
                   key={items[indexId]?.name}
-                  // width={loadingMain ? 580 : 0}
-                  // height={loadingMain ? 580 : 0}
+                  width={loadingMain ? 580 : 0}
+                  height={loadingMain ? 580 : 0}
                   alt={items[indexId]?.name || "kevin 1111 NFT image"}
                   src={items[indexId]?.source || null}
                   afterLoad={afterLoadMain}
