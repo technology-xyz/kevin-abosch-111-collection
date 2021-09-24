@@ -37,6 +37,7 @@ const Gallery = () => {
   const [loadingDown, setLoadingDown] = useState(false);
   const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
+
   const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
@@ -74,10 +75,10 @@ const Gallery = () => {
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
       const loadImg = new Image();
-      loadImg.src = image.source;
-      loadImg.key = image.name;
+      loadImg.src = image?.source;
+      loadImg.key = image?.name;
       loadImg.onload = () => {
-        resolve(image.source);
+        resolve(image?.source);
       };
 
       loadImg.onerror = (err) => reject(err);
@@ -85,20 +86,24 @@ const Gallery = () => {
   };
 
   const up = () => {
-    loadImage(items[indexId + 3])
-      .then(() => console.log("loaded"))
-      .catch((err) => console.log("Failed to load images", err));
-    setScrollLimit(50);
+    if (indexId !== items?.length - 2) {
+      loadImage(items[indexId + 3])
+        .then(() => console.log("loaded"))
+        .catch((err) => console.log("Failed to load images", err));
+      setScrollLimit(50);
 
-    history.push(`/gallery/${indexId + 2}`);
+      history.push(`/gallery/${indexId + 2}`);
+    }
   };
   const down = () => {
-    loadImage(items[indexId - 1])
-      .then(() => console.log("loaded"))
-      .catch((err) => console.log("Failed to load images", err));
+    if (indexId !== 0) {
+      loadImage(items[indexId - 1])
+        .then(() => console.log("loaded"))
+        .catch((err) => console.log("Failed to load images", err));
 
-    setScrollLimit(50);
-    history.push(`/gallery/${indexId}`);
+      setScrollLimit(50);
+      history.push(`/gallery/${indexId}`);
+    }
   };
   const handleScroll = (e) => {
     let newScrollLimit = scrollLimit - e.deltaY * 0.075;
@@ -146,7 +151,7 @@ const Gallery = () => {
                   src={items[indexId]?.source || null}
                   afterLoad={afterLoadMain}
                   onClick={onShowDetails}
-                  effect="opacity"
+                  effect="blur"
                 />
               </MainImage>
               <ImageMenu>
@@ -232,15 +237,19 @@ const Gallery = () => {
                 </LeftImg>
 
                 <RightImg>
-                  <LazyLoadImage
-                    key={items[indexId + 1]?.name}
-                    onClick={up}
-                    width="170"
-                    height="170"
-                    alt={items[indexId + 1]?.name}
-                    src={items[indexId + 1]?.source}
-                    effect="blur"
-                  />
+                  {indexId === items?.length - 2 ? (
+                    <PlaceHolder />
+                  ) : (
+                    <LazyLoadImage
+                      key={items[indexId + 1]?.name}
+                      onClick={up}
+                      width="170"
+                      height="170"
+                      alt={items[indexId + 1]?.name}
+                      src={items[indexId + 1]?.source}
+                      effect="blur"
+                    />
+                  )}
                 </RightImg>
               </>
             )}
