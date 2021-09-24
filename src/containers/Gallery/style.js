@@ -192,6 +192,10 @@ export const ImageMenu = styled.div`
   img {
     width: 24px;
   }
+  .eth-bal {
+    display: flex;
+    justify-content: space-around;
+  }
 `;
 
 export const BidNow = styled.a`

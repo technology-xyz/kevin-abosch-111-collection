@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { Logo } from "../../assets/images";
+import { ReactComponent as NewLogo } from "assets/images/logo.svg";
 import Details from "./details";
 import BottomBar from "./bottom";
 import LoadingKoi from "../../components/LoadingKoi";
@@ -40,6 +40,7 @@ const Gallery = () => {
   const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
+  const [wallet, setWallet] = useState("")
   const mobile = window.matchMedia("(max-width: 768px)").matches;
   const ref = useRef(null);
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
@@ -63,13 +64,34 @@ const Gallery = () => {
     setItems(contents);
     if (contents.length) {
       if (contents.length > 0 && contents[indexId]) {
-        getKoi(contents[indexId].txId).catch((err) => {
+        // getEthBalance()
+        const content = contents[indexId]
+        getKoi(content.txId).catch((err) => {
           console.log(err);
         });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
+
+  const getEthBalance = async () => {
+    console.log(contents[indexId])
+
+    // await fetch(`https://api.opensea.io/api/v1/asset/${contents[indexId].txId}/${contents[indexId].txId}/`).then(res => console.log(res.json()))
+    let ethAddress;
+      window.ethereum.selectedAddress ? ethAddress = window.ethereum.selectedAddress : ethAddress = ""
+
+      if (ethAddress !== "") {
+      console.log("eth", ethAddress)
+      const balance = await window.ethereum.request({"jsonrpc": "2.0", "method": "eth_getBalance", "params": [ethAddress]})
+      if (balance !== "") {
+        const eth = parseInt(balance)/1e18
+        setWallet(eth.toFixed(3))
+      }
+    }
+      
+    
+  }
 
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
@@ -119,8 +141,8 @@ const Gallery = () => {
       history.replace(`/gallery/${id}/`);
     } else {
       history.push(`/gallery/${id}/details`);
-    }
-  };
+    };
+  }
   const afterLoadMain = () => {
     console.log("afterloadMain");
     setLoadingMain(true);
@@ -151,11 +173,11 @@ const Gallery = () => {
               </MainImage>
               <ImageMenu>
                 <span>#{items[indexId]?.name || "undefined"}</span>
-                {/* <span>
-                  {nftInfo}
-                  <img src={Logo} alt="koi-logo" />
+                 <span className="eth-bal">
+                  {wallet}
+                  <NewLogo fill="white"/>
                 </span>
-                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} */}
+                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} 
                 {/* {kevinNft && (
                   <EvolveButton
                     onClick={() => {
