@@ -106,7 +106,7 @@ const Gallery = () => {
     if (matchMain && !mobile) {
       if (newScrollLimit < 0) {
         up();
-      } else if (newScrollLimit > 100) {
+      } else if (newScrollLimit > 50) {
         down();
       } else {
         setScrollLimit(newScrollLimit);
@@ -132,7 +132,7 @@ const Gallery = () => {
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId]?.name || "kevin 1111 NFT image"}>
-              <MainImage>
+              {!mobile && <MainImage>
                 {!loadingMain && (
                   <div className="loader-cp">
                     <img src={LoaderGif} alt="test"></img>
@@ -140,15 +140,27 @@ const Gallery = () => {
                 )}
                 <LazyLoadImage
                   key={items[indexId]?.name}
-                  width={loadingMain ? 580 : 0}
-                  height={loadingMain ? 580 : 0}
+                  // width={loadingMain ? 580 : 0}
+                  // height={loadingMain ? 580 : 0}
                   alt={items[indexId]?.name || "kevin 1111 NFT image"}
                   src={items[indexId]?.source || null}
                   afterLoad={afterLoadMain}
                   onClick={onShowDetails}
                   effect="opacity"
                 />
-              </MainImage>
+              </MainImage>}
+              {mobile && <MainImage>
+                <LazyLoadImage
+                  key={items[indexId]?.name}
+                  // width={580}
+                  // height={580}
+                  alt={items[indexId]?.name || "kevin 1111 NFT image"}
+                  src={items[indexId]?.source}
+                  // afterLoad={afterLoadMain}
+                  onClick={onShowDetails}
+                  effect="opacity"
+                />
+              </MainImage>}
               <ImageMenu>
                 <span>#{items[indexId]?.name || "undefined"}</span>
                 {/* <span>
