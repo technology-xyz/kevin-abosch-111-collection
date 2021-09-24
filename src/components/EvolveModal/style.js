@@ -50,6 +50,16 @@ export const Modal = styled.div`
     button{
       width: 45%;
     }
+    @media (max-width: 370px){
+      flex-direction: column;
+      button{
+        width: 90%;
+        margin-left: 5%;
+        &:first-child {
+          margin-bottom: 15px;
+        }
+      }
+    }
   }
   .loading-gif{
     width: 300px;
