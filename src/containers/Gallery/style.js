@@ -205,9 +205,9 @@ export const BottomBar = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  bottom: -10%;
   width: 100vw;
-  height: 64px;
+  /* bottom: -10%;
+  height: 64px; */
   overflow: hidden;
   position: relative;
   img {

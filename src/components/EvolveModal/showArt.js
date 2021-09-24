@@ -35,7 +35,7 @@ const ShowArt = ({
         </ShowArtArea>
         <KoiiAddress className="koii-address m-t-15 w-100">
             <div className="lbl-cap1 w100">Koii Address</div>
-            <div className="lbl-cap1 text-center"><span className="f-yellow f-bold">{koiiAddress}</span></div>
+            <div className="lbl-cap1 text-center word-break"><span className="f-yellow f-bold">{koiiAddress}</span></div>
         </KoiiAddress>
         <div className="lbl-cap3 m-t-5 w-100 text-left">
             *This address is auto-filled from the Finnie Wallet Extension
