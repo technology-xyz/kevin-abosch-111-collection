@@ -58,6 +58,7 @@ const EvolveModal = () => {
   };
 
   const onEvolve = () => {
+    console.log("modal log 1");
     // const params = {
     //   from: addressAr,
     //   to: "0xd0000000000",

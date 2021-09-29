@@ -33,7 +33,7 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
   const [errorNFT, setErrorNFT] = useState("");
   const [koiiAddress, setKoiiAddress] = useState("");
 
-  const { addressEth, addressAr, kevinNft, setKevinNft } =
+  const { addressEth, addressAr, kevinNft, setKevinNft, setAddressAr } =
     useContext(DataContext);
 
   function redeem(payload) {
@@ -101,11 +101,20 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
     for (var i = 0; i < nfts.length; i++) {
       if (
         nfts[i].asset_contract.address ===
-        "0x7f72528229f85c99d8843c0317ef91f4a2793edf"
+        "0x09a9d076c7c11f9ba848ec3f181ada85fb22ac8f"
+        // "0x7f72528229f85c99d8843c0317ef91f4a2793edf"  ----- kevin 1111
       ) {
-        console.log(nfts[i].asset_contract.address);
+        // console.log(
+        //   "filtered nfts -----------------------------------",
+        //   nfts[i].asset_contract.address
+        // );
         kevinNFTs.push(nfts[i]);
       }
+      // else {
+      //   console.log("==============");
+      //   console.log("address1 ", nfts[i].asset_contract.address);
+      //   console.log("address2 0x09a9D076C7C11F9ba848EC3f181ADa85FB22ac8f");
+      // }
     }
     if (kevinNFTs.length > 0) {
       setKevinNft(kevinNFTs);
@@ -123,15 +132,17 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
       //  `https://api.opensea.io/api/v1/assets?owner=0x8dea9139b0e84d5cc2933072f5ba43c2b043f6db&order_direction=desc&offset=0&limit=20`,
       //  `https://api.opensea.io/api/v1/assets?owner=0x9428E55418755b2F902D3B1f898A871AB5634182&order_direction=desc&offset=0&limit=100`,
       // `https://api.opensea.io/api/v1/assets?owner=${addressEth}&order_direction=desc&offset=0&limit=50`,
-      `https://api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=20`,
-      //0x43ec5000afb136b07f41b9c8503661ac8a191f6b  --- test
+
+      // `https://api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=20`,
+      `https://testnets-api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=20`,
+      // 0x5d066A95Ee1514322977Db851E5FfA312c8C121F ----- test 1111 nfts  ${tempEth}
       { method: "GET" }
     )
       .then((response) => {
         return response.json();
       })
       .then(async (data) => {
-        console.log({ data });
+        console.log("this is the response ", { data });
         if (data.assets.length === 0) {
           show_notification(
             `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
@@ -186,6 +197,8 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
         let koii_address = await extension.getAddress();
         // console.log({koii_address})
         setKoiiAddress(koii_address.data);
+        setAddressAr(koii_address.data);
+
         return true;
       }
 
