@@ -64,34 +64,15 @@ const Gallery = () => {
     setItems(contents);
     if (contents.length) {
       if (contents.length > 0 && contents[indexId]) {
-        // getEthBalance()
         const content = contents[indexId]
         getKoi(content.txId).catch((err) => {
           console.log(err);
         });
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
 
-  const getEthBalance = async () => {
-    console.log(contents[indexId])
 
-    // await fetch(`https://api.opensea.io/api/v1/asset/${contents[indexId].txId}/${contents[indexId].txId}/`).then(res => console.log(res.json()))
-    let ethAddress;
-      window.ethereum.selectedAddress ? ethAddress = window.ethereum.selectedAddress : ethAddress = ""
-
-      if (ethAddress !== "") {
-      console.log("eth", ethAddress)
-      const balance = await window.ethereum.request({"jsonrpc": "2.0", "method": "eth_getBalance", "params": [ethAddress]})
-      if (balance !== "") {
-        const eth = parseInt(balance)/1e18
-        setWallet(eth.toFixed(3))
-      }
-    }
-      
-    
-  }
 
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
@@ -185,8 +166,7 @@ const Gallery = () => {
               </MainImage>}
               <ImageMenu>
                 <span>#{items[indexId]?.name || "undefined"}</span>
-                 <span className="eth-bal">
-                  {wallet}
+                 <span className="bal">
                   <NewLogo fill="white"/>
                 </span>
                 {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} 
