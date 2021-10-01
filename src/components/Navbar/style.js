@@ -66,6 +66,26 @@ export const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .veryfy-btn{
+    margin-right: 3rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border: solid 1px white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border-radius: 2px;
+    &:hover{
+      color: #f5b900;
+      cursor: pointer;
+      border: solid 1px #f5b900;
+    }
+    @media (max-width: 510px) {
+      display: none;
+    }
+  }
 `;
 export const NavigationWrapper = styled.div`
   position: static;
@@ -146,7 +166,6 @@ export const EvolveTooltip = styled.span`
   top:-55%;
   right: 120%;
   
-  }
   p {
     font-size: 15px;
     width: 100%;
@@ -186,6 +205,9 @@ export const EvolveTooltip = styled.span`
     border-style: solid;
     border-color: transparent transparent transparent  #f5b900 ;
   }
+  @media (max-width: 440px) {
+    display: none;
+  }
 `;
 
 export const MenuWrapper = styled.div`
@@ -202,6 +224,7 @@ export const MenuWrapper = styled.div`
 export const SideContent = styled.div`
   height: 70%;
   width: 30%;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

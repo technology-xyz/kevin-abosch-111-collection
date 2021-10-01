@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import "./style.css";
+// import "./style.css";
 import {
   Bar,
   Title,

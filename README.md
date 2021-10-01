@@ -1,6 +1,6 @@
 # Kevin Abosch 1111
 
-## Evolve flow
+## Evolve Flow - Make your NFTs permanent with the "Atomic NFT Standard" atomicnft.com
 * A user can click the ```Verify your 1111``` button which will prompt them to connect their metamask wallet if metamask is detected, or to install metamask if it is not detected.
 * After the metamask wallet has been connected, if any of the 1111 NFTs are found in the users wallet, the user will be prompted to Evolve those found NFTs.
   * If the user doesn't have Finnie connected they will be prompted to get Finnie so they have an Arweave wallet to evolve their NFTs.
@@ -15,8 +15,10 @@
   * Run ```$npm start``` to open the page on a local browser
   * Run ```$npx cypress run``` to run the tests
 * To access via deployed link through github pages click [here](https://1111.koi.rocks/#/)
-
 ## Deployment
-* After making changes to origin main, checkout to your local main branch and double-check to make sure it is up-to-date and there is nothing needed to be pulled down or committed at this point
-* Run npm run build in the command line
-* Run npm run deploy in the command line
+
+* After finishing a feature or bug fix, send up a pull request to deployment/testing branch
+* After successfully merging new commits into the staging branch, test to make sure that the changes are behaving as expected
+* Once tests have been setup and are passing, send a pull request to main from staging branch
+* Lastly after merging with main, to update gh pages from local main branch:
+  * run ```$npm run build``` followed by ```$npm run deploy```

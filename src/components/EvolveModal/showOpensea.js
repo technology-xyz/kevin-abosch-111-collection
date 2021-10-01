@@ -31,7 +31,6 @@ const ShowOpensea = ({
                     showStatus={false}
                 >
                     {kevinNft.map((item, _i) => {
-                        console.log({item})
                         return (
                             <div className="card-content" key={_i}>
                                 <div className="w114 d-flex align-items-center">
