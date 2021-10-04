@@ -17,7 +17,7 @@ const ConnectOpensea = ({
     const clickAtomicLink = () => window.open("https://atomicnft.com/en/", "_blank")
     return (
     <>
-        <h3 className="m-t-15 f-bold">Scan your Ethereum wallet to verify your 1111 NFT</h3>
+        <h3 className="m-t-15 f-bold">Scan your Ethereum wallet to verify your 1111 NFTs</h3>
         <div className="lbl-cap1 m-t-5">Make sure your 1111 piece is the real thing by connecting your Ethereum wallet.</div>
         <div className="lbl-cap1 m-t-15">Then evolve yours to an <span className="f-underline f-bold f-yellow" style={{cursor: "pointer"}} onClick={clickAtomicLink}>Atomic NFT</span>, stored permanently and forever earning attention rewards.</div>
         <div className="lbl-cap2 m-t-25 f-bold">Just a few reasons to evolve your 1111 NFT</div>

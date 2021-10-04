@@ -59,7 +59,7 @@ export const MainImage = styled.div`
   color: white;
   cursor: pointer;
   font-size: 4em;
-  transition: 1s ease-out;
+  transition: .5s ease;
   z-index: 1;
 }
 .left {
@@ -70,9 +70,9 @@ export const MainImage = styled.div`
 }
 
 .arrow:hover {
-  transform: scale(1.5);  
+  transform: scale(1.2);  
+  color: #f5b900;
   transition: transform .5s ease;
-  color: grey;
 }
   img {
     background-color: black;
