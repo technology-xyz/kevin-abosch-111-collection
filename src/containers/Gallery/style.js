@@ -192,6 +192,10 @@ export const ImageMenu = styled.div`
   img {
     width: 24px;
   }
+  .bal {
+    display: flex;
+    justify-content: space-around;
+  }
 `;
 
 export const BidNow = styled.a`
@@ -205,9 +209,9 @@ export const BottomBar = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  bottom: -10%;
   width: 100vw;
-  height: 64px;
+  /* bottom: -10%;
+  height: 64px; */
   overflow: hidden;
   position: relative;
   img {

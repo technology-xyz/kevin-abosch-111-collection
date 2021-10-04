@@ -15,3 +15,10 @@
   * Run ```$npm start``` to open the page on a local browser
   * Run ```$npx cypress run``` to run the tests
 * To access via deployed link through github pages click [here](https://1111.koi.rocks/#/)
+## Deployment
+
+* After finishing a feature or bug fix, send up a pull request to deployment/testing branch
+* After successfully merging new commits into the staging branch, test to make sure that the changes are behaving as expected
+* Once tests have been setup and are passing, send a pull request to main from staging branch
+* Lastly after merging with main, to update gh pages from local main branch:
+  * run ```$npm run build``` followed by ```$npm run deploy```

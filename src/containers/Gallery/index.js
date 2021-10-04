@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { Logo } from "../../assets/images";
+import { ReactComponent as NewLogo } from "assets/images/logo.svg";
 import Details from "./details";
 import BottomBar from "./bottom";
 import LoadingKoi from "../../components/LoadingKoi";
@@ -40,6 +40,7 @@ const Gallery = () => {
   const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
+  const [wallet, setWallet] = useState("")
   const mobile = window.matchMedia("(max-width: 768px)").matches;
   const ref = useRef(null);
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
@@ -63,13 +64,15 @@ const Gallery = () => {
     setItems(contents);
     if (contents.length) {
       if (contents.length > 0 && contents[indexId]) {
-        getKoi(contents[indexId].txId).catch((err) => {
+        const content = contents[indexId]
+        getKoi(content.txId).catch((err) => {
           console.log(err);
         });
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contents]);
+
+
 
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
@@ -106,7 +109,7 @@ const Gallery = () => {
     if (matchMain && !mobile) {
       if (newScrollLimit < 0) {
         up();
-      } else if (newScrollLimit > 100) {
+      } else if (newScrollLimit > 50) {
         down();
       } else {
         setScrollLimit(newScrollLimit);
@@ -119,8 +122,8 @@ const Gallery = () => {
       history.replace(`/gallery/${id}/`);
     } else {
       history.push(`/gallery/${id}/details`);
-    }
-  };
+    };
+  }
   const afterLoadMain = () => {
     console.log("afterloadMain");
     setLoadingMain(true);
@@ -132,7 +135,7 @@ const Gallery = () => {
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId]?.name || "kevin 1111 NFT image"}>
-              <MainImage>
+              {!mobile && <MainImage>
                 {!loadingMain && (
                   <div className="loader-cp">
                     <img src={LoaderGif} alt="test"></img>
@@ -148,14 +151,25 @@ const Gallery = () => {
                   onClick={onShowDetails}
                   effect="opacity"
                 />
-              </MainImage>
+              </MainImage>}
+              {mobile && <MainImage>
+                <LazyLoadImage
+                  key={items[indexId]?.name}
+                  // width={580}
+                  // height={580}
+                  alt={items[indexId]?.name || "kevin 1111 NFT image"}
+                  src={items[indexId]?.source}
+                  // afterLoad={afterLoadMain}
+                  onClick={onShowDetails}
+                  effect="opacity"
+                />
+              </MainImage>}
               <ImageMenu>
                 <span>#{items[indexId]?.name || "undefined"}</span>
-                {/* <span>
-                  {nftInfo}
-                  <img src={Logo} alt="koi-logo" />
+                 <span className="bal">
+                  <NewLogo fill="white"/>
                 </span>
-                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} */}
+                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} 
                 {/* {kevinNft && (
                   <EvolveButton
                     onClick={() => {

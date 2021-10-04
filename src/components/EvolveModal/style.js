@@ -4,10 +4,10 @@ export const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin-top: 10%;
   position: absolute;
   z-index: 4;
-  width: 100vw;
-  height: 100vh;
   letter-spacing: 0px;
 `;
 export const Modal = styled.div`
@@ -17,9 +17,10 @@ export const Modal = styled.div`
   position: relative;
   color: #fff;
   &.small{
-    max-width: 460px;
+    max-width: 470px;
   }
   max-width: 910px;
+  margin: 20px;
   text-align: center;
   align-items: center;
   padding: 8px 15px;
@@ -49,6 +50,21 @@ export const Modal = styled.div`
     button{
       width: 45%;
     }
+    @media (max-width: 370px){
+      flex-direction: column;
+      button{
+        width: 90%;
+        margin-left: 5%;
+        &:first-child {
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+  .loading-gif{
+    width: 300px;
+    height: 150px;
+    object-fit: none;
   }
 `;
 export const Exit = styled.button`
@@ -115,6 +131,13 @@ export const NFTStageArea = styled.div`
   .content-part{
     min-height: 90px;
   }
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    .a-stage{
+      min-width: 150px;
+      max-width: 200px;
+    }
+  }
 `;
 
 export const SliderArea = styled.div`
@@ -148,6 +171,9 @@ export const SliderArea = styled.div`
     flex: 1;
   }
   .w120{ width: 120px;}
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
 `
 
 export const NoFinnieArea = styled.div`
