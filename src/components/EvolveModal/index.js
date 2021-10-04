@@ -35,7 +35,7 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
 
   const { addressEth, addressAr, kevinNft, setKevinNft, setAddressAr } =
     useContext(DataContext);
-
+  console.log("--------", addressEth);
   function redeem(payload) {
     console.log("payload......", payload);
     axios
@@ -101,7 +101,7 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
     for (var i = 0; i < nfts.length; i++) {
       if (
         nfts[i].asset_contract.address ===
-        "0x09a9d076c7c11f9ba848ec3f181ada85fb22ac8f"
+        "0xff3096ed566445c9f24f615b3afd6677ad4dcba4"
         // "0x7f72528229f85c99d8843c0317ef91f4a2793edf"  ----- kevin 1111
       ) {
         // console.log(
@@ -134,7 +134,7 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
       // `https://api.opensea.io/api/v1/assets?owner=${addressEth}&order_direction=desc&offset=0&limit=50`,
 
       // `https://api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=20`,
-      `https://testnets-api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=20`,
+      `https://testnets-api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=50`,
       // 0x5d066A95Ee1514322977Db851E5FfA312c8C121F ----- test 1111 nfts  ${tempEth}
       { method: "GET" }
     )

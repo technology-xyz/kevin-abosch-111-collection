@@ -55,26 +55,26 @@ const ShowArt = ({ action = () => {}, koiiAddress = "", kevinNft = [] }) => {
 
           const routerContractMethods = new web3.eth.Contract(
             routerAbi,
-            "0xE3E8e9A41767a1804947EA58fCaA60CC16F4631d"
+            "0xD1183ad3B7934466aCB98D17B85Ced15999EA3AC"
           );
 
           const tokenContracMethods = new web3.eth.Contract(
             koiTokenAbi,
-            "0x09a9d076c7c11f9ba848ec3f181ada85fb22ac8f"
+            "0xff3096ED566445c9F24F615b3afD6677AD4Dcba4"
           );
 
           let isApprovedForAll = await tokenContracMethods.methods
             .isApprovedForAll(
-              "0x420b99dA30a7123A646f1157414077Af4C9862Ee",
-              "0xE3E8e9A41767a1804947EA58fCaA60CC16F4631d"
+              "0xB7180670fc3e7a4Ccd8fE4bcBEcAe2bEaA7d92E0",
+              "0xD1183ad3B7934466aCB98D17B85Ced15999EA3AC"
             )
             .call();
 
-          //   console.log("jhdsdfshfbsdfk", isApprovedForAll);
+          // console.log("jhdsdfshfbsdfk", isApprovedForAll);
           if (isApprovedForAll) {
             let result = await routerContractMethods.methods
               .deposit(
-                "0x09a9d076c7c11f9ba848ec3f181ada85fb22ac8f",
+                "0xff3096ed566445c9f24f615b3afd6677ad4dcba4",
                 selectedTokenId,
                 1,
                 addressAr
@@ -97,7 +97,10 @@ const ShowArt = ({ action = () => {}, koiiAddress = "", kevinNft = [] }) => {
             // console.log("token bought", result);
           } else if (!isApprovedForAll) {
             let setApprovalForAll = await routerContractMethods.methods
-              .deposit("0xE3E8e9A41767a1804947EA58fCaA60CC16F4631d", true)
+              .setApprovalForAll(
+                "0xD1183ad3B7934466aCB98D17B85Ced15999EA3AC",
+                true
+              )
               .send({
                 from: accounts[0],
                 gas: web3.utils.toHex(210000),
@@ -107,7 +110,7 @@ const ShowArt = ({ action = () => {}, koiiAddress = "", kevinNft = [] }) => {
             if (setApprovalForAll) {
               let result = await routerContractMethods.methods
                 .deposit(
-                  "0x09a9d076c7c11f9ba848ec3f181ada85fb22ac8f",
+                  "0xff3096ed566445c9f24f615b3afd6677ad4dcba4",
                   selectedTokenId,
                   1,
                   addressAr
