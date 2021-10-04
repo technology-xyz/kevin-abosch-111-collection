@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ReactComponent as NewLogo } from "assets/images/logo.svg";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
 import Details from "./details";
 import BottomBar from "./bottom";
 import LoadingKoi from "../../components/LoadingKoi";
@@ -35,7 +35,6 @@ const Gallery = () => {
   const [loadingMain, setLoadingMain] = useState(false);
   const [loadingUp, setLoadingUp] = useState(false);
   const [loadingDown, setLoadingDown] = useState(false);
-  const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
   const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
@@ -91,7 +90,6 @@ const Gallery = () => {
     loadImage(items[indexId + 3])
       .then(() => console.log("loaded"))
       .catch((err) => console.log("Failed to load images", err));
-    setScrollLimit(50);
 
     history.push(`/gallery/${indexId + 2}`);
   };
@@ -100,22 +98,9 @@ const Gallery = () => {
       .then(() => console.log("loaded"))
       .catch((err) => console.log("Failed to load images", err));
 
-    setScrollLimit(50);
     history.push(`/gallery/${indexId}`);
   };
-  const handleScroll = (e) => {
-    let newScrollLimit = scrollLimit - e.deltaY * 0.075;
 
-    if (matchMain && !mobile) {
-      if (newScrollLimit < 0) {
-        up();
-      } else if (newScrollLimit > 50) {
-        down();
-      } else {
-        setScrollLimit(newScrollLimit);
-      }
-    }
-  };
 
   const onShowDetails = () => {
     if (matchDetail) {
@@ -130,17 +115,17 @@ const Gallery = () => {
   };
   return (
     <MetaWrapper>
-      <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
-        {/* {loading && <LoadingKoi />} */}
+      <MenuContainer ref={ref}>
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId]?.name || "kevin 1111 NFT image"}>
-              {!mobile && <MainImage>
+              {!mobile && <><MainImage>
                 {!loadingMain && (
                   <div className="loader-cp">
                     <img src={LoaderGif} alt="test"></img>
                   </div>
                 )}
+                <AiOutlineArrowLeft className="arrow left" onClick={down}></AiOutlineArrowLeft>
                 <LazyLoadImage
                   key={items[indexId]?.name}
                   width={loadingMain ? 580 : 0}
@@ -151,35 +136,30 @@ const Gallery = () => {
                   onClick={onShowDetails}
                   effect="opacity"
                 />
-              </MainImage>}
+                <AiOutlineArrowRight className="arrow right" onClick={up}></AiOutlineArrowRight>
+              </MainImage>
+              <ImageMenu>
+                  <span>#{items[indexId]?.name || "undefined"}</span>
+                </ImageMenu>
+                </>
+              }
               {mobile && <MainImage>
                 <LazyLoadImage
                   key={items[indexId]?.name}
-                  // width={580}
-                  // height={580}
                   alt={items[indexId]?.name || "kevin 1111 NFT image"}
                   src={items[indexId]?.source}
-                  // afterLoad={afterLoadMain}
                   onClick={onShowDetails}
                   effect="opacity"
                 />
+                <ImageMenu>
+                  <span>#{items[indexId]?.name || "undefined"}</span>
+                </ImageMenu>
+                <div className="mobile-arrows">
+                <AiOutlineArrowLeft className="arrow left" onClick={down}/>
+                <AiOutlineArrowRight className="arrow right" onClick={up}/>
+              </div>
               </MainImage>}
-              <ImageMenu>
-                <span>#{items[indexId]?.name || "undefined"}</span>
-                 <span className="bal">
-                  <NewLogo fill="white"/>
-                </span>
-                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} 
-                {/* {kevinNft && (
-                  <EvolveButton
-                    onClick={() => {
-                      setModalOpen(true);
-                    }}
-                  >
-                    EVOLVE
-                  </EvolveButton>
-                )} */}
-              </ImageMenu>
+              
 
               {!matchMain && (
                 <>
@@ -220,6 +200,7 @@ const Gallery = () => {
                 </>
               )}
             </ImageWrapper>
+
             {mobile && (
               <BottomBar
                 left={items[indexId - 1]}
