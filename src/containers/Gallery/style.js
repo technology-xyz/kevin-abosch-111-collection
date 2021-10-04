@@ -7,10 +7,6 @@ export const MenuContainer = styled.div`
   width: 100vw;
   min-height: 100vh;
 
-
-
-
-  
   /* overflow: ${(props) => (props.lockScroll ? "hidden" : "scroll")}; */
   justify-content: center;
   align-items: center;
@@ -100,7 +96,6 @@ export const MainImage = styled.div`
   @media (max-width: 769px) {
     margin-top: 64px;
     flex-flow: column;
-    .mobile
   }
 `;
 
