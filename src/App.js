@@ -31,25 +31,27 @@ function App() {
       const nftArray = [];
       let source = "";
       let id = 0;
-      for (const [key, value] of Object.entries(data)) {
-        const [name, extension] = key.split(".");
+      if (data) {
+        for (const [key, value] of Object.entries(data)) {
+          const [name, extension] = key.split(".");
 
-        if (extension === "json") {
-          nftArray.push({
-            name: name.slice(5),
-            source: `${preUrl}${source}?t=${Math.random() * 999999}`,
-            json: `${preUrl}${value}?t=${Math.random() * 999999}`,
-            txId: source,
-            id: id,
-          });
-          id++;
-        } else {
-          source = value;
+          if (extension === "json") {
+            nftArray.push({
+              name: name.slice(5),
+              source: `${preUrl}${source}?t=${Math.random() * 999999}`,
+              json: `${preUrl}${value}?t=${Math.random() * 999999}`,
+              txId: source,
+              id: id,
+            });
+            id++;
+          } else {
+            source = value;
+          }
         }
-      }
 
-      setItems(nftArray);
-      setIsLoading(false);
+        setItems(nftArray);
+        setIsLoading(false);
+      }
     }
     if (error) {
       console.log(error);

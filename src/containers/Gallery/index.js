@@ -34,6 +34,7 @@ const Gallery = () => {
   const { contents, kevinNft, setModalOpen } = useContext(DataContext);
   const [loadingMain, setLoadingMain] = useState(false);
   const indexId = parseInt(id) - 1;
+
   const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
@@ -73,28 +74,30 @@ const Gallery = () => {
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
       const loadImg = new Image();
-      loadImg.src = image.source;
-      loadImg.key = image.name;
+      loadImg.src = image?.source;
+      loadImg.key = image?.name;
       loadImg.onload = () => {
-        resolve(image.source);
+        resolve(image?.source);
       };
       loadImg.onerror = (err) => reject(err);
     });
   };
 
   const up = () => {
-    loadImage(items[indexId + 3])
-      .then(() => console.log("loaded"))
-      .catch((err) => console.log("Failed to load images", err));
-
-    history.push(`/gallery/${indexId + 2}`);
+    if (indexId !== items?.length - 2) {
+      loadImage(items[indexId + 3])
+        .then(() => console.log("loaded"))
+        .catch((err) => console.log("Failed to load images", err));
+      history.push(`/gallery/${indexId + 2}`);
+    }
   };
   const down = () => {
-    loadImage(items[indexId - 1])
-      .then(() => console.log("loaded"))
-      .catch((err) => console.log("Failed to load images", err));
-
-    history.push(`/gallery/${indexId}`);
+    if (indexId !== 0) {
+      loadImage(items[indexId - 1])
+        .then(() => console.log("loaded"))
+        .catch((err) => console.log("Failed to load images", err));
+      history.push(`/gallery/${indexId}`);
+    }
   };
 
 
@@ -147,7 +150,7 @@ const Gallery = () => {
                   alt={items[indexId]?.name || "kevin 1111 NFT image"}
                   src={items[indexId]?.source}
                   onClick={onShowDetails}
-                  effect="opacity"
+                  effect="blur"
                 />
                 <ImageMenu>
                   <span>#{items[indexId]?.name || "undefined"}</span>
@@ -225,15 +228,19 @@ const Gallery = () => {
                 </LeftImg>
 
                 <RightImg>
-                  <LazyLoadImage
-                    key={items[indexId + 1]?.name}
-                    onClick={up}
-                    width="170"
-                    height="170"
-                    alt={items[indexId + 1]?.name}
-                    src={items[indexId + 1]?.source}
-                    effect="blur"
-                  />
+                  {indexId === items?.length - 2 ? (
+                    <PlaceHolder />
+                  ) : (
+                    <LazyLoadImage
+                      key={items[indexId + 1]?.name}
+                      onClick={up}
+                      width="170"
+                      height="170"
+                      alt={items[indexId + 1]?.name}
+                      src={items[indexId + 1]?.source}
+                      effect="blur"
+                    />
+                  )}
                 </RightImg>
               </>
             )}
