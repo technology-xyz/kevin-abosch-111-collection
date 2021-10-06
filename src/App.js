@@ -20,7 +20,7 @@ import DataContextContainer from "contexts/DataContextContainer";
 import ModalContextContainer from "contexts/ModalContext";
 
 window.onload = () => {
-  if (window.location.href === "https://1111.koi.rocks") window.location.href = "https://1111.koi.rocks/#/gallery"
+  if (window.location.href === "http://1111.koi.rocks") window.location.href = "https://1111.koi.rocks/#/gallery"
 };
 
 function App() {
