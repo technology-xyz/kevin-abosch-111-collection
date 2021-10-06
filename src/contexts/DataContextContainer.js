@@ -18,6 +18,7 @@ function DataContextContainer(props) {
   const [kevinNft, setKevinNft] = useState([]);
   const [totalViewCt, setTotalViewCt] = useLocalStorage("koi-totalViewCt", 0);
   const [totalKoiCt, setTotalKoiCt] = useLocalStorage("koi-totalKoiCt", 0);
+  const [selectedTokenId, setSelectedTokenId] = useState();
 
   useEffect(() => {
     setContents(props.images);
@@ -45,7 +46,9 @@ function DataContextContainer(props) {
         totalKoiCt,
         setTotalKoiCt,
         kevinNft,
-        setKevinNft
+        setKevinNft,
+        selectedTokenId,
+        setSelectedTokenId,
       }}
     >
       {props.children}

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ReactComponent as NewLogo } from "assets/images/logo.svg";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
 import Details from "./details";
 import BottomBar from "./bottom";
 import LoadingKoi from "../../components/LoadingKoi";
@@ -33,14 +33,11 @@ const Gallery = () => {
   const { pathname } = useLocation();
   const { contents, kevinNft, setModalOpen } = useContext(DataContext);
   const [loadingMain, setLoadingMain] = useState(false);
-  const [loadingUp, setLoadingUp] = useState(false);
-  const [loadingDown, setLoadingDown] = useState(false);
-  const [scrollLimit, setScrollLimit] = useState(50);
   const indexId = parseInt(id) - 1;
+
   const [items, setItems] = useState([]);
   const [nftInfo, setNftInfo] = useState("");
   const [owners, setOwners] = useState([]);
-  const [wallet, setWallet] = useState("")
   const mobile = window.matchMedia("(max-width: 768px)").matches;
   const ref = useRef(null);
   const matchMain = matchPath(pathname, { path: "/gallery/:id/", exact: true });
@@ -77,45 +74,32 @@ const Gallery = () => {
   const loadImage = (image) => {
     return new Promise((resolve, reject) => {
       const loadImg = new Image();
-      loadImg.src = image.source;
-      loadImg.key = image.name;
+      loadImg.src = image?.source;
+      loadImg.key = image?.name;
       loadImg.onload = () => {
-        resolve(image.source);
+        resolve(image?.source);
       };
-
       loadImg.onerror = (err) => reject(err);
     });
   };
 
   const up = () => {
-    loadImage(items[indexId + 3])
-      .then(() => console.log("loaded"))
-      .catch((err) => console.log("Failed to load images", err));
-    setScrollLimit(50);
-
-    history.push(`/gallery/${indexId + 2}`);
-  };
-  const down = () => {
-    loadImage(items[indexId - 1])
-      .then(() => console.log("loaded"))
-      .catch((err) => console.log("Failed to load images", err));
-
-    setScrollLimit(50);
-    history.push(`/gallery/${indexId}`);
-  };
-  const handleScroll = (e) => {
-    let newScrollLimit = scrollLimit - e.deltaY * 0.075;
-
-    if (matchMain && !mobile) {
-      if (newScrollLimit < 0) {
-        up();
-      } else if (newScrollLimit > 50) {
-        down();
-      } else {
-        setScrollLimit(newScrollLimit);
-      }
+    if (indexId !== items?.length - 2) {
+      loadImage(items[indexId + 3])
+        .then(() => console.log("loaded"))
+        .catch((err) => console.log("Failed to load images", err));
+      history.push(`/gallery/${indexId + 2}`);
     }
   };
+  const down = () => {
+    if (indexId !== 0) {
+      loadImage(items[indexId - 1])
+        .then(() => console.log("loaded"))
+        .catch((err) => console.log("Failed to load images", err));
+      history.push(`/gallery/${indexId}`);
+    }
+  };
+
 
   const onShowDetails = () => {
     if (matchDetail) {
@@ -130,56 +114,53 @@ const Gallery = () => {
   };
   return (
     <MetaWrapper>
-      <MenuContainer ref={ref} onWheel={handleScroll} lockScroll={false}>
-        {/* {loading && <LoadingKoi />} */}
+      <MenuContainer ref={ref}>
         {items[id] && (
           <>
             <ImageWrapper key={items[indexId]?.name || "kevin 1111 NFT image"}>
-              {!mobile && <MainImage>
-                {!loadingMain && (
-                  <div className="loader-cp">
-                    <img src={LoaderGif} alt="test"></img>
-                  </div>
-                )}
-                <LazyLoadImage
-                  key={items[indexId]?.name}
-                  width={loadingMain ? 580 : 0}
-                  height={loadingMain ? 580 : 0}
-                  alt={items[indexId]?.name || "kevin 1111 NFT image"}
-                  src={items[indexId]?.source || null}
-                  afterLoad={afterLoadMain}
-                  onClick={onShowDetails}
-                  effect="opacity"
-                />
-              </MainImage>}
+              {!mobile && 
+              <>
+                <MainImage>
+                  {!loadingMain && (
+                    <div className="loader-cp">
+                      <img src={LoaderGif} alt="test"></img>
+                    </div>
+                  )}
+                  {loadingMain && <AiOutlineArrowLeft className="arrow left" onClick={down}></AiOutlineArrowLeft>}
+                  <LazyLoadImage
+                    key={items[indexId]?.name}
+                    width={loadingMain ? 580 : 0}
+                    height={loadingMain ? 580 : 0}
+                    alt={items[indexId]?.name || "kevin 1111 NFT image"}
+                    src={items[indexId]?.source || null}
+                    afterLoad={afterLoadMain}
+                    onClick={onShowDetails}
+                    effect="opacity"
+                  />
+                  {loadingMain && <AiOutlineArrowRight className="arrow right" onClick={up}></AiOutlineArrowRight>}
+                </MainImage>
+                <ImageMenu>
+                  <span>#{items[indexId]?.name || "undefined"}</span>
+                </ImageMenu>
+              </>
+              }
               {mobile && <MainImage>
                 <LazyLoadImage
                   key={items[indexId]?.name}
-                  // width={580}
-                  // height={580}
                   alt={items[indexId]?.name || "kevin 1111 NFT image"}
                   src={items[indexId]?.source}
-                  // afterLoad={afterLoadMain}
                   onClick={onShowDetails}
-                  effect="opacity"
+                  effect="blur"
                 />
+                <ImageMenu>
+                  <span>#{items[indexId]?.name || "undefined"}</span>
+                </ImageMenu>
+                {!matchDetail && <div className="mobile-arrows">
+                  <AiOutlineArrowLeft className="arrow left" onClick={down}/>
+                  <AiOutlineArrowRight className="arrow right" onClick={up}/>
+                </div>}
               </MainImage>}
-              <ImageMenu>
-                <span>#{items[indexId]?.name || "undefined"}</span>
-                 <span className="bal">
-                  <NewLogo fill="white"/>
-                </span>
-                {matchMain ? <span>Bid Now</span> : <span>ETH: 2.751</span>} 
-                {/* {kevinNft && (
-                  <EvolveButton
-                    onClick={() => {
-                      setModalOpen(true);
-                    }}
-                  >
-                    EVOLVE
-                  </EvolveButton>
-                )} */}
-              </ImageMenu>
+              
 
               {!matchMain && (
                 <>
@@ -220,6 +201,7 @@ const Gallery = () => {
                 </>
               )}
             </ImageWrapper>
+
             {mobile && (
               <BottomBar
                 left={items[indexId - 1]}
@@ -246,15 +228,19 @@ const Gallery = () => {
                 </LeftImg>
 
                 <RightImg>
-                  <LazyLoadImage
-                    key={items[indexId + 1]?.name}
-                    onClick={up}
-                    width="170"
-                    height="170"
-                    alt={items[indexId + 1]?.name}
-                    src={items[indexId + 1]?.source}
-                    effect="blur"
-                  />
+                  {indexId === items?.length - 2 ? (
+                    <PlaceHolder />
+                  ) : (
+                    <LazyLoadImage
+                      key={items[indexId + 1]?.name}
+                      onClick={up}
+                      width="170"
+                      height="170"
+                      alt={items[indexId + 1]?.name}
+                      src={items[indexId + 1]?.source}
+                      effect="blur"
+                    />
+                  )}
                 </RightImg>
               </>
             )}

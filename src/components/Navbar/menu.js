@@ -131,7 +131,7 @@ const Menu = ({ hide = () => {} }) => {
                 transaction ID.
               </p>
 
-              <KoiiBtn>Connect Wallet</KoiiBtn>
+              <KoiiBtn>Verify your 1111</KoiiBtn>
             </EvolveTooltip>
           </Elink>
           {/* <Elink onClick={onClick}>

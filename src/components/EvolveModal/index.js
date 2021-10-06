@@ -25,19 +25,17 @@ import NoFinnie from "./noFinnie";
 import ShowArt from "./showArt";
 import AtomicNFT from "./atomicNFT";
 
-const EvolveModal = ({
-  hide = () => {},
-  initStep = 0,
-}) => {
-  console.log({initStep})
+const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
+  console.log({ initStep });
   const history = useHistory();
   const { address } = queryString.parse(history.location.search);
-  const [modalStep, setModalStep] = useState(initStep) // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art || atomic_nft
-  const [errorNFT, setErrorNFT] = useState('')
-  const [koiiAddress, setKoiiAddress] = useState('')
-  
-  const { addressEth, addressAr, kevinNft, setKevinNft } = useContext(DataContext);
+  const [modalStep, setModalStep] = useState(initStep); // connect_opensea || show_nft || loading || no_nft || no_finnie || show_art || atomic_nft
+  const [errorNFT, setErrorNFT] = useState("");
+  const [koiiAddress, setKoiiAddress] = useState("");
 
+  const { addressEth, addressAr, kevinNft, setKevinNft, setAddressAr } =
+    useContext(DataContext);
+  console.log("--------", addressEth);
   function redeem(payload) {
     console.log("payload......", payload);
     axios
@@ -59,16 +57,14 @@ const EvolveModal = ({
         ownerArAddress: addressAr,
       };
     } else {
-      
     }
 
     window.ethereum.enable().then(async (accounts) =>
       web3.eth.personal.sign(address, accounts[0]).then((res) => {
         payload.signature = res;
-        console.log('signature', res);
-        console.log('signature', payload);
+        console.log("signature", res);
+        console.log("signature", payload);
         redeem(payload);
-
       })
     );
   };
@@ -93,80 +89,92 @@ const EvolveModal = ({
     //   .catch((error) => {
     //     throw (error)
     //   });
-    sign(address)
+    sign(address);
   };
 
   const onExit = () => {
-    setErrorNFT('')
-    hide()
+    setErrorNFT("");
+    hide();
   };
   const checkKevinNFT = (nfts = []) => {
     let kevinNFTs = [];
     for (var i = 0; i < nfts.length; i++) {
-      if ( nfts[i].asset_contract.address === "0x7f72528229f85c99d8843c0317ef91f4a2793edf" ) {
-        console.log(nfts[i].asset_contract.address);
+      if (
+        nfts[i].asset_contract.address ===
+        "0xff3096ed566445c9f24f615b3afd6677ad4dcba4"
+        // "0x7f72528229f85c99d8843c0317ef91f4a2793edf"  ----- kevin 1111
+      ) {
+        // console.log(
+        //   "filtered nfts -----------------------------------",
+        //   nfts[i].asset_contract.address
+        // );
         kevinNFTs.push(nfts[i]);
       }
+      // else {
+      //   console.log("==============");
+      //   console.log("address1 ", nfts[i].asset_contract.address);
+      //   console.log("address2 0x09a9D076C7C11F9ba848EC3f181ADa85FB22ac8f");
+      // }
     }
-    if(kevinNFTs.length > 0){
+    if (kevinNFTs.length > 0) {
       setKevinNft(kevinNFTs);
-      setModalStep('show_nft')
-    }else{
+      setModalStep("show_nft");
+    } else {
       // show error loading
-      setModalStep('no_nft')
+      setModalStep("no_nft");
     }
   };
   const getNFTwallet = () => {
     // const tempEth = '0xe35a42153fecf7710733252fd8ef16b92fac4b95'
-    const tempEth = addressEth
-    setModalStep('loading')
+    const tempEth = addressEth;
+    setModalStep("loading");
     fetch(
       //  `https://api.opensea.io/api/v1/assets?owner=0x8dea9139b0e84d5cc2933072f5ba43c2b043f6db&order_direction=desc&offset=0&limit=20`,
       //  `https://api.opensea.io/api/v1/assets?owner=0x9428E55418755b2F902D3B1f898A871AB5634182&order_direction=desc&offset=0&limit=100`,
       // `https://api.opensea.io/api/v1/assets?owner=${addressEth}&order_direction=desc&offset=0&limit=50`,
-      `https://api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=50`,
+
+      // `https://api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=20`,
+      `https://testnets-api.opensea.io/api/v1/assets?owner=${tempEth}&order_direction=desc&offset=0&limit=50`,
+      // 0x5d066A95Ee1514322977Db851E5FfA312c8C121F ----- test 1111 nfts  ${tempEth}
       { method: "GET" }
     )
       .then((response) => {
         return response.json();
       })
       .then(async (data) => {
-        console.log({ data });
-        /* Navbar/index.js and this(line 139 - 40) use of show_notification is 
-        currently just showing a near transparent background message, instead 
-        of a notification that can be triggered on click and given config options
-        */
-        // if (data.assets.length === 0) {
-        //   show_notification(
-        //     `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
-        //   );
-        // }
+        console.log("this is the response ", { data });
+        if (data.assets.length === 0) {
+          // show_notification(
+          //   `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
+          // );
+        }
 
         let temp_opensea = data.assets;
         checkKevinNFT(temp_opensea);
-        
       })
       .catch((err) => {
         console.log(err);
-        setErrorNFT(`Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`)
+        setErrorNFT(
+          `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
+        );
       })
       .finally(() => {
-        console.log('finally :  checkKevinNFT')
+        console.log("finally :  checkKevinNFT");
         // go to next step
         // setModalStep('show_nft')
       });
-  }
+  };
   const checkFinnie = async () => {
     try {
       // Does it exist?
       let extensionObj = await window.koiWallet;
-      if(extensionObj === undefined) {
+      if (extensionObj === undefined) {
         // eslint-disable-next-line no-throw-literal
-        console.log("error undefined finnie")
-        return false  
+        console.log("error undefined finnie");
+        return false;
       }
-      console.log({extensionObj})
-      return true
+      console.log({ extensionObj });
+      return true;
       // Is it connected?
       // let res = await extensionObj.getPermissions();
       // console.log("Extension1", res);
@@ -176,10 +184,10 @@ const EvolveModal = ({
       // Have to throw error to trigger rejected
       // eslint-disable-next-line no-throw-literal
       // throw "Extension does not exist";
-      console.log("error chk finnie", error)
-      return false
+      console.log("error chk finnie", error);
+      return false;
     }
-  }
+  };
   const connectFinnie = async () => {
     const extension = window.koiWallet;
     try {
@@ -188,59 +196,79 @@ const EvolveModal = ({
       if (res.status === 200) {
         let koii_address = await extension.getAddress();
         // console.log({koii_address})
-        setKoiiAddress(koii_address.data)
+        setKoiiAddress(koii_address.data);
+        setAddressAr(koii_address.data);
+
         return true;
       }
 
-      return false
+      return false;
     } catch (error) {
-      console.log('finnie connect error', error)
-      return false
+      console.log("finnie connect error", error);
+      return false;
     }
-  }
+  };
   const getEvolveArt = async () => {
     try {
-      if(await checkFinnie()){
+      if (await checkFinnie()) {
         // installed finnie and connect finnie
-        if(await connectFinnie()) {
+        if (await connectFinnie()) {
           // go to show art page
-          console.log('go to show art page')
-          setModalStep('show_art')
-        }else{
+          console.log("go to show art page");
+          setModalStep("show_art");
+        } else {
           // error connect finnie
-          console.log('error connect finnie')
-          setModalStep('no_finnie')
+          console.log("error connect finnie");
+          setModalStep("no_finnie");
         }
-      }else{
+      } else {
         // show connect finnie page
-        console.log('show connect finnie page')
-        setModalStep('no_finnie')
+        console.log("show connect finnie page");
+        setModalStep("no_finnie");
       }
     } catch (error) {
-      console.log('error connect finnie', error)
-      setModalStep('no_finnie')
+      console.log("error connect finnie", error);
+      setModalStep("no_finnie");
     }
-  }
+  };
   const getModalSize = () => {
-    if(modalStep === 'loading' || modalStep === 'show_nft' || modalStep === 'no_finnie' || 
-      modalStep === 'show_art' || modalStep === 'atomic_nft') 
-      return true
-    else 
-      return false
-  }
+    if (
+      modalStep === "loading" ||
+      modalStep === "show_nft" ||
+      modalStep === "no_finnie" ||
+      modalStep === "show_art" ||
+      modalStep === "atomic_nft"
+    )
+      return true;
+    else return false;
+  };
   return (
     <ModalWrapper>
-      <Modal className={`${getModalSize() ? 'small' : ''}`}>
+      <Modal className={`${getModalSize() ? "small" : ""}`}>
         <Exit onClick={onExit}>
           <img src={IconClose} alt="modal close" />
         </Exit>
-        {modalStep === 'loading' && <LoadingArea error={errorNFT} back={onExit}/> }
-        {modalStep === 'no_nft' && <ErrorNFT /> }
-        {modalStep === 'connect_opensea' && <ConnectOpensea getNFTwallet={getNFTwallet} /> }
-        {modalStep === 'show_nft' && <ShowOpensea kevinNft={kevinNft} action={getEvolveArt} /> }
-        {modalStep === 'no_finnie' && <NoFinnie /> }
-        {modalStep === 'show_art' && <ShowArt koiiAddress={koiiAddress} kevinNft={kevinNft} action={getEvolveArt} /> }
-        {modalStep === 'atomic_nft' && <AtomicNFT kevinNft={kevinNft} back={onExit} /> }
+        {modalStep === "loading" && (
+          <LoadingArea error={errorNFT} back={onExit} />
+        )}
+        {modalStep === "no_nft" && <ErrorNFT />}
+        {modalStep === "connect_opensea" && (
+          <ConnectOpensea getNFTwallet={getNFTwallet} />
+        )}
+        {modalStep === "show_nft" && (
+          <ShowOpensea kevinNft={kevinNft} action={getEvolveArt} />
+        )}
+        {modalStep === "no_finnie" && <NoFinnie />}
+        {modalStep === "show_art" && (
+          <ShowArt
+            koiiAddress={koiiAddress}
+            kevinNft={kevinNft}
+            action={getEvolveArt}
+          />
+        )}
+        {modalStep === "atomic_nft" && (
+          <AtomicNFT kevinNft={kevinNft} back={onExit} />
+        )}
       </Modal>
     </ModalWrapper>
   );
