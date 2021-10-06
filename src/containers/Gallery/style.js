@@ -39,6 +39,8 @@ export const ImageWrapper = styled.div`
   flex-direction: column;
   width: 40%;
 
+
+
   @media (max-width: 769px) {
     img {
       width: 100%;
@@ -51,6 +53,27 @@ export const ImageWrapper = styled.div`
 `;
 
 export const MainImage = styled.div`
+  display: flex;
+  align-items: center;
+.arrow {
+  color: white;
+  cursor: pointer;
+  font-size: 4em;
+  transition: .5s ease;
+  z-index: 1;
+}
+.left {
+  margin-right: 20px;
+}
+.right {
+  margin-left: 20px;
+}
+
+.arrow:hover {
+  transform: scale(1.2);  
+  color: #f5b900;
+  transition: transform .5s ease;
+}
   img {
     background-color: black;
     &:hover {
@@ -72,6 +95,7 @@ export const MainImage = styled.div`
 
   @media (max-width: 769px) {
     margin-top: 64px;
+    flex-flow: column;
   }
 `;
 
