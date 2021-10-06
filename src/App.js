@@ -88,6 +88,10 @@ function App() {
                   path="/gallery"
                   render={() => <Redirect to="/gallery/1" />}
                 />
+                <Route 
+                  path="*"
+                  render={() => <Redirect to="/gallery/1" />}
+                />
               </DataContextContainer>
             </ModalContextContainer>
           </Switch>
