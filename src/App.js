@@ -19,6 +19,10 @@ import { preUrl } from "config";
 import DataContextContainer from "contexts/DataContextContainer";
 import ModalContextContainer from "contexts/ModalContext";
 
+window.onload = () => {
+  if (window.location.href === "https://1111.koi.rocks") window.location.href = "https://1111.koi.rocks/#/gallery"
+};
+
 function App() {
   const genRand = () => Math.floor(Math.random() * 1001);
   const [items, setItems] = useState([]);
@@ -26,6 +30,7 @@ function App() {
   const [{ data, loading, error }, refetch] = useAxios(
     "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
   );
+
   useEffect(() => {
     if (!loading) {
       const nftArray = [];
