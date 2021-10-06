@@ -60,7 +60,6 @@ export const MainImage = styled.div`
   cursor: pointer;
   font-size: 4em;
   transition: .5s ease;
-  z-index: 1;
 }
 .left {
   margin-right: 20px;
