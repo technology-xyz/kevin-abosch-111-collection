@@ -144,9 +144,9 @@ const EvolveModal = ({ hide = () => {}, initStep = 0 }) => {
       .then(async (data) => {
         console.log("this is the response ", { data });
         if (data.assets.length === 0) {
-          show_notification(
-            `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
-          );
+          // show_notification(
+          //   `Our school of Koii couldn't find anything on OpenSea NFTs associated with that wallet[${addressEth}].`
+          // );
         }
 
         let temp_opensea = data.assets;
