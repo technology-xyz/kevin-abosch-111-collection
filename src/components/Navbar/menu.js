@@ -152,7 +152,7 @@ const Menu = ({ hide = () => {} }) => {
           rel="noopener noreferrer"
         >
           <NewLogo className="koii-logo" />
-          Powered By Koi
+          Powered By Koii
         </KoiLink>
       </SideContent>
     </MenuWrapper>

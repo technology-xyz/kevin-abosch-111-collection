@@ -1,7 +1,7 @@
 describe('Abosch 1111', () => {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000/#/')
-  })
+  // beforeEach(() => {
+  //   cy.visit('http://localhost:3000/#/')
+  // })
   
   describe('Sidebar', () => {
     beforeEach(() => {
@@ -38,7 +38,7 @@ describe('Abosch 1111', () => {
       cy.get('button').contains('Evolve my NFT').trigger('mouseover').get('button').contains('Connect Wallet').click({ force: true })
     })
     it('should allow a user to go to Koii\'s homepage', () => {
-      cy.get('a').contains('Powered By Koi').should('have.attr', 'href').and('include', 'https://koii.cx/')
+      cy.get('a').contains('Powered By Koii').should('have.attr', 'href').and('include', 'https://koii.cx/')
     })
 
   })

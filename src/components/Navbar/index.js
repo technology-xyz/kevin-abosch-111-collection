@@ -82,7 +82,7 @@ const Navbar = () => {
           <Koi>
             <NewLogo fill="white" />
             <Tooltip>
-              <p>Powered by Koi.</p>
+              <p>Powered by Koii.</p>
               <p>
                 Koi is the first framework for building easy, customizable dApps
                 where content earns attention rewards by default.
