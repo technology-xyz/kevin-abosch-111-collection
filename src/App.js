@@ -27,9 +27,9 @@ function App() {
   const [{ data, loading, error }, refetch] = useAxios(
     "https://5vgwb6smju7uduepxbruar4paai3xfutjksugh67nsaxy5gejq6q.arweave.net/7U1g-kxNP0HQj7hjQEePABG7lpNKpUMf32yBfHTETD0/"
   );
-  if (window.location.protocol !== 'https:') {
-    window.location.replace("https://1111.koi.rocks/#/gallery");
-  }
+  // if (window.location.protocol !== 'https:') {
+  //   window.location.replace("https://1111.koi.rocks/#/gallery");
+  // }
   
   useEffect(() => {
     if (!loading) {

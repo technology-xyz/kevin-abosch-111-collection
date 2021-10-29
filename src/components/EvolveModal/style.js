@@ -81,7 +81,23 @@ export const BackArrow = styled.button`
   top: 0;
   right: 0;
 `;
-
+export const ErrorNFTArea = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction: column;
+.bg-blur{
+  width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: block;
+    background: black;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.7;
+}
+`
 export const ActionButton = styled.button`
   display:flex;
   justify-content:center;
@@ -131,6 +147,16 @@ export const NFTStageArea = styled.div`
   .content-part{
     min-height: 90px;
   }
+  .bg-blur {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: block;
+    background: black;
+    top: 0;
+    z-index: -1;
+    opacity: 0.7;
+  }
   @media (max-width: 768px) {
     flex-wrap: wrap;
     .a-stage{
@@ -165,6 +191,17 @@ export const SliderArea = styled.div`
     flex-direction: row;
     padding: 8px;
     height: 120px;
+  }
+  .bg-blur {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: block;
+    background: black;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.7;
   }
   .slider-caption{
     text-align: left;
@@ -202,3 +239,4 @@ export const KoiiAddress = styled.div`
   flex-direction: row;
   .w100{ width: 100px; text-align: left; }
 `
+

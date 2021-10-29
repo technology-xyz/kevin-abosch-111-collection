@@ -72,6 +72,7 @@ const ConnectOpensea = ({
                     <div className="lbl-cap1">Atomic NFTs are stored <span className="f-yellow">forever</span> with Koii on Arweave’s permaweb.</div>
                 </div>
             </div>
+            <div class="bg-blur"></div>
         </NFTStageArea>
         <ActionButton onClick={getNFTwallet} className="m-b-35">Scan Wallet for 1111 NFTs</ActionButton>
     </>
