@@ -1,7 +1,7 @@
 describe('Abosch 1111', () => {
-  // beforeEach(() => {
-  //   cy.visit('http://localhost:3000/#/')
-  // })
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/#/')
+  })
   
   describe('Sidebar', () => {
     beforeEach(() => {
