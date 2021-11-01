@@ -62,6 +62,7 @@ const ShowOpensea = ({ action = () => {}, kevinNft = [] }) => {
           </div>
           <div className="lbl-cap1">In your wallet!</div>
         </div>
+        <div class="bg-blur"></div>
       </SliderArea>
 
       <div className="lbl-cap1 m-t-15 f-bold">
@@ -80,6 +81,7 @@ const ShowOpensea = ({ action = () => {}, kevinNft = [] }) => {
         *Kevin Abosch envisioned the 1111 collection as a collection of Atomic
         NFTs.
       </div>
+      
     </>
   );
 };

@@ -7,7 +7,7 @@ import {
 } from "assets/images";
 import React from "react";
 import {
-    ActionButton
+    ActionButton, ErrorNFTArea
 } from "./style";
 
 const ErrorNFT = () => {
@@ -18,10 +18,13 @@ const ErrorNFT = () => {
 
     return (
     <>
-        <h3 className="m-t-15 f-bold">No 1111 NFTs were found in this wallet</h3>
+    <ErrorNFTArea>
+        <h3 className="m-t-25 f-bold">No 1111 NFTs were found in this wallet</h3>
         <div className="lbl-cap1 m-t-25">There aren’t any 1111 NFTs in your Ethereum Wallet.</div>
         <div className="lbl-cap1 m-t-15">You can get one from the 1111 Collection on Opensea.</div>
         <ActionButton onClick={getNFT} className="m-t-25 m-b-25">1111 Collection</ActionButton>
+        <div class="bg-blur"></div>
+    </ErrorNFTArea>
     </>
     )
 }
