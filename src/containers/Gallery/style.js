@@ -119,7 +119,6 @@ export const Details = styled.div`
 `;
 export const DetailWrapper = styled.div`
   width: 55vw;
-  margin-left: -5vw;
   @media (max-width: 769px) {
     width: 100%;
     margin-left: 0;
